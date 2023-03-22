@@ -1,10 +1,10 @@
 import './App.css';
-import Buscar from './componentes/search-banner/SearchBanner';
+import SearchBanner from './componentes/search-banner/SearchBanner';
 
 function App() {
   return (
     <div className="App">
-      <Buscar className="Buscar"/>
+      <SearchBanner className="Buscar"/>
     </div>
   );
 }
