@@ -5,7 +5,7 @@ section{
   border-radius: 30px;
   margin: auto;
   background-image: url("/public/imagens/search-banner.jpg");
-  background-size: contain;
+  background-size: cover;
   background-repeat: no-repeat;
   flex-direction: column;
   display: flex;
