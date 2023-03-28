@@ -1,4 +1,5 @@
 import { BrowserRouter } from "react-router-dom";
+import { Buscar } from "./components";
 import { Login, Cadastro } from "./pages";
 
 const App = () => {
@@ -6,7 +7,8 @@ const App = () => {
     <BrowserRouter>
       <div className='w-screen h-screen'>
         {/* <Login/> */}
-        <Cadastro />
+        {/* <Cadastro /> */}
+        <Buscar/>
       </div>
     </BrowserRouter>
   );
