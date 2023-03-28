@@ -11,7 +11,7 @@ module.exports = {
         dimBlue: "#2A2A4B",
       },
       fontFamily: {
-        poppins: ["R", "sans-serif"],
+        roboto: ["'Roboto', sans-serif"],
       },
       backgroundImage: {
         'art-login': "url('./public/Rectangle.svg')",

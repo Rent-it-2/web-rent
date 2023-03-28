@@ -3,15 +3,15 @@ import './SearchBanner.css'
 function Buscar() {
     return (
         <>
-        <section>
-        <h1>Encontre o que precisa a um valor acessível</h1>
-           <div className='search-container'>
-                <img className='search-icon' src="/imagens/search.png" alt="Lupa" />
-                <input className='search-input' type="text" placeholder="O que está procurando?"/>
-                <img className='submit-icon' src="/imagens/next-circle.png" alt="Avançar" />
-           </div>
-           <Categorias />
-        </section>
+            <section className='w-full flex items-center'>
+                <h1>Encontre o que precisa a um valor acessível</h1>
+                <div className='w-full flex items-center'>
+                        <img className='search-icon' src="/imagens/search.png" alt="Lupa" />
+                        <input className='search-input' type="text" placeholder="O que está procurando?"/>
+                        <img className='submit-icon' src="/imagens/next-circle.png" alt="Avançar" />
+                </div>
+                <Categorias />
+            </section>
         </>
     )
 }

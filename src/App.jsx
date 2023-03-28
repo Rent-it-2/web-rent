@@ -1,5 +1,5 @@
 import { BrowserRouter } from "react-router-dom";
-import { Buscar } from "./components";
+import { Buscar, Footer } from "./components";
 import { Login, Cadastro } from "./pages";
 
 const App = () => {
@@ -8,7 +8,7 @@ const App = () => {
       <div className='w-screen h-screen'>
         {/* <Login/> */}
         {/* <Cadastro /> */}
-        <Buscar/>
+        <Footer/>
       </div>
     </BrowserRouter>
   );
