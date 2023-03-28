@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Login = () => {
     return (
-        <div className="flex w-full text-dimBlue">
+        <div className="flex w-full text-rentBlue">
 
 
             <div className='hidden w-1/2 min-w-fit flex-col justify-start items-center h-screen overflow-hidden sm:flex'>
@@ -27,7 +27,7 @@ const Login = () => {
                             <label htmlFor="" className='text-gray-500 text-sm'>Senha</label>
                             <input type="password" name="password" id="password" className='border-2 rounded-md p-2 border-gray-400 outline-none text-xs text-gray-500' />
                         </div>
-                        <div className="w-full flex justify-between w-full">
+                        <div className="w-full flex justify-between">
                             <div className="flex gap-1 flex-row-reverse items-center">
                                 <label htmlFor="" className='text-gray-500 text-sm'>Lembrar de mim</label>
                                 <input type="checkbox" name="lembrar" id="lembrar" className='border-2 rounded-md p-1 border-gray-400' />
@@ -38,7 +38,7 @@ const Login = () => {
 
                         <div className="w-full flex flex-col items-center gap-2">
                             <button className='bg-primary rounded-md w-full p-2 text-white' type="submit">Entrar</button>
-                            <span className='text-gray-500 text-sm'>Não tem uma conta? <a href="./Cadastro.jsx" className={`font-bold text-sm text-dimBlue cursor-pointer hover:text-secondary`}>Cadastre-se</a> agora</span>
+                            <span className='text-gray-500 text-sm'>Não tem uma conta? <a href="./Cadastro.jsx" className={`font-bold text-sm text-rentBlue cursor-pointer hover:text-secondary`}>Cadastre-se</a> agora</span>
                         </div>
                     </form>
                 </div>
@@ -78,7 +78,7 @@ const Login = () => {
 
                         <div className="w-full flex flex-col items-center gap-2">
                             <button className='bg-primary rounded-md w-full p-2 text-white' type="submit">Entrar</button>
-                            <span className='text-gray-500 text-sm'>Não tem uma conta? <a href="./Cadastro.jsx" className={`font-bold text-sm text-dimBlue cursor-pointer hover:text-secondary`}>Cadastre-se</a> agora</span>
+                            <span className='text-gray-500 text-sm'>Não tem uma conta? <a href="./Cadastro.jsx" className={`font-bold text-sm text-rentBlue cursor-pointer hover:text-secondary`}>Cadastre-se</a> agora</span>
                         </div>
                     </form>
                 </div>

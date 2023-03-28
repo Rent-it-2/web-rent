@@ -7,8 +7,9 @@ module.exports = {
       colors: {
         primary: "#FF724C",
         secondary: "#FDBF50",
-        dimWhite: "#F4F4F8",
-        dimBlue: "#2A2A4B",
+        rentWhite: "#F4F4F8",
+        rentBlue: "#2A2A4B",
+        primaryOpacity: "#ff734c63",
       },
       fontFamily: {
         roboto: ["'Roboto', sans-serif"],

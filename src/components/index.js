@@ -1,7 +1,9 @@
+import Header from "./Header";
+import  Buscar from "./Buscar";
 import Footer from "./Footer";
-import  Buscar from "./SearchBanner";
 
 export {
+    Header,
     Buscar,
     Footer
 }
