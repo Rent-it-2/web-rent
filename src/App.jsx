@@ -5,11 +5,13 @@ import { Login, Cadastro } from "./pages";
 const App = () => {
   return (
     <BrowserRouter>
-      <div className='w-screen h-screen'>
+      <div className=''>
         <Header/>
-        <Buscar/>
-        {/* <Login/> */}
-        {/* <Cadastro /> */}
+        <main className="pt-36 pb-28">
+          <Buscar/>
+          {/* <Login/> */}
+          {/* <Cadastro /> */}
+        </main>
         <Footer/>
       </div>
     </BrowserRouter>

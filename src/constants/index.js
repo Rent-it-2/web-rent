@@ -23,8 +23,8 @@ export const footerLinksLcd = [
         link: ""
     },
     {
-        id: "produto",
-        title: "Listar seu produto",
+        id: "produtos",
+        title: "Listar seus produtos",
         link: ""
     },
     {
