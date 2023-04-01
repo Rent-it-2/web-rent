@@ -10,6 +10,7 @@ module.exports = {
         rentWhite: "#F4F4F8",
         rentBlue: "#2A2A4B",
         primaryOpacity: "#ff734c63",
+        rentBlueOpacity: "#11101db2",
       },
       fontFamily: {
         roboto: ["'Roboto', sans-serif"],
@@ -17,7 +18,7 @@ module.exports = {
       backgroundImage: {
         'art-login': "url('./public/Rectangle.svg')",
         'art-cadastro': "url('./public/Rectangle.svg')",
-        'art-buscar': "url('./public/search-banner.jpg)",
+        'art-buscar': "url('./public/search-banner.svg')",
       }
     },
     screens: {
