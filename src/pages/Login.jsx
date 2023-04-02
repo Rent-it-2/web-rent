@@ -3,8 +3,8 @@ import { AuthContext } from "../contexts/Auth";
 
 
 const Login = () => {
-    const {authenticated, login} = useContext(AuthContext) || {};
-
+  
+  const { authenticated, login } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
 
