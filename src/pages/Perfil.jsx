@@ -1,9 +1,12 @@
 import React from 'react'
-import { Header } from '../components'
+import { Header, ProdutosAnunciados } from '../components'
 
 const Perfil = () => {
   return (
+    <>
     <Header/>
+    <ProdutosAnunciados/>
+    </>
   )
 }
 

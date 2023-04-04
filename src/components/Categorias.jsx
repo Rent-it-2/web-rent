@@ -8,7 +8,7 @@ const Categorias = () => {
       <section
       className={`${styles.glassEffect} w-full fixed z-40`}
       >
-        <div className="w-full flex items-center py-1 mt-16 border-b-[0.1px] p-2 border-gray-300">
+        <div className="w-full flex items-center py-1 mt-16 border-b-[0.1px] p-2">
           <ul className="w-full flex gap-5 items-center justify-between">
             <li>
               <a
