@@ -4,31 +4,36 @@ import { AuthContext } from "../contexts/Auth";
 import { useNavigate } from "react-router-dom";
 
 const Header = () => {
-  const {logout} = useContext(AuthContext);
+  const { authenticated, logout } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const toLogin = () =>{
-    navigate('/login');
+  const toLogin = () => {
+    navigate('/login');navigate
     logout();
   }
 
-  const handleLogout = () =>{
+  const toCadastro = () => {
+    navigate('/cadastro');
+  }
+
+  const handleLogout = () => {
     logout();
   };
 
   return (
     <section className={`${styles.glassEffect} w-full fixed z-50  border-none`}>
       <div className="flex justify-between py-2 px-8">
-        <a href="">
+        <a href="/">
           <img src="../../public/logo.svg" alt="home" className="w-28" />
         </a>
         <div className="flex gap-5">
           <button onClick={toLogin} className="rounded-full border-2 border-rentBlue text-rentBlue px-8 hover:text-secondary hover:border-secondary">
             Entrar
           </button>
-          <button className="rounded-full bg-rentBlue text-white px-8 hover:bg-secondary">
+          <button onClick={toCadastro} className="rounded-full bg-rentBlue text-white px-8 hover:bg-secondary">
             Cadastrar-se
           </button>
+
           <button onClick={handleLogout} className="rounded-full bg-rentBlue text-white px-8 hover:bg-secondary">
             Sair
             <span class="material-icons">logout</span>
@@ -81,9 +86,9 @@ const Categorias = () => {
             </a>
           </li>
 
-          <button className="flex items-center gap-2 rounded-full border-[1px] border-primary bg-primaryOpacity text-rentBlue px-5 py-2 hover:text-primary hover:bg-transparent">
+          <button className="flex items-center gap-2 rounded-full border-[1px] border-primary bg-primaryOpacity text-rentBlue px-5 py-1 hover:text-primary hover:bg-transparent">
             Desapegar
-            <span class="material-icons">label</span>
+            <i className="mdi mdi-label text-[22px]"></i>
           </button>
         </ul>
       </div>
