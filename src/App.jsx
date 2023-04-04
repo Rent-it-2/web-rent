@@ -1,5 +1,4 @@
-import { BrowserRouter } from "react-router-dom";
-import { Login, Cadastro, Home } from "./pages";
+import '@mdi/font/css/materialdesignicons.min.css';
 import AppRoutes from "./AppRoutes"
 
 const App = () => {

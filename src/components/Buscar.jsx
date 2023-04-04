@@ -1,5 +1,6 @@
 import { styles } from "../styles";
 
+
 function Buscar() {
   return (
     <section className="w-full flex items-center justify-center">
@@ -7,14 +8,14 @@ function Buscar() {
         <h1 className="text-white text-4xl font-bold py-10 drop-shadow-xl shadow-black text-center">
           Bem vindo a <b className="">RENT-IT</b>, seu site para <b className="text-pri">alugar</b> o que precisar
         </h1>
-        <div className="w-full rounded-full flex items-center justify-center bg-white p-2">
-          <span className="material-icons text-gray-400 text-[35px]">search</span>
+        <div className="w-full rounded-full flex items-center justify-center bg-white px-3">
+          <i className="mdi mdi-magnify text-gray-400 text-[35px] h-fit"></i>
           <input
             className="appearance-none w-full pl-6 outline-none text-gray-400"
             type="text"
             placeholder="O que está procurando?"
           />
-          <span className="material-icons text-primary text-[35px]">arrow_circle_right</span>
+          <i className="mdi mdi-arrow-right-bold-circle text-primary text-[35px] h-fit"></i>       
         </div>
         <Categorias />
       </div>
