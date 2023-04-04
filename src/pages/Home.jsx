@@ -1,10 +1,11 @@
 import React from "react";
-import { Buscar, Footer, Header, Item } from "../components";
+import { Buscar, Categorias, Footer, Header, Item } from "../components";
 
 const Home = () => {
   return (
     <>
       <Header />
+      <Categorias />
       <main className="pt-36 pb-28 px-32">
         <Buscar />
         <div className="pt-10 flex justify-between">
