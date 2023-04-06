@@ -23,7 +23,7 @@ const Home = () => {
       <main className="pt-36 pb-28 px-32">
         {console.log(itemList)}
         <Buscar />
-        <div className="w-full pt-10 flex flex-wrap justify-start gap-11 mt-3">
+        <div className="w-full pt-10 flex flex-wrap justify-start gap-y-5 gap-x-11 mt-3">
           {itemList?.map((item) => 
             <Item
               key={item.id}

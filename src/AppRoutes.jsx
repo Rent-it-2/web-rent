@@ -5,13 +5,10 @@ import {
   Routes,
   Navigate,
 } from "react-router-dom";
-import { Login, Cadastro, Home, Perfil } from "./pages";
+import { Login, Cadastro, Home, Perfil, ItemDetalhes } from "./pages";
 import { AuthProvider, AuthContext } from "./contexts/Auth";
 
-const AppRoutes = ({
-  products,
-  bannerData
-}) => {
+const AppRoutes = () => {
   
   const Private = ({ children }) => {
     const { authenticated, loading } = useContext(AuthContext);
@@ -29,11 +26,9 @@ const AppRoutes = ({
     <Router>
       <AuthProvider>
         <Routes>
-          <Route exact path="/" element={<Home
-            products={products}
-            bannerData={bannerData}
-          />}/>
-          <Route exact path="/login" element={<Login />} />
+          <Route exact path="/" element={<Home/>}/>
+          <Route exact path="/item" element={<ItemDetalhes/>}/>
+          <Route exact path="/login" element={<Login/>} />
           <Route exact path="/cadastro" element={<Cadastro />} />
           <Route exact path="/perfil" element={<Private><Perfil/></Private>}/>
         </Routes>
