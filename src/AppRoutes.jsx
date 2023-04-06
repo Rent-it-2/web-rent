@@ -8,7 +8,10 @@ import {
 import { Login, Cadastro, Home, Perfil } from "./pages";
 import { AuthProvider, AuthContext } from "./contexts/Auth";
 
-const AppRoutes = () => {
+const AppRoutes = ({
+  products,
+  bannerData
+}) => {
   
   const Private = ({ children }) => {
     const { authenticated, loading } = useContext(AuthContext);
@@ -26,7 +29,10 @@ const AppRoutes = () => {
     <Router>
       <AuthProvider>
         <Routes>
-          <Route exact path="/" element={<Home/>}/>
+          <Route exact path="/" element={<Home
+            products={products}
+            bannerData={bannerData}
+          />}/>
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/cadastro" element={<Cadastro />} />
           <Route exact path="/perfil" element={<Private><Perfil/></Private>}/>
