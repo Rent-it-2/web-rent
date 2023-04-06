@@ -24,15 +24,12 @@ const Home = () => {
         {console.log(itemList)}
         <Buscar />
         <div className="w-full pt-10 flex flex-wrap justify-start gap-11 mt-3">
-          {itemList?.map((item) => (
+          {itemList?.map((item) => 
             <Item
-              id={item.id}
-              foto={item.foto}
-              nome={item.nome}
-              categoria={item.categoria}
-              valorDia={item.valorDia}
+              key={item.id}
+              item={item}
             />
-          ))}
+          )}
         </div>
       </main>
       <Footer />

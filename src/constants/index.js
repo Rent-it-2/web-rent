@@ -51,3 +51,16 @@ export const footerLinksAjuda = [
         link: ""
     },
 ];
+
+
+// export const TESTE = [
+//     {
+//         id: "1",
+//         nome: "Chair",
+//         foto: "https://loremflickr.com/640/480/abstract",
+//         categoria: "Tasty",
+//         descricao: "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
+//         tempoLocacao: 26,
+//         valorDia: "81.00",
+//     },
+// ];
