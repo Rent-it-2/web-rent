@@ -19,12 +19,10 @@ export const AuthProvider = ({ children }) => {
 
   const login = (email, senha) => {
     console.log("login auth", { email, senha });
-
     const loggedUser = {
       id: "123",
       email,
     };
-
     sessionStorage.setItem("user", JSON.stringify(loggedUser));
 
     if (senha === "secret") {
