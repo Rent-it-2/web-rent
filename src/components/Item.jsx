@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { ItemContext }  from "../contexts/ItemContext";
 
 const Item = ({ item: { id, userId, foto, nome, categoria, valorDia } }) => {
-  // const { setItemInfo } = useItem();
   const { setItemId } = useContext(ItemContext);
   const { setUserId } = useContext(ItemContext);
 

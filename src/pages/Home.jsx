@@ -9,39 +9,21 @@ const Home = () => {
     try {
       const element = [];
 
-      // const usersQuantity = await api.get(`/users`).then((res) => {
-      //   return res.data.length
-      // });
-
-      // console.log(usersQuantity);
-
       for (let index = 1; index <= 5; index++) {
         const resposta = await api.get(`/users/${index}/itens`).then((res) => {
           for (let j = 0; j < res.data.length; j++) {
             element.push(res.data[j]);
           }
         });
-        // console.log("element", element);
       }
-      console.log("element", element);
-
+      // console.log("element", element);
       setItem(element);
-
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
-    // api
-    //   .get()
-    //   .then((res) => {
-    //     console.log(res.data);
-    //     setItem(res.data);
-    //   })
-    //   .catch((erro) => {
-    //     console.log(erro);
-    //   });
     getItens();
   }, []);
 
