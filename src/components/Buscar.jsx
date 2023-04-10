@@ -1,7 +1,18 @@
+import { Navigate, useNavigate } from "react-router-dom";
 import { styles } from "../styles";
 
 
 function Buscar() {
+
+  const navigate = useNavigate();
+
+  const navigateFilters = (email, senha) => {
+    // if (senha === "secret") {
+      // setUser(loggedUser);::
+      navigate("/filter");
+    // }
+  };
+
   return (
     <section className="w-full flex items-center justify-center">
       <div className=" w-full flex flex-col items-center justify-center rounded-2xl bg-art-buscar bg-cover px-20 py-6 overflow-hidden">
@@ -22,6 +33,7 @@ function Buscar() {
     </section>
   );
 }
+
 function Categorias() {
   return (
     <>
