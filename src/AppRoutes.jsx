@@ -23,29 +23,15 @@ const AppRoutes = () => {
   };
 
   return (
-    // <Router>
-    //   <AuthProvider>
-    //     <Routes>
-    //       <Route exact path="/" element={<Home/>}/>
-
-    //       <Route path="/item/:id" component={<ItemProvider><ItemDetalhes/></ItemProvider>} />
-
-    //       <Route exact path="/login" element={<Login/>} />
-    //       <Route exact path="/cadastro" element={<Cadastro />} />
-    //       <Route exact path="/perfil" element={<Private><Perfil/></Private>}/>
-    //     </Routes>
-    //   </AuthProvider>
-    // </Router>
-
     <Router>
       <AuthProvider>
         <ItemProvider>
           <Routes>
-            <Route exact path="/" element={<Home/>} />
-            <Route path="/login" element={<Login/>} />
+            <Route exact path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
             <Route path="/cadastro" element={<Cadastro />} />
             <Route path="/perfil" element={<Private><Perfil /></Private>} />
-            <Route path="/item/:id" element={<ItemProvider><ItemDetalhes /></ItemProvider>} />
+            <Route path="/item/:id" element={<ItemDetalhes />} />
           </Routes>
         </ItemProvider>
       </AuthProvider>

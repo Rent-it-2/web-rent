@@ -2,15 +2,14 @@ import React, { useContext, useEffect, useState } from 'react';
 import { ItemContext } from "../contexts/ItemContext";
 import { api } from '../api';
 
-const ItemDetalhes = () => {
-  // const { itemInfo } = useItem();
-  // const { id, userId } = itemInfo;
+const ItemDetalhes = ({ children }) => {
   const { itemId } = useContext(ItemContext);
+  const { userId } = useContext(ItemContext);
 
   const getItenById = async () => {
-    console.log(itemId);
+    console.log(itemId, userId);
     try {
-      const resposta = await api.get(`/users/${1}/itens/${3}`).then((res) => {
+      const resposta = await api.get(`/users/${userId}/itens/${itemId}`).then((res) => {
         console.log(res.data);
         // setItem(res.data);
       });
@@ -25,7 +24,10 @@ const ItemDetalhes = () => {
   }, []);
 
   return (
-    <div>ItemDetalhes {itemId}</div>
+    <>
+    ItemDetalhes {itemId}
+    
+    </>
   );
 };
 

@@ -7,20 +7,13 @@ export const ItemContext = createContext();
 // }
 
 export const ItemProvider = ({ children }) =>{
-
     const [itemId, setItemId] = useState();
-// debugger
+    const [userId, setUserId] = useState();
+
+    console.log('context',itemId, userId)
     return (
-      <ItemContext.Provider value={{ itemId, setItemId }}>
+      <ItemContext.Provider value={{ itemId, setItemId, userId, setUserId }}>
         {children}
       </ItemContext.Provider>
     );
-
-//   const [itemInfo, setItemInfo] = useState({});
-
-//   return (
-//     <ItemContext.Provider value={{ itemInfo, setItemInfo }}>
-//       {children}
-//     </ItemContext.Provider>
-//   );
 }
