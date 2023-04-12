@@ -30,7 +30,12 @@ const AppRoutes = () => {
             <Route exact path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/cadastro" element={<Cadastro />} />
-            <Route path="/perfil" element={<Private><Perfil /></Private>} />
+            <Route path="/perfil" element={
+            // <Private>
+            //   <Perfil />
+            // </Private>
+            <Perfil/>
+            } />
             <Route path="/item/:id" element={<ItemDetalhes />} />
           </Routes>
         </ItemProvider>
