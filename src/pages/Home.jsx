@@ -30,6 +30,7 @@ const Home = () => {
   return (
     <>
       <Header />
+      <Categorias />
       <main className="pt-36 pb-28 px-32">
         <Buscar />
         <div className="w-full pt-10 flex flex-wrap justify-start gap-y-5 gap-x-11 mt-3">

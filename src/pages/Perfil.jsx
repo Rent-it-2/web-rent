@@ -1,8 +1,12 @@
 import React from 'react'
+import { Header, ProdutosAnunciados } from '../components'
 
 const Perfil = () => {
   return (
-    <div>Perfil</div>
+    <>
+    <Header/>
+    <ProdutosAnunciados/>
+    </>
   )
 }
 
