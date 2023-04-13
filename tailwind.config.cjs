@@ -7,15 +7,18 @@ module.exports = {
       colors: {
         primary: "#FF724C",
         secondary: "#FDBF50",
-        dimWhite: "#F4F4F8",
-        dimBlue: "#2A2A4B",
+        rentWhite: "#F4F4F8",
+        rentBlue: "#2A2A4B",
+        primaryOpacity: "#ff734c63",
+        rentBlueOpacity: "#11101db2",
       },
       fontFamily: {
-        poppins: ["R", "sans-serif"],
+        roboto: ["'Roboto', sans-serif"],
       },
       backgroundImage: {
         'art-login': "url('./public/Rectangle.svg')",
         'art-cadastro': "url('./public/Rectangle.svg')",
+        'art-buscar': "url('./public/search-banner.svg')",
       }
     },
     screens: {

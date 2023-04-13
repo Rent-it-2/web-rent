@@ -3,7 +3,7 @@ import { IMaskInput } from "react-imask";
 
 const Cadastro = () => {
   return (
-    <div className="flex w-full text-dimBlue">
+    <div className="flex w-full text-rentBlue">
       <div className="hidden bg-primary w-1/2 h-screen overflow-hidden 
       bg-art-cadastro bg-cover bg-no-repeat sm:flex"></div>
 
@@ -130,7 +130,7 @@ const Cadastro = () => {
               </button>
               <span className="text-gray-500 text-sm">
                 Já tem uma conta?{" "}
-                <a href="" className="font-bold text-sm text-dimBlue hover:text-secondary">
+                <a href="" className="font-bold text-sm text-rentBlue hover:text-secondary">
                   Entre
                 </a>{" "}
                 agora
@@ -270,7 +270,7 @@ const Cadastro = () => {
               </button>
               <span className="text-gray-500 text-sm">
                 Já tem uma conta?{" "}
-                <a href="" className="font-bold text-sm text-dimBlue hover:text-secondary">
+                <a href="" className="font-bold text-sm text-rentBlue hover:text-secondary">
                   Entre
                 </a>{" "}
                 agora
@@ -403,7 +403,7 @@ const Cadastro = () => {
               </button>
               <span className="text-gray-500 text-xs">
                 Já tem uma conta?{" "}
-                <a href="" className="font-bold text-dimBlue text-xs hover:text-secondary">
+                <a href="" className="font-bold text-rentBlue text-xs hover:text-secondary">
                   Entre
                 </a>{" "}
                 agora
