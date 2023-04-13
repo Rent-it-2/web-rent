@@ -1,9 +1,11 @@
 import React from 'react'
-import { Header, Sidebar } from '../components'
+import { Header, Sidebar, Footer } from '../components'
 
 const Perfil = () => {
   return (
+    <>
     <Sidebar/>
+    </>
   )
 }
 
