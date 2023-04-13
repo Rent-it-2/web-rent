@@ -1,11 +1,10 @@
 import React from 'react'
-import { Header, ProdutosAnunciados } from '../components'
+import { Header, Sidebar, Footer } from '../components'
 
 const Perfil = () => {
   return (
     <>
-    <Header/>
-    <ProdutosAnunciados/>
+    <Sidebar/>
     </>
   )
 }

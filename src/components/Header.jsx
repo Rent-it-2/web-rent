@@ -36,6 +36,7 @@ const Header = () => {
 
           <button onClick={handleLogout} className="rounded-full bg-rentBlue text-white px-8 hover:bg-secondary">
             Sair
+            {/* <span class="material-icons">logout</span> */}
           </button>
         </div>
       </div>

@@ -1,23 +1,43 @@
-import React from 'react'
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
+import { ItemContext }  from "../contexts/ItemContext";
 
-const Item = () => {
-    return (
-        <div className='w-[15rem] h-[18rem] max-h-[18rem] text-rentBlue'>
-            <img src="../../public/Rectangle 20.png" alt="img" className='rounded-lg max-w-full min-w-full cursor-pointer'/>
-            <div className="flex justify-between p-3">
-                <h3 className="">Furadeira Bosch g28</h3>
-            </div>
-            <div className="flex p-3 items-end justify-between hover:drop-shadow-xl">
-                <div className="flex items-end">
-                <h2 className='text-lg'>R$ 18.00 </h2>
-                <span className='text-sm'>/dia</span>
-                </div>
-                <span class="material-icons cursor-pointer">
-                    favorite_border
-                </span>
-            </div>
+const Item = ({ item: { id, userId, foto, nome, categoria, valorDia } }) => {
+  const { setItemId } = useContext(ItemContext);
+  const { setUserId } = useContext(ItemContext);
+
+  const backImage = {
+    backgroundImage: `url(${foto})`
+    // backgroundImage: `url(${foto && foto[0]})` *Código para trazer o primeira imagem quando for um array, não apagar
+  }
+
+  const visualizarItem = () => {
+    setItemId(id);
+    setUserId(userId);
+  };
+
+  return (
+    <div className="w-[15rem] h-[18rem] max-h-[18rem] text-rentBlue border-[1px] border-gray-300 rounded-lg transition hover:scale-105">
+      <Link to={`/item/${id}`} onClick={visualizarItem}>
+        <div className="aspect-[4/3] rounded-lg max-w-full min-w-full" style={backImage}></div>
+
+        <div className="w-full p-3 flex justify-between">
+          <h3 className="">{nome}</h3>
         </div>
-    )
-}
+        <h4 className="w-full px-3 text-sm text-gray-400">
+          {categoria}
+        </h4>
 
-export default Item
+      </Link>
+      <div className="flex px-3 items-end justify-between hover:drop-shadow-xl">
+        <div className="flex items-end">
+          <h2 className="text-lg">R$ {valorDia} </h2>
+          <span className="text-sm">/dia</span>
+        </div>
+        <i className="mdi mdi-heart cursor-pointer text-[22px]"></i>
+      </div>
+    </div>
+  );
+};
+
+export default Item;
