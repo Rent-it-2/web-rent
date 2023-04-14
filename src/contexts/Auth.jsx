@@ -1,5 +1,6 @@
 import React, { useState, createContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+// import api, { createSession } from "../api";
 
 export const AuthContext = createContext();
 
@@ -17,10 +18,14 @@ export const AuthProvider = ({ children }) => {
     setLoading(false);
   }, []);
 
-  const login = (email, senha) => {
+  const login = async (email, senha) => {
     console.log("login auth", { email, senha });
+
+    // const response = await createSession(email, senha);
+    // const loggedUser = response.data.user;
+
     const loggedUser = {
-      id: "123",
+      id: "1",
       email,
     };
     sessionStorage.setItem("user", JSON.stringify(loggedUser));
@@ -35,7 +40,7 @@ export const AuthProvider = ({ children }) => {
     console.log("logout");
     sessionStorage.clear();
     setUser(null);
-    navigate("/login");
+    navigate("/");
   };
 
   return (

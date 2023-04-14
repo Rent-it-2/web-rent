@@ -5,7 +5,7 @@ import {
   Routes,
   Navigate,
 } from "react-router-dom";
-import { Login, Cadastro, Home, Perfil, ItemDetalhes, Filters } from "./pages";
+import { Login, Cadastro, Home, Perfil, ItemDetalhes, Filters, PerfilPublico } from "./pages";
 import { AuthProvider, AuthContext } from "./contexts/Auth";
 import { ItemProvider } from "./contexts/ItemContext";
 
@@ -27,12 +27,13 @@ const AppRoutes = () => {
       <AuthProvider>
         <ItemProvider>
           <Routes>
-            <Route exact path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
             <Route path="/cadastro" element={<Cadastro />} />
-            <Route path="/perfil" element={<Private><Perfil /></Private>} />
+            <Route path="/login" element={<Login />} />
+            <Route exact path="/" element={<Home />} />
+            <Route path="/filtros" element={<Filters/>} />
             <Route path="/item/:id" element={<ItemDetalhes />} />
-            <Route path="/filters" element={<Filters/>} />
+            <Route path="/locador/:id" element={<PerfilPublico/>} />
+            <Route path="/perfil" element={<Private><Perfil /></Private>} />
           </Routes>
         </ItemProvider>
       </AuthProvider>

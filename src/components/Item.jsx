@@ -17,24 +17,30 @@ const Item = ({ item: { id, userId, foto, nome, categoria, valorDia } }) => {
   };
 
   return (
-    <div className="w-[15rem] h-[18rem] max-h-[18rem] text-rentBlue border-[1px] border-gray-300 rounded-lg transition hover:scale-105">
+    <div className="w-[12.6rem] h-[18rem] text-rentBlue border-[1px] border-gray-300 rounded-lg transition hover:scale-105">
       <Link to={`/item/${id}`} onClick={visualizarItem}>
-        <div className="aspect-[4/3] rounded-lg max-w-full min-w-full" style={backImage}></div>
-
-        <div className="w-full p-3 flex justify-between">
-          <h3 className="">{nome}</h3>
-        </div>
-        <h4 className="w-full px-3 text-sm text-gray-400">
-          {categoria}
-        </h4>
-
+        <div className="aspect-[4/3] rounded-lg max-w-full min-w-full bg-contain" style={backImage}></div>
       </Link>
-      <div className="flex px-3 items-end justify-between hover:drop-shadow-xl">
-        <div className="flex items-end">
-          <h2 className="text-lg">R$ {valorDia} </h2>
-          <span className="text-sm">/dia</span>
+
+      <div className="h-1/2 w-full p-3 flex flex-col justify-around">
+
+        <div className="h-2/3 justify-between">
+          <div className="flex justify-between">
+            <h3 className="">{nome}</h3>
+          </div>
+          <h4 className="text-sm text-gray-400">
+            {categoria}
+          </h4>
         </div>
-        <i className="mdi mdi-heart cursor-pointer text-[22px]"></i>
+
+        <div className="h-1/3 flex items-end justify-between hover:drop-shadow-xl">
+          <div className="flex items-end">
+            <h2 className="text-lg">R$ {valorDia} </h2>
+            <span className="text-sm">/dia</span>
+          </div>
+          <i className="mdi mdi-heart cursor-pointer text-[22px]"></i>
+        </div>
+
       </div>
     </div>
   );

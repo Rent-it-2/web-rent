@@ -4,7 +4,7 @@ import Home from './Home';
 import Perfil from './Perfil';
 import ItemDetalhes from './ItemDetalhes';
 import Filters from './Filters';
-// Filters
+import PerfilPublico from './PerfilPublico';
 
 export {
     Home,
@@ -12,5 +12,6 @@ export {
     Cadastro,
     Filters,
     Perfil,
-    ItemDetalhes
+    ItemDetalhes,
+    PerfilPublico
 }

@@ -1,13 +1,16 @@
-import React from 'react'
-import { Header, ProdutosAnunciados } from '../components'
+import React from "react";
+import { Header, ProdutosAnunciados } from "../components";
+import { styles } from "../styles";
 
 const Perfil = () => {
   return (
     <>
-    <Header/>
-    <ProdutosAnunciados/>
+      <Header />
+      <main className={`${styles.mainConfig}`}>
+        <ProdutosAnunciados />
+      </main>
     </>
-  )
-}
+  );
+};
 
-export default Perfil
+export default Perfil;

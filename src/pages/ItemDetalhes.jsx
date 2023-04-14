@@ -1,7 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Buscar, Footer, Header, Item } from "../components";
 import { ItemContext } from "../contexts/ItemContext";
-import { api } from "../api";
+import { getItemById, getUserById } from "../api";
+import { styles } from "../styles";
+import { Link } from "react-router-dom";
 
 const ItemDetalhes = () => {
   const { itemId } = useContext(ItemContext);
@@ -10,12 +12,10 @@ const ItemDetalhes = () => {
   const [item, setItem] = useState({});
   const [user, setUser] = useState({});
 
-  const getItenById = async () => {
+  const getIten = async () => {
     try {
-      const resposta = await api
-        .get(`/users/${userId}/itens/${itemId}`)
+      const resposta = await getItemById(userId, itemId)
         .then((res) => {
-          // console.log('data',res.data);
           setItem(res.data);
         });
       return resposta;
@@ -24,10 +24,10 @@ const ItemDetalhes = () => {
     }
   };
 
-  const getUserById = async () => {
+  const getUser = async () => {
     try {
-      const resposta = await api.get(`/users/${userId}`).then((res) => {
-        // console.log('data',res.data);
+      const resposta = await getUserById(userId)
+      .then((res) => {
         setUser(res.data);
       });
       return resposta;
@@ -43,7 +43,6 @@ const ItemDetalhes = () => {
 
   const backImageUser = {
     backgroundImage: `url(${user.foto})`,
-    // backgroundImage: `url(${foto && foto[0]})` *Código para trazer o primeira imagem quando for um array, não apagar
   };
 
   const alugarItem = () => {
@@ -51,15 +50,27 @@ const ItemDetalhes = () => {
   };
 
   useEffect(() => {
-    getItenById();
-    getUserById();
+    getIten();
+    getUser();
   }, []);
 
   return (
     <>
       <Header />
-      <main className="pt-36 pb-28 px-32">
+      <main className={`${styles.mainConfig}`}>
+
+        <div className="py-2">
+        <Link
+          to={"/filtros"}
+          className="text-md flex items-center text-gray-400"
+        >
+          <i className="mdi mdi-arrow-left text-[25px]" />
+          Voltar
+        </Link>
+        </div>
+
         <div className="flex flex-wrap">
+
           <div className="w-3/5 h-min-96 h-max-96">
             <div
               className="aspect-[4/3] rounded-xl max-w-full min-w-full bg-no-repeat bg-black bg-center"
@@ -75,19 +86,20 @@ const ItemDetalhes = () => {
               <h1 className="text-2xl font-bold">{item.nome}</h1>
             </div>
 
-            <div className="flex">
+            <Link to={`/locador/${user.id}`} className="flex">
               <div
                 className="rounded-full min-w-[60px] min-h-[60px] bg-cover"
                 style={backImageUser}
               ></div>
-
+              
               <div className="px-3 gap-3">
                 <h3 className="text-xl font-bold">{user.nome}</h3>
                 <p>Avaliação: {user.avaliacao}</p>
               </div>
-            </div>
+            </Link>
 
-            <button className="w-full rounded-lg flex items-center justify-evenly border-[1px] border-gray-400 p-1 px-3">
+            <button className={`w-full rounded-lg flex items-center justify-evenly border-[1px] 
+            border-gray-400 p-1 px-3 ${styles.hoverPadraoPrimary}`}>
               <i className="mdi mdi-chat w-1/6 cursor-pointer text-[22px]"></i>
               Conversar com o locador
             </button>
@@ -104,7 +116,7 @@ const ItemDetalhes = () => {
 
             <div className="w-full flex gap-2">
               <button
-                className="w-5/6 rounded-lg bg-primary p-3 text-white"
+                className={`w-5/6 ${styles.botaoPadraoPrimary} ${styles.hoverPadraoPrimary}`}
                 onClick={alugarItem()}
               >
                 Alugar
@@ -113,8 +125,10 @@ const ItemDetalhes = () => {
                 <i className="mdi mdi-heart w-1/6 cursor-pointer text-[22px] text-gray-400"></i>
               </button>
             </div>
+
           </div>
         </div>
+
       </main>
       <Footer />
     </>
