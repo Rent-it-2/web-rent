@@ -7,6 +7,7 @@ import ProdutosAnunciados from "./ProdutosAnunciados";
 import Filtro from "./Filtro";
 import Menu from "./Menu";
 import InputBuscar from "./InputBuscar";
+import Sidebar from "./Sidebar";
 
 export {
     Header,
@@ -17,5 +18,6 @@ export {
     ProdutosAnunciados,
     Filtro,
     Menu,
-    InputBuscar
+    InputBuscar,
+    Sidebar
 }

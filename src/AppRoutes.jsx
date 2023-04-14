@@ -33,7 +33,12 @@ const AppRoutes = () => {
             <Route path="/filtros" element={<Filters/>} />
             <Route path="/item/:id" element={<ItemDetalhes />} />
             <Route path="/locador/:id" element={<PerfilPublico/>} />
-            <Route path="/perfil" element={<Private><Perfil /></Private>} />
+            <Route path="/perfil" element={
+            // <Private>
+            //   <Perfil />
+            // </Private>
+            <Perfil/>
+            } />
           </Routes>
         </ItemProvider>
       </AuthProvider>
