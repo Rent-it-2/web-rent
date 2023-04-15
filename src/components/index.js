@@ -3,21 +3,23 @@ import Buscar from "./Buscar";
 import Footer from "./Footer";
 import Item from "./Item";
 import Categorias from "./Categorias";
-import ProdutosAnunciados from "./ProdutosAnunciados";
+import ItensAnunciados from "./ItensAnunciados";
 import Filtro from "./Filtro";
 import Menu from "./Menu";
 import InputBuscar from "./InputBuscar";
 import Sidebar from "./Sidebar";
+import MeusDados from "./MeusDados";
 
 export {
-    Header,
-    Buscar,
-    Footer,
-    Item,
-    Categorias,
-    ProdutosAnunciados,
-    Filtro,
-    Menu,
-    InputBuscar,
-    Sidebar
-}
+  Header,
+  Buscar,
+  Footer,
+  Item,
+  Categorias,
+  ItensAnunciados,
+  Filtro,
+  Menu,
+  InputBuscar,
+  Sidebar,
+  MeusDados,
+};

@@ -1,16 +1,19 @@
 import React from "react";
-import { Header, ProdutosAnunciados } from "../components";
 import { styles } from "../styles";
-import { Header, Sidebar, Footer } from '../components'
+import { Header, Sidebar, Footer} from "../components";
+import { Outlet } from "react-router-dom";
 
 const Perfil = () => {
   return (
     <>
       <Header />
       <main className={`${styles.mainConfig}`}>
-      <Sidebar/>
-        <ProdutosAnunciados />
+        <div className="flex flex-wrap">
+          <Sidebar/>
+          <Outlet/>
+        </div>
       </main>
+      <Footer />
     </>
   );
 };

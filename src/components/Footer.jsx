@@ -28,6 +28,7 @@ const FooterDiv2 = () => {
                 <ul className='w-full list-none flex-col gap-2 flex'>
                     {footerLinksLct.map((nav) => (
                         <li
+                            key={nav.id}
                             className={`text-gray-400 hover:text-secondary text-[18px] font-medium `}
                         >
                             <a href={`${nav.link}`} className="text-xs min-w-fit font-light" >{nav.title}</a>
@@ -41,6 +42,7 @@ const FooterDiv2 = () => {
                 <ul className='w-full list-none flex-col gap-2 flex'>
                     {footerLinksLcd.map((nav) => (
                         <li
+                            key={nav.id}
                             className={`text-gray-400 hover:text-secondary text-[18px] font-medium `}
                         >
                             <a href={`${nav.link}`} className="text-xs min-w-fit font-light" >{nav.title}</a>

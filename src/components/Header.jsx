@@ -16,8 +16,7 @@ const Header = () => {
           <img src="../../public/logo.svg" alt="home" className="w-28" />
         </a>
         <div className="flex gap-5">
-          {!authenticated && <ButtonsNoAuth />}
-
+          {!authenticated && <ButtonsNoAuth/>}
           {authenticated && <Menu/>}
         </div>
       </div>

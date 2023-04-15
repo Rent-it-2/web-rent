@@ -24,4 +24,18 @@ export const getUserById = async (userId) => {
     return api.get(`/users/${userId}`);
 };
 
+
+export const getUserLogged = async () => {
+    let userInfos = JSON.parse(sessionStorage.getItem("user"));
+    try {
+      const resposta = await getUserById(userInfos.id).then((res) => {
+        return res.data;
+      });
+      return resposta;
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+};
+
 export default api;

@@ -5,9 +5,19 @@ import {
   Routes,
   Navigate,
 } from "react-router-dom";
-import { Login, Cadastro, Home, Perfil, ItemDetalhes, Filters, PerfilPublico } from "./pages";
+import {
+  Login,
+  Cadastro,
+  Home,
+  Perfil,
+  ItemDetalhes,
+  Filters,
+  PerfilPublico,
+} from "./pages";
 import { AuthProvider, AuthContext } from "./contexts/Auth";
 import { ItemProvider } from "./contexts/ItemContext";
+import { ItensAnunciados } from "./components";
+import MeusDados from "./components/MeusDados";
 
 const AppRoutes = () => {
   const Private = ({ children }) => {
@@ -30,15 +40,21 @@ const AppRoutes = () => {
             <Route path="/cadastro" element={<Cadastro />} />
             <Route path="/login" element={<Login />} />
             <Route exact path="/" element={<Home />} />
-            <Route path="/filtros" element={<Filters/>} />
+            <Route path="/filtros" element={<Filters />} />
             <Route path="/item/:id" element={<ItemDetalhes />} />
-            <Route path="/locador/:id" element={<PerfilPublico/>} />
-            <Route path="/perfil" element={
-            // <Private>
-            //   <Perfil />
-            // </Private>
-            <Perfil/>
-            } />
+            <Route path="/locador/:id" element={<PerfilPublico />} />
+
+            <Route
+              path="/perfil"
+              element={
+                <Private>
+                  <Perfil />
+                </Private>
+              }
+            >
+              <Route path="meus-dados" element={<MeusDados/>} />
+              <Route path="itens" element={<ItensAnunciados />} />
+            </Route>
           </Routes>
         </ItemProvider>
       </AuthProvider>

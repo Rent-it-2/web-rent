@@ -110,8 +110,8 @@ export const zonas = [
 
 export const paginas = [
   {
-    title: "Perfil",
-    link: "/perfil",
+    title: "Meus Dados",
+    link: "/perfil/meus-dados",
     icon:"account"
   },
   {
@@ -131,7 +131,7 @@ export const paginas = [
   },
   {
     title: "Meus Itens",
-    link: "/perfil",
+    link: "/perfil/itens",
     icon:"shape"
   },
   {
