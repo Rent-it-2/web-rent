@@ -20,10 +20,9 @@ const MeusDados = () => {
 
   return (
     <>
-      <section className={`w-3/4 px-10 flex flex-col gap-5`}>
         <div>
           <h1 className="font-bold text-xl">
-            <i className="mdi mdi-account" />
+            <i className="mdi mdi-account pr-2" />
             Meus Dados
           </h1>
           <p className="text-gray-400 text-sm pt-2">
@@ -35,7 +34,7 @@ const MeusDados = () => {
           <div className="flex flex-col items-center">
             <h3 className="font-bold">Foto de Perfil</h3>
             <div
-              className="rounded-full min-w-[120px] min-h-[120px] bg-contain bg-no-repeat"
+              className="rounded-full min-w-[120px] min-h-[120px] border-[3px] border-primary bg-contain bg-no-repeat"
               style={backImageUser}
             />
           </div>
@@ -62,12 +61,35 @@ const MeusDados = () => {
         </div>
 
         <div className="">
-          <Input label={"Apelido"} name={"apelido"} type={"text"} value={user.apelido} />
-          <Input label={"Nome"} name={"nome"} type={"text"} value={user.nome}/>
-          <Input label={"Email"} name={"email"} type={"email"} value={user.email}/>
-          <Input label={"Telefone"} name={"telefone"} type={"text"} mask={`(00) 0000-0000`} value={user.telefone}/>
+          <Input
+            label={"Apelido"}
+            name={"apelido"}
+            type={"text"}
+            value={user.apelido}
+          />
+          <Input label={"Nome"} name={"nome"} type={"text"} value={user.nome} />
+          <Input
+            label={"Email"}
+            name={"email"}
+            type={"email"}
+            value={user.email}
+          />
+          <Input
+            label={"Telefone"}
+            name={"telefone"}
+            type={"text"}
+            mask={`(00) 0000-0000`}
+            value={user.telefone}
+          />
+
+          <div className="py-3">
+          <button
+            className={`w-48 ${styles.botaoPadraoPrimary} text-sm ${styles.hoverPadraoPrimary}`}
+          >
+            Salvar
+          </button>
+          </div>
         </div>
-      </section>
     </>
   );
 };

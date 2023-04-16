@@ -9,6 +9,7 @@ import Menu from "./Menu";
 import InputBuscar from "./InputBuscar";
 import Sidebar from "./Sidebar";
 import MeusDados from "./MeusDados";
+import Modal from "./Modal";
 
 export {
   Header,
@@ -22,4 +23,5 @@ export {
   InputBuscar,
   Sidebar,
   MeusDados,
+  Modal,
 };

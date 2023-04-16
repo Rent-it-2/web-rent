@@ -1,9 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { getUserById } from "../api";
 import { Link } from "react-router-dom";
-import { categorias, paginas } from "../constants";
+import { paginas } from "../constants";
 import { AuthContext } from "../contexts/Auth";
-import { styles } from "../styles";
 
 const Menu = () => {
   const [user, setUser] = useState({});
@@ -41,7 +40,7 @@ const Menu = () => {
       <div className="h-full rounded-full text-rentBlue border-[0.1px] border-rentBlue flex pr-3 gap-3 items-center">
         <Link
           to={"/perfil"}
-          className="rounded-full min-w-[40px] min-h-[40px] bg-cover"
+          className="rounded-full min-w-[40px] min-h-[40px] bg-cover border-[1px] border-rentBlue"
           style={backImageUser}
         ></Link>
         <h3 className="text-md">{user.apelido}</h3>

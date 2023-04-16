@@ -5,12 +5,12 @@ import { styles } from "../styles";
 const Login = () => {
   const { authenticated, login } = useContext(AuthContext);
   const [email, setEmail] = useState("");
-  const [senha, setSenha] = useState("");
+  const [password, setpassword] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("submit", { email, senha });
-    login(email, senha);
+    console.log("submit", { email, password });
+    login(email, password);
   };
 
 
@@ -56,14 +56,14 @@ const Login = () => {
 
             <div className="flex-col flex">
               <label htmlFor="" className="text-gray-500 text-sm">
-                Senha
+                password
               </label>
               <input
                 type="password"
-                name="senha"
-                id="senha"
-                value={senha}
-                onChange={(e) => setSenha(e.target.value)}
+                name="password"
+                id="password"
+                value={password}
+                onChange={(e) => setpassword(e.target.value)}
                 className="border-2 rounded-md p-2 border-gray-400 outline-none text-xs text-gray-500"
               />
             </div>
@@ -81,7 +81,7 @@ const Login = () => {
               </div>
 
               <a href="" className="font-bold text-sm hover:text-secondary">
-                Esqueci a senha
+                Esqueci a password
               </a>
             </div>
 
