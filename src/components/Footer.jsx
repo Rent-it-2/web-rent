@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { footerLinksAjuda, footerLinksLcd, footerLinksLct } from '../constants';
 
+
 const Footer = () => {
     const [active, setActive] = useState("");
     return (
@@ -28,10 +29,9 @@ const FooterDiv2 = () => {
                     {footerLinksLct.map((nav) => (
                         <li
                             key={nav.id}
-                            className={`text-gray-400 hover:text-secondary text-[18px] font-medium cursor-pointer`}
-                            onClick={() => setActive(nav.title)}
+                            className={`text-gray-400 hover:text-secondary text-[18px] font-medium `}
                         >
-                            <a href={`#${nav.id}`} className="text-xs min-w-fit font-light" >{nav.title}</a>
+                            <a href={`${nav.link}`} className="text-xs min-w-fit font-light" >{nav.title}</a>
                         </li>
                     ))}
                 </ul>
@@ -43,10 +43,9 @@ const FooterDiv2 = () => {
                     {footerLinksLcd.map((nav) => (
                         <li
                             key={nav.id}
-                            className={`text-gray-400 hover:text-secondary text-[18px] font-medium cursor-pointer`}
-                            onClick={() => setActive(nav.title)}
+                            className={`text-gray-400 hover:text-secondary text-[18px] font-medium `}
                         >
-                            <a href={`#${nav.id}`} className="text-xs min-w-fit font-light" >{nav.title}</a>
+                            <a href={`${nav.link}`} className="text-xs min-w-fit font-light" >{nav.title}</a>
                         </li>
                     ))}
                 </ul>
@@ -65,11 +64,10 @@ const FooterDiv3 = () => {
                 <h2 className="font-extrabold text-sm">Ajuda</h2>
                 {footerLinksAjuda.map((nav) => (
                     <li
-                        key={nav.id}
-                        className={`text-gray-400 hover:text-secondary text-[18px] font-medium cursor-pointer`}
+                        className={`text-gray-400 hover:text-secondary text-[18px] font-medium `}
                         onClick={() => setActive(nav.title)}
                     >
-                        <a href={`#${nav.id}`} className="text-xs min-w-fit font-light" >{nav.title}</a>
+                        <a href={`#${nav.link}`} className="text-xs min-w-fit font-light" >{nav.title}</a>
                     </li>
                 ))}
             </ul>
@@ -77,16 +75,16 @@ const FooterDiv3 = () => {
             <ul className="flex w-full justify-between self-end">
 
                 <li className="flex flex-col gap-5">
-                    <a href="" className="text-xs text-gray-400 hover:text-secondary font-medium cursor-pointer">Termos e condições</a>
-                    <a href="" className="text-xs text-gray-400 hover:text-secondary font-medium cursor-pointer">Política de uso de dados</a>
+                    <a href="" className="text-xs text-gray-400 hover:text-secondary font-medium">Termos e condições</a>
+                    <a href="" className="text-xs text-gray-400 hover:text-secondary font-medium">Política de uso de dados</a>
                 </li>
 
                 <div>
                     <h2 className="font-extrabold text-sm">Siga-nos</h2>
                     <div className="flex justify-between">
-                        <a href=""><img src="../../public/icon.svg" alt="twitter" className="w-10" /></a>
-                        <a href=""><img src="../../public/icon.svg" alt="twitter" className="w-10" /></a>
-                        <a href=""><img src="../../public/icon.svg" alt="twitter" className="w-10" /></a>
+                        <a href=""><i className="mdi mdi-instagram text-[35px] hover:text-secondary"/></a>
+                        <a href=""><i className="mdi mdi-twitter text-[35px] hover:text-secondary"/></a>
+                        <a href=""><i className="mdi mdi-linkedin text-[35px] hover:text-secondary"/></a>
                     </div>
                 </div>
             </ul>

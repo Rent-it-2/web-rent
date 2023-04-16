@@ -11,6 +11,7 @@ module.exports = {
         rentBlue: "#2A2A4B",
         primaryOpacity: "#ff734c63",
         rentBlueOpacity: "#11101db2",
+        bgModalColor: "rgb(0,0,0,0.7)",
       },
       fontFamily: {
         roboto: ["'Roboto', sans-serif"],
