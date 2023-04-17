@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Buscar, Footer, Header, Item, Categorias } from "../components";
+import { Buscar, Footer, Header, Item, Categorias} from "../components";
 import api, { getAllItem } from "../api";
 
 const Home = () => {

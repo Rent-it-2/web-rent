@@ -24,7 +24,7 @@ function Categorias() {
         {categorias.map((categoria) => (
           <button
             href={`/filtros`}
-            className={`${styles.glassEffect} py-2 px-8 rounded-full hover:text-secondary hover:border-secondary `}
+            className={`${styles.glassEffect} py-2 px-8 rounded-full hover:text-secondary hover:border-secondary`}
           >
             {categoria.title}
           </button>

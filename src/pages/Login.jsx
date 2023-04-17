@@ -110,7 +110,7 @@ const Login = () => {
 
       <div
         className="hidden bg-primary w-1/2 h-screen overflow-hidden 
-            bg-art-cadastro bg-cover bg-no-repeat sm:flex"
+            bg-art-login bg-cover bg-no-repeat sm:flex"
       ></div>
     </div>
   );

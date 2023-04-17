@@ -13,6 +13,7 @@ import {
   ItemDetalhes,
   Filters,
   PerfilPublico,
+  Chat,
 } from "./pages";
 import { AuthProvider, AuthContext } from "./contexts/Auth";
 import { ItemProvider } from "./contexts/ItemContext";
@@ -41,6 +42,7 @@ const AppRoutes = () => {
             <Route path="/login" element={<Login />} />
             <Route exact path="/" element={<Home />} />
             <Route path="/filtros" element={<Filters />} />
+            <Route path="/chat" element={<Chat />} />
             <Route path="/item/:id" element={<ItemDetalhes />} />
             <Route path="/locador/:id" element={<PerfilPublico />} />
 
