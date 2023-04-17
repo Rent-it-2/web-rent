@@ -4,7 +4,6 @@ import { Header, Sidebar, Footer } from '../components'
 const Perfil = () => {
   return (
     <>
-    <Sidebar/>
     </>
   )
 }
