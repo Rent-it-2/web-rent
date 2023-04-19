@@ -52,42 +52,44 @@ const ItensAnunciados = () => {
         isOpen={openModal}
         setModalOpen={() => setOpenModal(!openModal)}
       >
-        <Form/>
+        <Form />
       </Modal>
     </>
   );
 };
 
-const ItemCard = ({
-  item: { id, userId, foto, nome, categoria, valorDia, isAlugando },
-}) => {
+const ItemCard = ({ item }) => {
+  const [openModal, setOpenModal] = useState(false);
+
   const backImage = {
-    backgroundImage: `url(${foto})`,
+    backgroundImage: `url(${item.foto})`,
   };
 
   return (
-    <div className="flex items-center gap-5 rounded-lg p-1 border-[0.1px] border-gray-300">
-      <div
-        className="aspect-[4/3] min-w-[70px] min-h-[70px] rounded-lg bg-contain"
-        style={backImage}
-      />
+    <div className="flex flex-wrap items-center justify-between gap-5 rounded-lg p-1 border-[0.1px] border-gray-300">
+      <div className="flex flex-wrap items-center justify-center gap-5">
+        <div
+          className="aspect-[4/3] min-w-[70px] min-h-[70px] rounded-lg bg-contain"
+          style={backImage}
+        />
 
-      <div className="w-2/5">
-        <p className="text-base font-semibold">{nome}</p>
-        <div className="flex items-end">
-          <h2 className="text-base">R$ {valorDia} </h2>
-          <span className="text-sm">/dia</span>
+        <div className="flex-col justify-start">
+          <p className="text-base font-semibold">{item.nome}</p>
+          <div className="flex items-end">
+            <h2 className="text-base">R$ {item.valorDia} </h2>
+            <span className="text-sm">/dia</span>
+          </div>
+          <p
+            className={`text-sm ${
+              !item.isAlugando ? "text-primary" : "text-green-500"
+            }`}
+          >
+            <b>Status:</b> {!item.isAlugando ? "Não anunciado" : "Anunciando"}
+          </p>
         </div>
-        <p
-          className={`text-sm ${
-            !isAlugando ? "text-primary" : "text-green-500"
-          }`}
-        >
-          <b>Status:</b> {!isAlugando ? "Não anunciado" : "Anunciando"}
-        </p>
       </div>
 
-      <div className="w-2/5 flex items-center justify-end gap-2">
+      <div className="flex items-center justify-end gap-2">
         <button
           className={`${styles.botaoPadraoPrimary} text-sm rounded-md ${styles.hoverPadraoPrimary}`}
         >
@@ -96,17 +98,25 @@ const ItemCard = ({
 
         <button
           className={`rounded-lg border-[1px] border-gray-300 p-1 px-3 text-gray-400 ${styles.hoverPadraoPrimary}`}
+          onClick={() => setOpenModal(true)}
         >
           <i className="mdi mdi-pencil w-1/6 cursor-pointer text-[22px] "></i>
         </button>
       </div>
+      <Modal
+        title={"Editar Item"}
+        isOpen={openModal}
+        setModalOpen={() => setOpenModal(!openModal)}
+      >
+        <Form item={item} />
+      </Modal>
     </div>
   );
 };
 
-const Form = () => {
+const Form = ({ item }) => {
   const [isChecked, setIsChecked] = useState(false);
-  const [formValues, setFormValues] = useState({});
+  const [formValues, setFormValues] = useState(item || {});
 
   const handleChange = (event) => {
     const { name, type } = event.target;
@@ -114,11 +124,10 @@ const Form = () => {
 
     if (type === "file") {
       value = event.target.files[0];
-    } 
-    else if (type === "checkbox") {
-      setIsChecked(!!event.target.checked); 
-      value = !isChecked;
-    }else {
+    } else if (type === "checkbox") {
+      setIsChecked(event.target.checked);
+      value = event.target.checked;
+    } else {
       value = event.target.value;
     }
 
@@ -133,6 +142,12 @@ const Form = () => {
     console.log("submit", formValues);
     // postItem(formValues)
   };
+
+  useEffect(() => {
+    if (item) {
+      setFormValues(item);
+    }
+  }, [item]);
 
   return (
     <form className="w-96 flex flex-wrap gap-2" onSubmit={handleSubmit}>
@@ -158,6 +173,7 @@ const Form = () => {
           <input
             type="text"
             name="nome"
+            value={formValues.nome || ""}
             onChange={handleChange}
             className={`w-full appearance-none outline-none bg-transparent`}
           />
@@ -172,6 +188,7 @@ const Form = () => {
             <CurrencyInput
               name="valorDia"
               placeholder="0,00"
+              value={formValues.valorDia || ""}
               onChange={handleChange}
               decimalSeparator=","
               groupSeparator="."
@@ -186,7 +203,7 @@ const Form = () => {
           <div className="flex rounded-md bg-gray-300 text-sm items-center p-2">
             <select
               name="categoria"
-              // value={selectedOption}
+              value={formValues.categoria || ""}
               onChange={handleChange}
               className={`w-full appearance-none outline-none bg-transparent`}
             >
@@ -208,6 +225,7 @@ const Form = () => {
             type="text"
             name="descricao"
             rows="4"
+            value={formValues.descricao || ""}
             onChange={handleChange}
             className={`w-full appearance-none outline-none bg-transparent resize-none`}
           ></textarea>
@@ -220,21 +238,30 @@ const Form = () => {
           <input
             type="checkbox"
             checked={isChecked}
-            name="isAlugado"
+            name="isAlugando"
+            value={formValues.isAlugando || ""}
             onChange={handleChange}
             className="border-2 rounded-md p-1 border-gray-400"
           />
         </div>
       </div>
 
-      <div className="w-1/2">
+      <div className="w-1/2 flex gap-2">
         <button
           type="submit"
-          className={`${styles.botaoPadraoPrimary} p-2 ${styles.hoverPadraoPrimary}`}
+          className={`${styles.botaoPadraoPrimary} p-2 text-sm ${styles.hoverPadraoPrimary}`}
         >
-          <i className="mdi mdi-plus text-[20px]" />
-          Cadastrar Item
+          <i className={`mdi mdi-${!item ? "plus": ""} text-[20px]`}/>
+          {item ? "Salvar" : "Cadastrar Item"}
         </button>
+
+        {item && (
+          <button
+            className={`border-[1px] w-full p-3 border-gray-400 text-gray-400 text-sm rounded-md ${styles.hoverPadraoPrimary}`}
+          >
+            Cancelar
+          </button>
+        )}
       </div>
     </form>
   );

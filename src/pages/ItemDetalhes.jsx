@@ -99,10 +99,10 @@ const ItemDetalhes = () => {
             </div>
 
             <button
-              className={`w-full rounded-lg flex items-center justify-evenly border-[1px] 
+              className={`w-64 rounded-lg flex items-center justify-evenly border-[1px] 
             border-gray-400 p-1 px-3 ${styles.hoverPadraoPrimary}`}
             >
-              <i className="mdi mdi-chat w-1/6 cursor-pointer text-[22px]"></i>
+              <i className="mdi mdi-chat text-[22px]"></i>
               Conversar com o locador
             </button>
 
@@ -123,8 +123,8 @@ const ItemDetalhes = () => {
               >
                 Alugar
               </button>
-              <button className="rounded-lg border-[1px] border-gray-300 p-1 px-3">
-                <i className="mdi mdi-heart w-1/6 cursor-pointer text-[22px] text-gray-400"></i>
+              <button className={`rounded-lg border-[1px] text-gray-400 border-gray-300 p-1 px-3  ${styles.hoverPadraoPrimary}`}>
+                <i className="mdi mdi-heart w-1/6 cursor-pointer text-[22px]"></i>
               </button>
             </div>
           </div>

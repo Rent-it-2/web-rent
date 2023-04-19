@@ -9,7 +9,7 @@ const InputBuscar = () => {
     };
   
     return (
-      <div className="w-full rounded-full border-[0.1px] border-gray-400 flex items-center justify-center bg-white px-3">
+      <div className="w-full rounded-full flex items-center justify-center bg-white px-3">
         <i className="mdi mdi-magnify text-gray-400 text-[30px] h-fit"></i>
         <input
           className="appearance-none w-full pl-6 outline-none text-gray-400"
