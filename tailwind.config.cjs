@@ -11,14 +11,15 @@ module.exports = {
         rentBlue: "#2A2A4B",
         primaryOpacity: "#ff734c63",
         rentBlueOpacity: "#11101db2",
+        bgModalColor: "rgb(0,0,0,0.7)",
       },
       fontFamily: {
         roboto: ["'Roboto', sans-serif"],
       },
       backgroundImage: {
-        'art-login': "url('./public/Rectangle.svg')",
-        'art-cadastro': "url('./public/Rectangle.svg')",
-        'art-buscar': "url('./public/search-banner.svg')",
+        'art-login': "url('./public/banner-login.jpg')",
+        'art-cadastro': "url('./public/banner-cadastro.gif')",
+        'art-buscar': "url('./public/banner-01.png')",
       }
     },
     screens: {
