@@ -1,4 +1,5 @@
 import axios from "axios";
+import { UsuarioLogado } from "./constants";
 
 const token = JSON.parse(sessionStorage.getItem("token"));
 const headers = {
@@ -34,9 +35,9 @@ export const getUserItem = async (userId) => {
 };
 
 export const getUserLogged = async () => {
-    let userInfos = JSON.parse(sessionStorage.getItem("user"));
+    // let userInfos = JSON.parse(sessionStorage.getItem("user"));
     try {
-      const resposta = await getUserById(userInfos.id).then((res) => {
+      const resposta = await getUserById(UsuarioLogado.id).then((res) => {
         return res.data;
       });
       return resposta;
@@ -47,9 +48,9 @@ export const getUserLogged = async () => {
 };
 
 export const getUserLoggedItems = async () => {
-    let userInfos = JSON.parse(sessionStorage.getItem("user"));
+    // let userInfos = JSON.parse(sessionStorage.getItem("user"));
     try {
-      const resposta = await getUserItem(userInfos.id).then((res) => {
+      const resposta = await getUserItem(UsuarioLogado.id).then((res) => {
         console.log(res.data);
         return res.data;
       });

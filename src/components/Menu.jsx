@@ -37,10 +37,10 @@ const Menu = () => {
 
   return (
     <>
-      <div className="h-full rounded-full text-rentBlue border-[0.1px] border-rentBlue flex pr-3 gap-3 items-center">
+      <div className="h-fit rounded-full text-white bg-rentBlue border-[0.1px] border-rentBlue flex pr-3 gap-3 items-center">
         <Link
-          to={"/perfil"}
-          className="rounded-full min-w-[40px] min-h-[40px] bg-cover border-[1px] border-rentBlue"
+          to={"/perfil/meus-dados"}
+          className="rounded-full min-w-[45px] min-h-[45px] bg-cover border-[1px] border-rentBlue"
           style={backImageUser}
         ></Link>
         <h3 className="text-md">{user.apelido}</h3>

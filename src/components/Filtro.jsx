@@ -7,13 +7,16 @@ const Filtro = () => {
     <>
       <form
         action=""
-        className={`w-56 text-black flex flex-col gap-5 px-5 z-50`}
+        className={`w-56 text-rentBlue flex flex-col gap-10 px-5`}
       >
-        <h2 className="text-xl font-bold">Filtrar por:</h2>
+        <h2 className="text-xl font-bold">
+          <i className="mdi mdi-filter text-[20px]"/>
+          Filtrar por:
+        </h2>
 
         <div className="">
           <h3 className="font-bold">Região:</h3>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap pt-5 gap-3">
             {zonas.map((zona) => (
               <button
                 href={`#${zona.id}`}
@@ -53,7 +56,7 @@ const Filtro = () => {
 
         <div className="">
           <h3 className="font-bold">Categoria:</h3>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-3 justify-center pt-5">
             {categorias.map((categoria) => (
               <button
                 href={`#${categoria.id}`}

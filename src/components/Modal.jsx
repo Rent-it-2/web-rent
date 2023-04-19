@@ -10,7 +10,7 @@ const Modal = ({isOpen, children, setModalOpen, title}) => {
             <header>
               <h2 className="text-xl font-bold pr-10">{title}</h2>
             </header>
-            <button className={`${styles.hoverPadraoPrimary} hover:border-0`} onClick={setModalOpen}>
+            <button className={`border-0 hover:text-primary`} onClick={setModalOpen}>
               <i className="mdi mdi-close text-[25px]"/>
             </button>
           </div>

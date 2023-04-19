@@ -26,11 +26,11 @@ const Sidebar = () => {
               <li
                 key={pagina.title}
                 className={`font-medium cursor-pointer text-[16px]  ${
-                  active === pagina.link ? "text-secondary" : "text-rentBlue"
+                  active === pagina.link ? "bg-gray-200 group-text-gray-900 group-text-white" : "text-rentBlue"
                 }`}
                 onClick={() => {
                   setToggle(!toggle);
-                  setActive(pagina.title);
+                  setActive(pagina.link);
                 }}
               >
                 {pagina.title != "Sair" && (

@@ -1,3 +1,5 @@
+export const UsuarioLogado = JSON.parse(sessionStorage.getItem("user"));
+
 export const footerLinksLct = [
   {
     id: "criar",
@@ -25,7 +27,7 @@ export const footerLinksLcd = [
   {
     id: "produtos",
     title: "Listar seus produtos",
-    link: "",
+    link: "perfil/itens",
   },
   {
     id: "impulsionar",
@@ -116,7 +118,7 @@ export const paginas = [
   },
   {
     title: "Perfil Público",
-    link: "/perfil",
+    // link: `/locador/${UsuarioLogado.id}`,
     icon:"share-variant"
   },
   {
@@ -125,7 +127,7 @@ export const paginas = [
     icon:"chat"
   },
   {
-    title: "Transações Efetuadas",
+    title: "Transações",
     link: "/perfil",
     icon:"transfer"
   },
@@ -133,6 +135,11 @@ export const paginas = [
     title: "Meus Itens",
     link: "/perfil/itens",
     icon:"shape"
+  },
+  {
+    title: "Cartões",
+    link: "/perfil",
+    icon:"credit-card"
   },
   {
     title: "Favoritos",

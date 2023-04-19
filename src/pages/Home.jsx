@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Buscar, Footer, Header, Item, Categorias } from "../components";
 import api, { getAllItem } from "../api";
+import { styles } from "../styles";
 
 const Home = () => {
   const [itemList, setItem] = useState([]);
@@ -16,7 +17,7 @@ const Home = () => {
           }
         });
       }
-      // console.log("element", element);
+      console.log("element", element);
       setItem(element);
     } catch (error) {
       console.log(error);
@@ -30,20 +31,23 @@ const Home = () => {
   return (
     <>
       <Header />
-      <Categorias />
-      <main className="pt-36 pb-28 px-28">
+      {/* <Categorias /> */}
+      <main className={`${styles.mainConfig}`}>
         <Buscar />
 
-        <div className="pt-10">
+        {/* <div className="">
           <h2 className="text-xl font-bold">Mais Procurados</h2>
-          <div className="w-full flex flex-wrap justify-start gap-y-5 gap-x-7 mt-3">
+          <div className="w-full flex flex-wrap justify-start gap-y-5 gap-x-12 mt-3 bg-white rounded-2xl p-2">
             {itemList?.map((item) => (
               <Item key={item.userId} item={item} />
             ))}
+                        {itemList?.map((item) => (
+              <Item key={item.userId} item={item} />
+            ))}
           </div>
-        </div>
+        </div> */}
 
-        <div className="pt-10">
+        <div className=" rounded-2xl p-5 bg-white">
           <h2 className="text-xl font-bold">Sugestões</h2>
           <div className="w-full flex flex-wrap justify-start gap-y-5 gap-x-7 mt-3">
             {itemList?.map((item) => (

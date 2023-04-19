@@ -17,12 +17,12 @@ const Item = ({ item: { id, userId, foto, nome, categoria, valorDia } }) => {
   };
 
   return (
-    <div className="w-[12.6rem] h-[18rem] text-rentBlue border-[1px] border-gray-300 rounded-lg transition hover:scale-105">
+    <div className="w-[10rem] h-[18rem] text-rentBlue bg-white border-[1px] border-gray-300 rounded-lg transition hover:scale-105">
       <Link to={`/item/${id}`} onClick={visualizarItem}>
-        <div className="aspect-[4/3] rounded-lg max-w-full min-w-full bg-contain" style={backImage}></div>
+        <div className="aspect-square rounded-lg max-w-full min-w-full bg-cover bg-no-repeat" style={backImage}></div>
       </Link>
 
-      <div className="h-1/2 w-full p-3 flex flex-col justify-around">
+      <div className="h-1/2 w-full p-3 flex flex-col justify-between">
 
         <div className="h-2/3 justify-between">
           <div className="flex justify-between">
@@ -33,7 +33,7 @@ const Item = ({ item: { id, userId, foto, nome, categoria, valorDia } }) => {
           </h4>
         </div>
 
-        <div className="h-1/3 flex items-end justify-between hover:drop-shadow-xl">
+        <div className="h-1/3 py-2 flex items-end justify-between hover:drop-shadow-xl">
           <div className="flex items-end">
             <h2 className="text-lg">R$ {valorDia} </h2>
             <span className="text-sm">/dia</span>

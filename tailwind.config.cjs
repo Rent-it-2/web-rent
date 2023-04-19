@@ -6,6 +6,7 @@ module.exports = {
     extend: {
       colors: {
         primary: "#FF724C",
+        complementPrimary: "#f7503a",
         secondary: "#FDBF50",
         rentWhite: "#F4F4F8",
         rentBlue: "#2A2A4B",

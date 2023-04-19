@@ -10,6 +10,7 @@ import InputBuscar from "./InputBuscar";
 import Sidebar from "./Sidebar";
 import MeusDados from "./MeusDados";
 import Modal from "./Modal";
+import Avaliacao from "./Avaliacao";
 
 export {
   Header,
@@ -24,4 +25,5 @@ export {
   Sidebar,
   MeusDados,
   Modal,
+  Avaliacao,
 };

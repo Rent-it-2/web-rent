@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { styles } from "../styles";
 import { getUserLoggedItems } from "../api";
 import { Modal } from "./index";
-import { IMaskInput } from "react-imask";
 import CurrencyInput from "react-currency-input-field";
 import { categorias } from "../constants";
 
@@ -143,7 +142,6 @@ const Form = () => {
           <label htmlFor="foto">
             <i className="mdi mdi-plus text-[50px] text-gray-400 cursor-pointer"></i>
           </label>
-          {/* <input type="file" name="foto" id="foto" className={`hidden`} onChange={e => setItem(e.target.files[0])} /> */}
           <input
             type="file"
             name="foto"

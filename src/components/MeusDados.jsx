@@ -60,7 +60,7 @@ const MeusDados = () => {
           </div>
         </div>
 
-        <div className="">
+        <div className="w-full">
           <Input
             label={"Apelido"}
             name={"apelido"}
@@ -82,9 +82,9 @@ const MeusDados = () => {
             value={user.telefone}
           />
 
-          <div className="py-3">
+          <div className="w-1/4 py-3">
           <button
-            className={`w-48 ${styles.botaoPadraoPrimary} text-sm ${styles.hoverPadraoPrimary}`}
+            className={`${styles.botaoPadraoPrimary} text-sm ${styles.hoverPadraoPrimary}`}
           >
             Salvar
           </button>

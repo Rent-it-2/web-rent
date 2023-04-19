@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Footer, Header, Item, Filtro, InputBuscar } from "../components";
+import { Footer, Header, Item, Filtro, InputBuscar, Categorias } from "../components";
 import { api } from "../api";
 import { Link } from "react-router-dom";
 import { styles } from "../styles";
@@ -18,7 +18,6 @@ const Filters = () => {
           }
         });
       }
-      // console.log("element", element);
       setItem(element);
     } catch (error) {
       console.log(error);
@@ -32,20 +31,11 @@ const Filters = () => {
   return (
     <>
       <Header />
+      <Categorias/>
       <main className={`${styles.mainConfig}`}>
-        <Link
-          to={"/filtros"}
-          className="text-md flex items-center text-gray-400"
-        >
-          <i className="mdi mdi-arrow-left text-[25px]" />
-          Voltar
-        </Link>
-        <div className="pb-7 pt-2">
-          <InputBuscar />
-        </div>
         <div className="w-full min-h-full flex flex-wrap">
           <Filtro />
-          <div className="w-4/5 max-h-screen pl-2 flex flex-wrap justify-start gap-y-5 gap-x-2 mt-3 overflow-auto">
+          <div className="w-4/5 pl-2 flex flex-wrap justify-start gap-5">
             {itemList?.map((item) => (
               <Item key={item.userId} item={item} />
             ))}

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Buscar, Footer, Header, Item } from "../components";
+import { Avaliacao, Footer, Header } from "../components";
 import { ItemContext } from "../contexts/ItemContext";
 import { getItemById, getUserById } from "../api";
 import { styles } from "../styles";
@@ -14,10 +14,9 @@ const ItemDetalhes = () => {
 
   const getIten = async () => {
     try {
-      const resposta = await getItemById(userId, itemId)
-        .then((res) => {
-          setItem(res.data);
-        });
+      const resposta = await getItemById(userId, itemId).then((res) => {
+        setItem(res.data);
+      });
       return resposta;
     } catch (error) {
       console.log(error);
@@ -26,8 +25,7 @@ const ItemDetalhes = () => {
 
   const getUser = async () => {
     try {
-      const resposta = await getUserById(userId)
-      .then((res) => {
+      const resposta = await getUserById(userId).then((res) => {
         setUser(res.data);
       });
       return resposta;
@@ -58,22 +56,20 @@ const ItemDetalhes = () => {
     <>
       <Header />
       <main className={`${styles.mainConfig}`}>
-
         <div className="py-2">
-        <Link
-          to={"/filtros"}
-          className="text-md flex items-center text-gray-400"
-        >
-          <i className="mdi mdi-arrow-left text-[25px]" />
-          Voltar
-        </Link>
+          <Link
+            to={"/filtros"}
+            className="text-md flex items-center text-gray-400"
+          >
+            <i className="mdi mdi-arrow-left text-[25px]" />
+            Voltar
+          </Link>
         </div>
 
         <div className="flex flex-wrap">
-
           <div className="w-3/5 h-min-96 h-max-96">
             <div
-              className="aspect-[4/3] rounded-xl max-w-full min-w-full bg-no-repeat bg-black bg-center"
+              className="aspect-video max-w-full min-w-full bg-no-repeat bg-black bg-center"
               style={backImage}
             ></div>
             <h2 className="text-xl font-bold py-10">Descrição</h2>
@@ -86,20 +82,26 @@ const ItemDetalhes = () => {
               <h1 className="text-2xl font-bold">{item.nome}</h1>
             </div>
 
-            <Link to={`/locador/${user.id}`} className="flex">
-              <div
-                className="rounded-full min-w-[60px] min-h-[60px] bg-cover"
-                style={backImageUser}
-              ></div>
-              
-              <div className="px-3 gap-3">
-                <h3 className="text-xl font-bold">{user.nome}</h3>
-                <p>Avaliação: {user.avaliacao}</p>
+            <div className="flex">
+              <Link to={`/locador/${user.id}`}>
+                <div
+                  className="rounded-full w-[60px] h-[60px] bg-cover"
+                  style={backImageUser}
+                ></div>
+              </Link>
+              <div className="px-3">
+                <Link to={`/locador/${user.id}`}>
+                    <h3 className="text-xl font-bold">{user.nome}</h3>
+                </Link>
+                {/* <p>Avaliação: {3.5}</p> */}
+                <Avaliacao valorSetado={2.5} />
               </div>
-            </Link>
+            </div>
 
-            <button className={`w-full rounded-lg flex items-center justify-evenly border-[1px] 
-            border-gray-400 p-1 px-3 ${styles.hoverPadraoPrimary}`}>
+            <button
+              className={`w-full rounded-lg flex items-center justify-evenly border-[1px] 
+            border-gray-400 p-1 px-3 ${styles.hoverPadraoPrimary}`}
+            >
               <i className="mdi mdi-chat w-1/6 cursor-pointer text-[22px]"></i>
               Conversar com o locador
             </button>
@@ -125,10 +127,8 @@ const ItemDetalhes = () => {
                 <i className="mdi mdi-heart w-1/6 cursor-pointer text-[22px] text-gray-400"></i>
               </button>
             </div>
-
           </div>
         </div>
-
       </main>
       <Footer />
     </>
