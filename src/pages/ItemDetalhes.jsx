@@ -11,11 +11,18 @@ const ItemDetalhes = () => {
 
   const [item, setItem] = useState({});
   const [user, setUser] = useState({});
+  const [fotoList, setFotos] = useState([6]);
 
-  const getIten = async () => {
+  const getItem = async () => {
+    const element = [];
+
     try {
       const resposta = await getItemById(userId, itemId).then((res) => {
         setItem(res.data);
+        for (let index = 0; index < 6; index++) {
+          element.push[res.data.foto];      
+        }
+        setFotos(element);
       });
       return resposta;
     } catch (error) {
@@ -48,7 +55,7 @@ const ItemDetalhes = () => {
   };
 
   useEffect(() => {
-    getIten();
+    getItem();
     getUser();
   }, []);
 

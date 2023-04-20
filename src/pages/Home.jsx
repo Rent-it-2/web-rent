@@ -32,20 +32,17 @@ const Home = () => {
     <>
       <Header />
       {/* <Categorias /> */}
-      <main className={`${styles.mainConfig}`}>
+      <main className={`${styles.mainConfig} flex flex-col gap-10`}>
         <Buscar />
 
-        {/* <div className="">
+        <div className=" rounded-2xl p-5 bg-white">
           <h2 className="text-xl font-bold">Mais Procurados</h2>
-          <div className="w-full flex flex-wrap justify-start gap-y-5 gap-x-12 mt-3 bg-white rounded-2xl p-2">
+          <div className="w-full flex flex-wrap justify-start gap-y-5 gap-x-7 mt-3">
             {itemList?.map((item) => (
               <Item key={item.userId} item={item} />
             ))}
-                        {itemList?.map((item) => (
-              <Item key={item.userId} item={item} />
-            ))}
           </div>
-        </div> */}
+        </div>
 
         <div className=" rounded-2xl p-5 bg-white">
           <h2 className="text-xl font-bold">Sugestões</h2>

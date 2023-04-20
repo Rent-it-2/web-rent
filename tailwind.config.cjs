@@ -21,6 +21,9 @@ module.exports = {
         'art-login': "url('./public/Rectangle.svg')",
         'art-cadastro': "url('./public/Rectangle.svg')",
         'art-buscar': "url('./public/search-banner.svg')",
+      },
+      gradientColorStopPositions: {
+        33: '33%',
       }
     },
     screens: {

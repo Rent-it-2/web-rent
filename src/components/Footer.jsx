@@ -8,7 +8,7 @@ const Footer = () => {
         <section className='w-full'>
 
 
-            <div className="w-full bg-rentWhite p-8 flex flex-row">
+            <div className="w-full bg-white p-8 flex flex-row">
                 <div className="w-2/5">
                     <img src="../../public/logo.svg" alt="home" />
                     <h2 className="text-gray-400 max-w-xs">Sua plataforma número 1 para aluguel de produtos.</h2>

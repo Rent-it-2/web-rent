@@ -138,12 +138,12 @@ export const paginas = [
   },
   {
     title: "Cartões",
-    link: "/perfil",
+    link: "/perfil/cartoes",
     icon:"credit-card"
   },
   {
     title: "Favoritos",
-    link: "/perfil",
+    link: "/perfil/favoritos",
     icon:"heart"
   },
   {

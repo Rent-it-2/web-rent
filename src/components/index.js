@@ -11,6 +11,8 @@ import Sidebar from "./Sidebar";
 import MeusDados from "./MeusDados";
 import Modal from "./Modal";
 import Avaliacao from "./Avaliacao";
+import Cartoes from "./Cartoes";
+import Favoritos from "./Favoritos";
 
 export {
   Header,
@@ -21,9 +23,11 @@ export {
   ItensAnunciados,
   Filtro,
   Menu,
-  InputBuscar,
+  Modal,
   Sidebar,
   MeusDados,
-  Modal,
+  InputBuscar,
   Avaliacao,
+  Cartoes,
+  Favoritos,
 };
