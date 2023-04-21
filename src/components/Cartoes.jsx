@@ -36,7 +36,7 @@ const Cartoes = () => {
         </button>
       </div>
 
-      <div className="flex flex-wrap gap-3">
+      <div className="flex flex-wrap gap-5">
         <Cartao cartaoInfos={user} />
         <Cartao cartaoInfos={user} />
         <Cartao cartaoInfos={user} />
@@ -56,7 +56,7 @@ const Cartoes = () => {
 const Cartao = ({ cartaoInfos }) => {
   return (
     <div className="items-center rounded-3xl text-xs text-gray-500 bg-gray-300 sm:flex">
-      <div className="flex flex-wrap flex-col gap-5 bg-black rounded-3xl py-10 px-8 bg-gradient-to-r from-gray-700 via-gray-950 to-gray-950">
+      <div className="flex flex-wrap flex-col gap-5 bg-black rounded-3xl py-10 px-8 bg-gradient-to-r from-rentBlue via-gray-950 to-gray-950">
         <div className="flex items-start gap-3">
           <img
             src="../../public/card-ship.png"
@@ -79,7 +79,7 @@ const Cartao = ({ cartaoInfos }) => {
           </div>
           <div className="">
             {/* <h2 className="text-lg font-semibold">{cartaoInfos.cartaoVal}</h2> */}
-            <h2 className="text-lg font-semibold">12/2025</h2>
+            <h2 className="text-lg font-semibold">12/25</h2>
             <p>Good thru</p>
           </div>
         </div>

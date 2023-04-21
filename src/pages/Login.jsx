@@ -13,8 +13,6 @@ const Login = () => {
     login(email, password);
   };
 
-
-
   return (
     <div className="flex w-full text-rentBlue">
       <div className="w-full min-w-fit flex-col justify-center items-center h-screen overflow-hidden sm:w-1/2">

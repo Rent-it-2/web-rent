@@ -34,7 +34,7 @@ const MeusDados = () => {
 
       <div className="w-full flex flex-wrap items-center justify-between gap-x-10">
         <div className="flex flex-wrap gap-5 items-end">
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col justify-center items-center sm:justify-satart">
             <h3 className="font-bold">Foto de Perfil</h3>
             <div
               className="rounded-full min-w-[120px] min-h-[120px] border-[3px] border-primary bg-contain bg-no-repeat"

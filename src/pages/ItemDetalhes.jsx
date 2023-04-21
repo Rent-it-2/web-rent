@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Avaliacao, Footer, Header } from "../components";
 import { ItemContext } from "../contexts/ItemContext";
-import { getItemById, getUserById } from "../api";
+import { getItemById, getUserById, putItem } from "../api";
 import { styles } from "../styles";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const ItemDetalhes = () => {
   const { itemId } = useContext(ItemContext);
@@ -11,7 +11,7 @@ const ItemDetalhes = () => {
 
   const [item, setItem] = useState({});
   const [user, setUser] = useState({});
-  const [fotoList, setFotos] = useState([6]);
+  // const [fotoList, setFotos] = useState([6]);
 
   const getItem = async () => {
     const element = [];
@@ -20,7 +20,7 @@ const ItemDetalhes = () => {
       const resposta = await getItemById(userId, itemId).then((res) => {
         setItem(res.data);
         for (let index = 0; index < 6; index++) {
-          element.push[res.data.foto];      
+          element.push[res.data.foto];
         }
         setFotos(element);
       });
@@ -41,6 +41,13 @@ const ItemDetalhes = () => {
     }
   };
 
+  const favoritarItem = () => {
+    const itemAtualizado = item;
+    itemAtualizado.isFavorito = true;
+    console.log("Favoritado", itemAtualizado);
+    putItem(userId, item.id, itemAtualizado);
+  };
+
   const backImage = {
     backgroundImage: `url(${item.foto})`,
     // backgroundImage: `url(${foto && foto[0]})` *Código para trazer o primeira imagem quando for um array, não apagar
@@ -48,10 +55,6 @@ const ItemDetalhes = () => {
 
   const backImageUser = {
     backgroundImage: `url(${user.foto})`,
-  };
-
-  const alugarItem = () => {
-    // navigate("/perfil");
   };
 
   useEffect(() => {
@@ -98,7 +101,7 @@ const ItemDetalhes = () => {
               </Link>
               <div className="px-3">
                 <Link to={`/locador/${user.id}`}>
-                    <h3 className="text-xl font-bold">{user.nome}</h3>
+                  <h3 className="text-xl font-bold">{user.apelido}</h3>
                 </Link>
                 {/* <p>Avaliação: {3.5}</p> */}
                 <Avaliacao valorSetado={2.5} />
@@ -124,14 +127,14 @@ const ItemDetalhes = () => {
             </div>
 
             <div className="w-full flex gap-2">
+              <Link to={`/item/alugar/${item.id}`} className={`w-5/6 ${styles.botaoPadraoPrimary} ${styles.hoverPadraoPrimary}`}>
+                  Alugar
+              </Link>
+
               <button
-                className={`w-5/6 ${styles.botaoPadraoPrimary} ${styles.hoverPadraoPrimary}`}
-                onClick={alugarItem()}
+                className={`rounded-lg border-[1px] text-gray-400 border-gray-300 p-1 px-3  ${styles.hoverPadraoPrimary}`}
               >
-                Alugar
-              </button>
-              <button className={`rounded-lg border-[1px] text-gray-400 border-gray-300 p-1 px-3  ${styles.hoverPadraoPrimary}`}>
-                <i className="mdi mdi-heart w-1/6 cursor-pointer text-[22px]"></i>
+                <i className="mdi mdi-heart w-1/6 cursor-pointer text-[22px]" onClick={favoritarItem}/>
               </button>
             </div>
           </div>

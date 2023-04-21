@@ -13,6 +13,7 @@ import Modal from "./Modal";
 import Avaliacao from "./Avaliacao";
 import Cartoes from "./Cartoes";
 import Favoritos from "./Favoritos";
+import Transacoes from "./Transacoes";
 
 export {
   Header,
@@ -30,4 +31,5 @@ export {
   Avaliacao,
   Cartoes,
   Favoritos,
+  Transacoes,
 };

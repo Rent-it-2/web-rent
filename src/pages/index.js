@@ -5,6 +5,7 @@ import Perfil from './Perfil';
 import ItemDetalhes from './ItemDetalhes';
 import Filters from './Filters';
 import PerfilPublico from './PerfilPublico';
+import Pagamentos from './Pagamentos';
 
 export {
     Home,
@@ -13,5 +14,6 @@ export {
     Filters,
     Perfil,
     ItemDetalhes,
-    PerfilPublico
+    PerfilPublico,
+    Pagamentos
 }
