@@ -6,6 +6,7 @@ import { styles } from "../styles";
 import { Link, useNavigate } from "react-router-dom";
 
 const ItemDetalhes = () => {
+  const navigate = useNavigate();
   const { itemId } = useContext(ItemContext);
   const { userId } = useContext(ItemContext);
 
@@ -67,13 +68,14 @@ const ItemDetalhes = () => {
       <Header />
       <main className={`${styles.mainConfig}`}>
         <div className="py-2">
-          <Link
+          <button
+          onClick={()=>navigate(-1)}
             to={"/filtros"}
             className="text-md flex items-center text-gray-400"
           >
             <i className="mdi mdi-arrow-left text-[25px]" />
             Voltar
-          </Link>
+          </button>
         </div>
 
         <div className="flex justify-center flex-wrap sm:justify-between">

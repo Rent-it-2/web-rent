@@ -16,19 +16,20 @@ const Login = () => {
   return (
     <div className="flex w-full text-rentBlue">
       <div className="w-full min-w-fit flex-col justify-center items-center h-screen overflow-hidden sm:w-1/2">
-        <header className="w-full flex items-start self-start justify-self-start px-8 py-2">
+        
+        <header className="w-full flex items-start self-start justify-self-start py-2 sm:px-8">
           <a href="/">
-            <img src="../../public/logo.svg" alt="home" className="w-28" />
+            <img src="../../public/logo.svg" alt="home" className="w-20 sm:w-28" />
           </a>
         </header>
 
         <div
           id="login"
-          className="w-full h-full flex flex-col gap-20 p-48 justify-center items-center"
+          className="w-full h-full gap-5 p-20 flex flex-col justify-center items-center xs:gap-20 xs:p-32 ss:p-44 sm:p-48 md:p-48"
         >
           <div className={`flex flex-col items-center`}>
-            <h1 className="font-bold font text-3xl">Bem vindo(a) de volta</h1>
-            <h3 className="text-gray-500">Por favor, preencha os detalhes</h3>
+            <h1 className="font-bold font text-xl text-center xs:text-3xl">Bem vindo(a) de volta</h1>
+            <h3 className="text-gray-500 text-xs xs:text-base">Por favor, preencha os detalhes</h3>
           </div>
 
           <form
@@ -54,7 +55,7 @@ const Login = () => {
 
             <div className="flex-col flex">
               <label htmlFor="" className="text-gray-500 text-sm">
-                password
+                Password
               </label>
               <input
                 type="password"
