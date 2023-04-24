@@ -25,7 +25,7 @@ const ItensAnunciados = () => {
           Meus Itens
         </h1>
         <p className="text-gray-400 text-sm pt-2">
-          Gerenciar itens cadastrados
+          Gerenciar os itens cadastrados
         </p>
       </div>
 

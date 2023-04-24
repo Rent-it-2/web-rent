@@ -43,7 +43,7 @@ const Menu = () => {
           className="rounded-full min-w-[45px] min-h-[45px] bg-cover border-[1px] border-rentBlue"
           style={backImageUser}
         ></Link>
-        <h3 className="text-md">{user.apelido}</h3>
+        <h3 className="hidden text-md sm:block">{user.apelido}</h3>
         <div className="">
           <i
             onClick={() => setToggle(!toggle)}

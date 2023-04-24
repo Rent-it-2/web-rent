@@ -76,17 +76,21 @@ const ItemDetalhes = () => {
           </Link>
         </div>
 
-        <div className="flex flex-wrap">
-          <div className="w-3/5 h-min-96 h-max-96">
+        <div className="flex justify-center flex-wrap sm:justify-between">
+          <div className="w-full flex flex-col gap-10 sm:w-[70%]">
             <div
-              className="aspect-video max-w-full min-w-full bg-no-repeat bg-black bg-center"
+              className="aspect-video max-w-full min-w-full bg-no-repeat bg-contain bg-black bg-center"
               style={backImage}
             ></div>
-            <h2 className="text-xl font-bold py-10">Descrição</h2>
-            <p>{item.descricao}</p>
+
+            <div className="rounded-lg p-5 bg-white">
+              <h2 className="text-xl font-bold pb-10">Detalhes</h2>
+              <p>{item.descricao}</p>
+            </div>
+
           </div>
 
-          <div className="flex flex-col gap-10 px-8 py-2">
+          <div className="flex flex-col gap-10 p-8">
             <div>
               <p className="text-lg text-gray-400">{item.categoria}</p>
               <h1 className="text-2xl font-bold">{item.nome}</h1>
@@ -103,13 +107,12 @@ const ItemDetalhes = () => {
                 <Link to={`/locador/${user.id}`}>
                   <h3 className="text-xl font-bold">{user.apelido}</h3>
                 </Link>
-                {/* <p>Avaliação: {3.5}</p> */}
                 <Avaliacao valorSetado={2.5} />
               </div>
             </div>
 
             <button
-              className={`w-64 rounded-lg flex items-center justify-evenly border-[1px] 
+              className={`w-full rounded-lg flex items-center justify-evenly border-[1px] 
             border-gray-400 p-1 px-3 ${styles.hoverPadraoPrimary}`}
             >
               <i className="mdi mdi-chat text-[22px]"></i>
@@ -121,20 +124,20 @@ const ItemDetalhes = () => {
                 <h2 className="text-4xl font-bold">R$ {item.valorDia} </h2>
                 <span className="text-sm">/dia</span>
               </div>
-              <p className="text-sm text-gray-400">
+              <p className="text-xs text-gray-400">
                 Cobrança recorrente no cartão de crédito
               </p>
             </div>
 
             <div className="w-full flex gap-2">
               <Link to={`/item/alugar/${item.id}`} className={`w-5/6 ${styles.botaoPadraoPrimary} ${styles.hoverPadraoPrimary}`}>
-                  Alugar
+                Alugar
               </Link>
 
               <button
                 className={`rounded-lg border-[1px] text-gray-400 border-gray-300 p-1 px-3  ${styles.hoverPadraoPrimary}`}
               >
-                <i className="mdi mdi-heart w-1/6 cursor-pointer text-[22px]" onClick={favoritarItem}/>
+                <i className="mdi mdi-heart w-1/6 cursor-pointer text-[22px]" onClick={favoritarItem} />
               </button>
             </div>
           </div>

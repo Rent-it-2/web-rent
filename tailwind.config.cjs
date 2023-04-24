@@ -20,7 +20,7 @@ module.exports = {
       backgroundImage: {
         'art-login': "url('./public/Rectangle.svg')",
         'art-cadastro': "url('./public/Rectangle.svg')",
-        'art-buscar': "url('./public/search-banner.svg')",
+        'art-buscar': "url('./public/search-banner.jpg')",
       },
       gradientColorStopPositions: {
         33: '33%',
