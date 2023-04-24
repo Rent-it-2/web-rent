@@ -17,7 +17,7 @@ import {
 } from "./pages";
 import { AuthProvider, AuthContext } from "./contexts/Auth";
 import { ItemProvider } from "./contexts/ItemContext";
-import { Cartoes, Favoritos, ItensAnunciados, Transacoes } from "./components";
+import { Cartoes, Favoritos, ItensAnunciados, Transacoes, Chat } from "./components";
 import MeusDados from "./components/MeusDados";
 
 const AppRoutes = () => {
@@ -59,6 +59,7 @@ const AppRoutes = () => {
               <Route path="transacoes" element={<Transacoes/>} />
               <Route path="cartoes" element={<Cartoes/>} />
               <Route path="favoritos" element={<Favoritos/>} />
+              <Route path="chat" element={<Chat/>} />
             </Route>
           </Routes>
         </ItemProvider>

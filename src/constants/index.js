@@ -124,7 +124,7 @@ export const paginas = [
   },
   {
     title: "Chat",
-    link: "/perfil",
+    link: "/perfil/chat",
     icon:"chat"
   },
   {
