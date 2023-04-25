@@ -35,15 +35,15 @@ const PerfilPublico = () => {
       <Header />
       <main className={`${styles.mainConfig}`}>
         <div className="flex items-center justify-around">
-          <div>
+          <div className="items-center">
             <div
               className="rounded-full w-[250px] h-[250px] bg-cover"
               style={backImageUser}
             ></div>
-            <h2>{user.nome}</h2>
+            <h2 className="text-center">{user.nome}</h2>
           </div>
           <div>
-            <p>Na plataforma desde:24/04/2023</p>
+            <p>Na plataforma desde: 24/04/2023</p>
             {/* <p>Na plataforma desde:{user.dtCadastro}</p> */}
             {/* <p>{user.telefone}</p> */}
             <p>(11) 9568-4120</p>
