@@ -30,26 +30,6 @@ const Home = () => {
     getItens();
   }, []);
 
-  const handleLeftClick = (e) => {
-    e.preventDefault();
-    carousel.current.scrollLeft -= carousel.current.offsetWidth;
-  };
-
-  const handleRightClick = (e) => {
-    e.preventDefault();
-
-    carousel.current.scrollLeft += carousel.current.offsetWidth;
-  };
-
-  // const handleLeftClick2 = (e) => {
-  //   e.preventDefault();
-  //   carousel2.current.scrollLeft -= carousel2.current.offsetWidth;
-  // };
-
-  // const handleRightClick2 = (e) => {
-  //   e.preventDefault();
-  //   carousel2.current.scrollLeft += carousel2.current.offsetWidth;
-  // };
 
   return (
     <>
@@ -82,7 +62,6 @@ export const Carousel = ({ dataSource }) => {
 
   const handleRightClick = (e) => {
     e.preventDefault();
-
     carousel.current.scrollLeft += carousel.current.offsetWidth;
   };
 
