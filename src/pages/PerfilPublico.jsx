@@ -47,9 +47,9 @@ const PerfilPublico = () => {
             {/* <p>Na plataforma desde:{user.dtCadastro}</p> */}
             {/* <p>{user.telefone}</p> */}
             <p>(11) 9568-4120</p>
-            <p>{user.email}</p>
-            <button className="rounded-full border-2 border-gray-500 text-gray-500 py-2 px-8 hover:text-rentBlue hover:border-rentBlue">
-              Iniciar chat
+            <p> <i className="mdi mdi-email-multiple-outline"></i> {user.email}</p>
+            <button className="rounded-full border-2 border-gray-500 text-gray-500 py-2 mt-2 px-8 hover:text-rentBlue hover:border-rentBlue">
+            <i className="mdi mdi-chat-processing-outline text-[20px]"></i>  Iniciar chat
             </button>
           </div>
         </div>
