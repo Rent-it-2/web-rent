@@ -9,11 +9,13 @@ const Header = () => {
 
   return (
     <section
-      className={`px-20 py-5 w-full fixed z-50 border-b-[1px] border-t-0 bg-gradient-to-t to-complementPrimary from-primary`}
+      className={`py-5 w-full fixed z-50 border-b-[1px] border-t-0 bg-gradient-to-t to-complementPrimary from-primary sm:px-20`}
     >
       <div className="flex gap-5">
+        <i className="mdi mdi-magnify text-white text-[30px] sm:hidden"></i>
+
         <a href="/">
-          <img src="../../public/logo-vazado-04.png" alt="home" className="w-40" />
+          <img src="../../public/logo-vazado-04.png" alt="home" className="sm:w-40" />
         </a>
 
         <div className="w-3/5 flex flex-col">
@@ -23,10 +25,9 @@ const Header = () => {
         <div className="flex gap-2 justify-end items-start">
           {!authenticated && <ButtonsNoAuth/>}
           {authenticated && <Menu/>}
-        {/* </div> */}
-        {/* <div className="flex gap-3 items-center"> */}
-          <h2 className="h-10 w-[0.1px] bg-white"></h2>
-          <Link to={'/perfil/favoritos'}>
+
+          <h2 className="hidden h-10 w-[0.1px] bg-white sm:block"></h2>
+          <Link to={'/perfil/favoritos'} className="hidden sm:block">
             <i className="mdi mdi-heart text-[35px] text-white hover:text-rentBlue"></i>
           </Link>
         </div>

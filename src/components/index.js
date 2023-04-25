@@ -14,6 +14,8 @@ import Avaliacao from "./Avaliacao";
 import Cartoes from "./Cartoes";
 import Favoritos from "./Favoritos";
 import Transacoes from "./Transacoes";
+import Chat from "./Chat";
+
 
 export {
   Header,
@@ -32,4 +34,5 @@ export {
   Cartoes,
   Favoritos,
   Transacoes,
+  Chat,
 };

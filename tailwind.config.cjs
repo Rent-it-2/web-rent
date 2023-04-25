@@ -18,9 +18,9 @@ module.exports = {
         roboto: ["'Roboto', sans-serif"],
       },
       backgroundImage: {
-        'art-login': "url('./public/Rectangle.svg')",
-        'art-cadastro': "url('./public/Rectangle.svg')",
-        'art-buscar': "url('./public/search-banner.svg')",
+        'art-login': "url('./public/banner-login.jpg')",
+        'art-cadastro': "url('./public/banner-cadastro.gif')",
+        'art-buscar': "url('./public/banner-home.png')",
       },
       gradientColorStopPositions: {
         33: '33%',

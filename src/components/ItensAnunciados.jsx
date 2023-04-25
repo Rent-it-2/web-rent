@@ -25,7 +25,7 @@ const ItensAnunciados = () => {
           Meus Itens
         </h1>
         <p className="text-gray-400 text-sm pt-2">
-          Gerenciar itens cadastrados
+          Gerenciar os itens cadastrados
         </p>
       </div>
 
@@ -84,7 +84,7 @@ const ItemCard = ({ item }) => {
               !item.isAlugando ? "text-primary" : "text-green-500"
             }`}
           >
-            <b>Status:</b> {!item.isAlugando ? "Não anunciado" : "Anunciando"}
+            <b>Status:</b> {!item.isAlugando ? "Anuncio Pausado" : "Anunciando"}
           </p>
         </div>
       </div>

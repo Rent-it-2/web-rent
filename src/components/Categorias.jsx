@@ -11,7 +11,7 @@ const Categorias = () => {
   };
 
   return (
-    <section className={`w-full pt-1`}>
+    <section className={`hidden w-full pt-1 sm:block`}>
       <div className="w-full flex items-center justify-center">
         <ul className="w-full flex gap-5 items-center justify-between">
           <li>

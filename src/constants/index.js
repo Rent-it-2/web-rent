@@ -124,14 +124,14 @@ export const paginas = [
   },
   {
     title: "Chat",
-    link: "/perfil",
+    link: "/perfil/chat",
     icon:"chat"
   },
-  {
-    title: "Transações",
-    link: "/perfil/transacoes",
-    icon:"transfer"
-  },
+  // {
+  //   title: "Transações",
+  //   link: "/perfil/transacoes",
+  //   icon:"transfer"
+  // },
   {
     title: "Meus Itens",
     link: "/perfil/meus-itens",
