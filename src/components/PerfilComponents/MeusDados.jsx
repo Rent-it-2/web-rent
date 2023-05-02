@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { getUserLogged } from "../api";
-import { styles } from "../styles";
+import { getUserLogged } from "../../api";
+import { styles } from "../../styles";
 import { IMaskInput } from "react-imask";
 import CurrencyInput from "react-currency-input-field";
-import { categorias } from "../constants";
+import { categorias } from "../../constants";
 
 const MeusDados = () => {
   const [user, setUser] = useState({});
@@ -108,49 +108,46 @@ const Form = ({user}) => {
     <form className="w-full flex flex-wrap gap-2 sm:w-1/2" onSubmit={handleSubmit}>
     <div className="w-full">
       <label className="text-sm text-rentBlue">Nome Compelto</label>
-      <div className="flex rounded-md bg-gray-300 text-sm items-center p-2">
+      
         <input
           type="text"
           name="nome"
           value={formValues.nome || ""} 
           onChange={handleChange}
-          className={`w-full appearance-none outline-none bg-transparent`}
+          className={`${styles.inputPadrao}`}
         />
-        <i className="mdi mdi-square-edit-outline text-[20px] text-gray-400" />
-      </div>
+        
     </div>
 
     <div className="w-full">
       <label className="text-sm text-rentBlue">Apelido</label>
-      <div className="flex rounded-md bg-gray-300 text-sm items-center p-2">
+      
         <input
           type="text"
           name="apelido"
           value={formValues.apelido || ""} 
           onChange={handleChange}
-          className={`w-full appearance-none outline-none bg-transparent`}
+          className={`${styles.inputPadrao}`}
         />
-        <i className="mdi mdi-square-edit-outline text-[20px] text-gray-400" />
-      </div>
+        
     </div>
 
     <div className="w-full">
       <label className="text-sm text-rentBlue">Email</label>
-      <div className="flex rounded-md bg-gray-300 text-sm items-center p-2">
+      
         <input
           type="text"
           name="email"
           value={formValues.email || ""}
           onChange={handleChange}
-          className={`w-full appearance-none outline-none bg-transparent`}
+          className={`${styles.inputPadrao}`}
         />
-        <i className="mdi mdi-square-edit-outline text-[20px] text-gray-400" />
-      </div>
+        
     </div>
 
     <div className="w-full">
       <label className="text-sm text-rentBlue">Telefone</label>
-      <div className="flex rounded-md bg-gray-300 text-sm items-center p-2">
+      
         <IMaskInput
           type="text"
           name="telefone"
@@ -158,10 +155,9 @@ const Form = ({user}) => {
           onChange={handleChange}
           mask="(00) 0000-0000"
           as={IMaskInput}
-          className={`w-full appearance-none outline-none bg-transparent`}
+          className={`${styles.inputPadrao}`}
         />
-        <i className="mdi mdi-square-edit-outline text-[20px] text-gray-400" />
-      </div>
+        
     </div>
 
     <div className="w-1/2">

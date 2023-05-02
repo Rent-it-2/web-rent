@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Footer, Header, Item, Filtro, InputBuscar, Categorias } from "../components";
 import { api } from "../api";
-import { Link } from "react-router-dom";
 import { styles } from "../styles";
 
 const Filters = () => {

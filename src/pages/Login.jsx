@@ -47,7 +47,7 @@ const Login = () => {
                 id="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="border-2 rounded-md p-2 border-gray-400 outline-none text-xs text-gray-500"
+                className={`${styles.inputPadrao}`}
               />
             </div>
 
@@ -63,7 +63,7 @@ const Login = () => {
                 id="password"
                 value={password}
                 onChange={(e) => setpassword(e.target.value)}
-                className="border-2 rounded-md p-2 border-gray-400 outline-none text-xs text-gray-500"
+                className={`${styles.inputPadrao}`}
               />
             </div>
             <div className="w-full flex justify-between">
@@ -80,7 +80,7 @@ const Login = () => {
               </div>
 
               <a href="" className="font-bold text-sm hover:text-secondary">
-                Esqueci a password
+                Esqueci a senha
               </a>
             </div>
 
@@ -109,7 +109,7 @@ const Login = () => {
 
       <div
         className="hidden bg-primary w-1/2 h-screen overflow-hidden 
-            bg-art-cadastro bg-cover bg-no-repeat sm:flex"
+            bg-art-login bg-center bg-cover bg-no-repeat sm:flex"
       ></div>
     </div>
   );

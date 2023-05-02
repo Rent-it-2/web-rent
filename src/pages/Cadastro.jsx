@@ -39,7 +39,7 @@ const Cadastro = () => {
     <div className="flex w-full text-rentBlue">
       <div
         className="bg-primary w-1/2 h-screen overflow-hidden 
-      bg-art-cadastro bg-cover bg-no-repeat"
+      bg-art-cadastro bg-center bg-cover bg-no-repeat"
       ></div>
 
       <div className="w-1/2 min-w-fit flex-col justify-start items-center h-screen overflow-hidden">
@@ -64,7 +64,7 @@ const Cadastro = () => {
                 type="text"
                 name="nome"
                 onChange={handleChange}
-                className={`${styles.inputPadraoLoginCadastro}`}
+                className={`${styles.inputPadrao}`}
               />
             </div>
 
@@ -76,7 +76,7 @@ const Cadastro = () => {
                 type="text"
                 name="apelido"
                 onChange={handleChange}
-                className={`${styles.inputPadraoLoginCadastro}`}
+                className={`${styles.inputPadrao}`}
               />
             </div>
 
@@ -88,7 +88,7 @@ const Cadastro = () => {
                 type="email"
                 name="email"
                 onChange={handleChange}
-                className={`${styles.inputPadraoLoginCadastro}`}
+                className={`${styles.inputPadrao}`}
               />
             </div>
 
@@ -104,7 +104,7 @@ const Cadastro = () => {
                   as={IMaskInput}
                   mask="000.000.000-00"
                   placeholder="Digite o seu CPF"
-                  className={`${styles.inputPadraoLoginCadastro}`}
+                  className={`${styles.inputPadrao}`}
                 />
               </div>
 
@@ -119,7 +119,7 @@ const Cadastro = () => {
                   as={IMaskInput}
                   mask="(00) 0000-0000"
                   placeholder="(__) ____-____"
-                  className={`${styles.inputPadraoLoginCadastro}`}
+                  className={`${styles.inputPadrao}`}
                 />
               </div>
             </div>
@@ -132,7 +132,7 @@ const Cadastro = () => {
                 type="password"
                 name="senha"
                 onChange={handleChange}
-                className={`${styles.inputPadraoLoginCadastro}`}
+                className={`${styles.inputPadrao}`}
               />
             </div>
 

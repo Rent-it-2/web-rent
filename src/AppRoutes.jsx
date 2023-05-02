@@ -17,8 +17,7 @@ import {
 } from "./pages";
 import { AuthProvider, AuthContext } from "./contexts/Auth";
 import { ItemProvider } from "./contexts/ItemContext";
-import { Cartoes, Favoritos, ItensAnunciados, Transacoes, Chat } from "./components";
-import MeusDados from "./components/MeusDados";
+import { MeusDados, Cartoes, Favoritos, ItensAnunciados, Transacoes, Chat } from "./components/index";
 
 const AppRoutes = () => {
   const Private = ({ children }) => {

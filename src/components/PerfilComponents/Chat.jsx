@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 // import { addDoc, collection, limit, orderBy, query, serverTimestamp } from "firebase/firestore";
-import { styles } from "../styles";
-import { Header, Footer, Sidebar } from "../components";
+import { styles } from "../../styles";
+import { Header, Footer, Sidebar } from "..";
 //import { app, databaseApp } from "./services/firebaseConfig";
-import { getUserLogged } from "../api";
+import { getUserLogged } from "../../api";
 import { race } from "rxjs";
 // import {databaseApp} from "../services/firebase";
 
@@ -160,7 +160,7 @@ const Chat = () => {
 export const Contato = ({ props }) => {
   return (
     <li>
-      <a className="flex rounded-md items-center px-3 py-2 text-sm transition duration-150 ease-in-out border border-gray-300 cursor-pointer hover:bg-gray-100 focus:outline-none">
+      <a className="flex rounded-md items-center px-3 py-2 text-sm transition duration-150 ease-in-out border border-gray-300 cursor-pointer hover:bg-gray-300 focus:outline-none">
         <img className="object-cover w-10 h-10 rounded-full" src={props.foto} />
 
         <div className="w-full pb-2 rounded-lg">

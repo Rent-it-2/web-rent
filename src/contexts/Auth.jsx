@@ -35,7 +35,7 @@ export const AuthProvider = ({ children }) => {
 
     if (password === "secret") {
       setUser(loggedUser);
-      navigate("/");
+      navigate(-1);
     }
   };
 

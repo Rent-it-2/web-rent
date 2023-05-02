@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { styles } from "../styles";
-import { getUserLoggedItems } from "../api";
-import { Modal } from "./index";
+import { styles } from "../../styles";
+import { getUserLoggedItems } from "../../api";
+import { Modal } from "../index";
 import CurrencyInput from "react-currency-input-field";
-import { categorias } from "../constants";
+import { categorias } from "../../constants";
 
 const ItensAnunciados = () => {
   const [openModal, setOpenModal] = useState(false);

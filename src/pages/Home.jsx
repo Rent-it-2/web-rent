@@ -37,12 +37,12 @@ const Home = () => {
       <main className={`${styles.mainConfig} flex flex-col gap-5 sm:gap-10`}>
         <Buscar />
 
-        <div className="rounded-lg bg-white py-5 px-2 sm:p-5">
+        <div className={`${styles.cardWhite}`}>
           <h2 className="text-xl font-bold">Mais Procurados</h2>
           <Carousel dataSource={itemList} />
         </div>
 
-        <div className="rounded-lg bg-white py-5 px-2 sm:p-5">
+        <div className={`${styles.cardWhite}`}>
           <h2 className="text-xl font-bold">Sugestões</h2>
           <Carousel dataSource={itemList} />
         </div>

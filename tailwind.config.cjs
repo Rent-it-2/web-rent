@@ -16,11 +16,12 @@ module.exports = {
       },
       fontFamily: {
         roboto: ["'Roboto', sans-serif"],
+        poppins: ["'Poppins', sans-serif"],
       },
       backgroundImage: {
         'art-login': "url('./public/banner-login.jpg')",
         'art-cadastro': "url('./public/banner-cadastro.gif')",
-        'art-buscar': "url('./public/banner-home.png')",
+        'art-buscar': "url('./public/search-banner.jpg')",
       },
       gradientColorStopPositions: {
         33: '33%',
