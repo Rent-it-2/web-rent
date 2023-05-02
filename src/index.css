@@ -14,17 +14,18 @@
 }
 
 body{
-  background: #fff;
-  background: -webkit-linear-gradient(
+  background: #f4f4f8;
+  /* background: -webkit-linear-gradient(
     to right,
     #fff,
     #F4F4F8,
-    #F4F4F8
+    #F4F4F8,
+    #ff614c
   );
   background: linear-gradient(
     to right,
     #fff,
     #F4F4F8,
     #F4F4F8
-  );
+  ); */
 }

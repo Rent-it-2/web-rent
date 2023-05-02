@@ -1,38 +1,34 @@
 import { styles } from "../styles";
-
+import { categorias } from "../constants";
+import { InputBuscar } from "./index";
 
 function Buscar() {
   return (
     <section className="w-full flex items-center justify-center">
-      <div className=" w-full flex flex-col items-center justify-center rounded-2xl bg-art-buscar bg-cover px-20 py-6 overflow-hidden">
-        <h1 className="text-white text-4xl font-bold py-10 drop-shadow-xl shadow-black text-center">
-          Bem vindo a <b className="">RENT-IT</b>, seu site para <b className="text-pri">alugar</b> o que precisar
+      <div className=" w-full rounded-2xl flex flex-col items-center justify-center bg-art-buscar bg-cover px-5 py-6 overflow-hidden sm:px-20 shadow-lg shadow-[#959595a8]">
+        <h1 className="text-white font-bold text-xl py-10 drop-shadow-xl shadow-black text-center sm:text-4xl">
+          Bem vindo a <b className="">RENT-IT</b>, seu site para{" "}
+          <b className="text-pri">alugar</b> o que precisar
         </h1>
-        <div className="w-full rounded-full flex items-center justify-center bg-white px-3">
-          <i className="mdi mdi-magnify text-gray-400 text-[35px] h-fit"></i>
-          <input
-            className="appearance-none w-full pl-6 outline-none text-gray-400"
-            type="text"
-            placeholder="O que está procurando?"
-          />
-          <i className="mdi mdi-arrow-right-bold-circle text-primary text-[35px] h-fit"></i>       
-        </div>
+        <InputBuscar/>
         <Categorias />
       </div>
     </section>
   );
 }
+
 function Categorias() {
   return (
     <>
-      <div className="w-full flex justify-around p-10 gap-5">
-        <button className={`${styles.glassEffect} py-2 px-8 rounded-full hover:text-secondary hover:border-secondary `} >Utensílios</button>
-        <button className={`${styles.glassEffect} py-2 px-8 rounded-full hover:text-secondary hover:border-secondary`} >Ferramentas</button>
-        <button className={`${styles.glassEffect} py-2 px-8 rounded-full hover:text-secondary hover:border-secondary`} >Eletrônicos</button>
-        <button className={`${styles.glassEffect} py-2 px-8 rounded-full hover:text-secondary hover:border-secondary`} >Vestuário</button>
-        <button className={`${styles.glassEffect} py-2 px-8 rounded-full hover:text-secondary hover:border-secondary`} >
-          Entretenimento
-        </button>
+      <div className="w-full flex flex-wrap justify-center gap-3 py-5 sm:p-10 sm:gap-5 ss:justify-around">
+        {categorias.map((categoria) => (
+          <button
+            href={`/filtros`}
+            className={`${styles.glassEffect} text-xs p-1 rounded-full hover:text-secondary hover:border-secondary sm:py-2 sm:px-8 sm:text-base`}
+          >
+            {categoria.title}
+          </button>
+        ))}
       </div>
     </>
   );
