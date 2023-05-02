@@ -18,7 +18,7 @@ const Categorias = () => {
             {categorias.map((categoria) => (
               <a
                 href={`/filtros`}
-                className=" text-white text-xs px-5 hover:text-secondary"
+                className=" text-white text-xs px-5 font-poppins hover:text-secondary"
               >
                 {categoria.title}
               </a>

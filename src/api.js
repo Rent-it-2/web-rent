@@ -37,7 +37,6 @@ export const getUserItem = async (userId) => {
 };
 
 export const getUserLogged = async () => {
-  // let userInfos = JSON.parse(sessionStorage.getItem("user"));
   try {
     const resposta = await getUserById(UsuarioLogado.id).then((res) => {
       return res.data;

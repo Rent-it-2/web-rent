@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import api from "../api";
-import Item from "./Item";
+import api from "../../api";
+import {Item} from "../index";
 
 const Favoritos = () => {
   const [itemList, setItem] = useState([]);

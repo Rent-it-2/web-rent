@@ -7,12 +7,10 @@ import { Link, useNavigate } from "react-router-dom";
 
 const ItemDetalhes = () => {
   const navigate = useNavigate();
-  const { itemId } = useContext(ItemContext);
-  const { userId } = useContext(ItemContext);
+  const { itemId, userId } = useContext(ItemContext);
 
   const [item, setItem] = useState({});
   const [user, setUser] = useState({});
-  // const [fotoList, setFotos] = useState([6]);
 
   const getItem = async () => {
     const element = [];
@@ -20,10 +18,6 @@ const ItemDetalhes = () => {
     try {
       const resposta = await getItemById(userId, itemId).then((res) => {
         setItem(res.data);
-        for (let index = 0; index < 6; index++) {
-          element.push[res.data.foto];
-        }
-        setFotos(element);
       });
       return resposta;
     } catch (error) {
@@ -79,20 +73,20 @@ const ItemDetalhes = () => {
         </div>
 
         <div className="flex justify-center flex-wrap sm:justify-between">
-          <div className="w-full flex flex-col gap-10 sm:w-[70%]">
+          <div className="w-full flex flex-col gap-10 lg:w-[70%]">
             <div
               className="aspect-video max-w-full min-w-full bg-no-repeat bg-contain bg-black bg-center"
               style={backImage}
             ></div>
 
-            <div className="rounded-lg p-5 bg-white">
+            <div className={`${styles.cardWhite}`}>
               <h2 className="text-xl font-bold pb-10">Detalhes</h2>
               <p>{item.descricao}</p>
             </div>
 
           </div>
 
-          <div className="flex flex-col gap-10 p-8">
+          <div className={`${styles.cardWhite} flex flex-col mt-10 gap-10 p-8 lg:bg-transparent lg:shadow-none lg:mt-0`}>
             <div>
               <p className="text-lg text-gray-400">{item.categoria}</p>
               <h1 className="text-2xl font-bold">{item.nome}</h1>
@@ -116,6 +110,7 @@ const ItemDetalhes = () => {
             <button
               className={`w-full rounded-lg flex items-center justify-evenly border-[1px] 
             border-gray-400 p-1 px-3 ${styles.hoverPadraoPrimary}`}
+            onClick={()=>navigate('/perfil/chat')}
             >
               <i className="mdi mdi-chat text-[22px]"></i>
               Conversar com o locador
