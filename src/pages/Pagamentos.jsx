@@ -15,6 +15,7 @@ import { usePagamentoForm } from "../hooks/usePagamentoForm";
 const Pagamentos = () => {
   const { itemId, userId } = useContext(ItemContext);
   const [user, setUser] = useState({});
+  const [item, setItem] = useState({});
 
   const formTemplate = {
     userId: userId,
@@ -42,21 +43,21 @@ const Pagamentos = () => {
       userInfos={user}
       updateFieldHandler={updateFieldHandler}
     />,
-    <PagamentosResumo data={data} />,
+    <PagamentosResumo data={data} item={item} user={user}/>,
   ];
 
   const { currentStep, currentComponent, changeStep, isLastStep, isFirstStep } = usePagamentoForm(formComponents);
 
-  // const getItem = async () => {
-  //   try {
-  //     const resposta = await getItemById(userId, itemId).then((res) => {
-  //       setItem(res.data);
-  //     });
-  //     return resposta;
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  const getItem = async () => {
+    try {
+      const resposta = await getItemById(userId, itemId).then((res) => {
+        setItem(res.data);
+      });
+      return resposta;
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const getUser = async () => {
     try {
@@ -70,7 +71,7 @@ const Pagamentos = () => {
   };
 
   useEffect(() => {
-    // getItem();
+    getItem();
     getUser();
   }, []);
 
