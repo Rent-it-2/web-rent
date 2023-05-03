@@ -1,4 +1,5 @@
 import React from "react";
+import { styles } from "../styles";
 
 const CardCartao = ({ cartaoInfos, showEdit, children }) => {
   return (
@@ -34,10 +35,10 @@ const CardCartao = ({ cartaoInfos, showEdit, children }) => {
 
       {showEdit && (
         <div className="py-2 flex items-center justify-center gap-20 sm:flex-col sm:px-2">
-          <button href="">
+          <button href="" className={`hover:text-primary`}>
             <i className="mdi mdi-square-edit-outline text-[20px]" />
           </button>
-          <button href="">
+          <button href="" className={`hover:text-primary`}>
             <i className="mdi mdi-trash-can-outline text-[20px]" />
           </button>
         </div>

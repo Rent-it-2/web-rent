@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { getUserLogged } from "../../api";
 import { styles } from "../../styles";
 import { IMaskInput } from "react-imask";
-import CurrencyInput from "react-currency-input-field";
-import { categorias } from "../../constants";
+import { Endereco, Modal } from "../index";
 
 const MeusDados = () => {
+  const [openModal, setOpenModal] = useState(false);
   const [user, setUser] = useState({});
 
   const getUser = async () => {
@@ -50,7 +50,7 @@ const MeusDados = () => {
             </button>
 
             <button
-              className={`flex items-center border-[1px] w-full p-3 border-gray-300 text-sm rounded-md ${styles.hoverPadraoPrimary}`}
+              className={`${styles.botaoPadraoSecondary} ${styles.hoverPadraoPrimary}`}
             >
               <i className="mdi mdi-trash-can-outline text-primary text-[20px]"></i>
               Remover Foto
@@ -65,15 +65,36 @@ const MeusDados = () => {
       </div>
 
       <div className="w-full">
-
-      <Form user={user}/>
+        <Form user={user} />
       </div>
+
+      <div className={`${styles.cardWhite} flex flex-col gap-5`}>
+        <Endereco user={user} showEdit={true} />
+
+        <button
+          className={`w-full flex items-center gap-5 rounded-md p-1 border-[0.1px] 
+        border-dashed border-gray-300 text-gray-500 
+        ${styles.hoverPadraoPrimary}`}
+          onClick={() => setOpenModal(true)}
+        >
+          <i className="mdi mdi-plus text-[22px] "></i>
+          <p>Adicionar Endereço</p>
+        </button>
+      </div>
+
+      <Modal
+        title={"Adicionar Endereço"}
+        isOpen={openModal}
+        setModalOpen={() => setOpenModal(!openModal)}
+      >
+        <FormModal/>
+      </Modal>
     </>
   );
 };
 
-const Form = ({user}) => {
-  const [formValues, setFormValues] = useState(user || {}); 
+const Form = ({ user }) => {
+  const [formValues, setFormValues] = useState(user || {});
 
   const handleChange = (event) => {
     const { name, type } = event.target;
@@ -105,36 +126,37 @@ const Form = ({user}) => {
   }, [user]);
 
   return (
-    <form className="w-full flex flex-wrap gap-2 sm:w-1/2" onSubmit={handleSubmit}>
-    <div className="w-full">
-      <label className="text-sm text-rentBlue">Nome Compelto</label>
-      
+    <form
+      className="w-full flex flex-wrap gap-2 sm:w-1/2"
+      onSubmit={handleSubmit}
+    >
+      <div className="w-full">
+        <label className="text-sm text-rentBlue">Nome Compelto</label>
+
         <input
           type="text"
           name="nome"
-          value={formValues.nome || ""} 
+          value={formValues.nome || ""}
           onChange={handleChange}
           className={`${styles.inputPadrao}`}
         />
-        
-    </div>
+      </div>
 
-    <div className="w-full">
-      <label className="text-sm text-rentBlue">Apelido</label>
-      
+      <div className="w-full">
+        <label className="text-sm text-rentBlue">Apelido</label>
+
         <input
           type="text"
           name="apelido"
-          value={formValues.apelido || ""} 
+          value={formValues.apelido || ""}
           onChange={handleChange}
           className={`${styles.inputPadrao}`}
         />
-        
-    </div>
+      </div>
 
-    <div className="w-full">
-      <label className="text-sm text-rentBlue">Email</label>
-      
+      <div className="w-full">
+        <label className="text-sm text-rentBlue">Email</label>
+
         <input
           type="text"
           name="email"
@@ -142,12 +164,11 @@ const Form = ({user}) => {
           onChange={handleChange}
           className={`${styles.inputPadrao}`}
         />
-        
-    </div>
+      </div>
 
-    <div className="w-full">
-      <label className="text-sm text-rentBlue">Telefone</label>
-      
+      <div className="w-full">
+        <label className="text-sm text-rentBlue">Telefone</label>
+
         <IMaskInput
           type="text"
           name="telefone"
@@ -157,19 +178,22 @@ const Form = ({user}) => {
           as={IMaskInput}
           className={`${styles.inputPadrao}`}
         />
-        
-    </div>
+      </div>
 
-    <div className="w-1/2">
-      <button
-        type="submit"
-        className={`${styles.botaoPadraoPrimary} p-1 text-sm  ${styles.hoverPadraoPrimary}`}
-      >
-        Salvar
-      </button>
-    </div>
-  </form>
+      <div className="w-1/2">
+        <button
+          type="submit"
+          className={`w-full ${styles.botaoPadraoPrimary} ${styles.hoverPadraoPrimary}`}
+        >
+          Salvar
+        </button>
+      </div>
+    </form>
   );
 };
+
+const FormModal = ({ user }) => {
+
+}
 
 export default MeusDados;

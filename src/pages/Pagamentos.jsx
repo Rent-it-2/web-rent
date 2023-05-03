@@ -92,7 +92,7 @@ const Pagamentos = () => {
               {!isFirstStep && (
                 <button
                   type="button"
-                  className={`${styles.botaoPadraoPrimary} ${styles.hoverPadraoPrimary}`}
+                  className={`w-full ${styles.botaoPadraoPrimary} ${styles.hoverPadraoPrimary}`}
                   onClick={() => changeStep(currentStep - 1)}
                 >
                   <i className="mdi mdi-chevron-left text-[20px]" />
@@ -103,7 +103,7 @@ const Pagamentos = () => {
               {!isLastStep ? (
                 <button
                   type="submit"
-                  className={`${styles.botaoPadraoPrimary} ${styles.hoverPadraoPrimary}`}
+                  className={`w-full ${styles.botaoPadraoPrimary} ${styles.hoverPadraoPrimary}`}
                 >
                   Próximo
                   <i className="mdi mdi-chevron-right text-[20px]" />
@@ -111,7 +111,7 @@ const Pagamentos = () => {
               ) : (
                 <button
                   type="submit"
-                  className={`${styles.botaoPadraoPrimary} ${styles.hoverPadraoPrimary}`}
+                  className={`w-full ${styles.botaoPadraoPrimary} ${styles.hoverPadraoPrimary}`}
                 >
                   Concluir
                   <i className="mdi mdi-check text-[20px]" />

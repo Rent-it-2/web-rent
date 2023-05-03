@@ -132,9 +132,9 @@ const ItemDetalhes = () => {
               </Link>
 
               <button
-                className={`rounded-lg border-[1px] text-gray-400 border-gray-300 p-1 px-3  ${styles.hoverPadraoPrimary}`}
+                className={`${styles.botaoPadraoSecondary} text-gray-300 ${styles.hoverPadraoPrimary}`}
               >
-                <i className="mdi mdi-heart w-1/6 cursor-pointer text-[22px]" onClick={favoritarItem} />
+                <i className="mdi mdi-heart cursor-pointer text-[22px]" onClick={favoritarItem} />
               </button>
             </div>
           </div>

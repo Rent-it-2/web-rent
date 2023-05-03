@@ -155,7 +155,7 @@ const Cadastro = () => {
 
             <div className="w-full flex flex-col items-center gap-2">
               <button
-                className={`w-5/6 ${styles.botaoPadraoPrimary} ${styles.hoverPadraoPrimary}`}
+                className={`w-full ${styles.botaoPadraoPrimary} ${styles.hoverPadraoPrimary}`}
                 type="submit"
               >
                 Cadastrar-se

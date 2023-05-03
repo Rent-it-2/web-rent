@@ -8,6 +8,7 @@ import Menu from "./Menu";
 import InputBuscar from "./InputBuscar";
 import Sidebar from "./Sidebar";
 import Modal from "./Modal";
+import Endereco from "./Endereco";
 import Avaliacao from "./Avaliacao";
 import Stepper from "./Stepper";
 
@@ -44,4 +45,5 @@ export {
   PagamentosInfos,
   PagamentosFormaPag,
   Stepper,
+  Endereco
 };

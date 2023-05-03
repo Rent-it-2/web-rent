@@ -10,7 +10,7 @@ const PagamentosInfos = ({ data, updateFieldHandler }) => {
       </h1>
 
       <div className="w-full">
-        <label className="text-sm text-rentBlue">Nome Compelto</label>
+        <label className="text-sm text-rentBlue">Nome Compeleto</label>
           <input
             type="text"
             name="nome"
