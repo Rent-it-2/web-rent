@@ -4,12 +4,16 @@ import { getUserLogged } from "../../api";
 import { IMaskInput } from "react-imask";
 import { styles } from "../../styles";
 
-const PagamentosFormaPag = ({ data, userInfos, updateFieldHandler }) => {
-  // const [user, setUser] = useState({});
+import ReactDatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
-  // useEffect(() => {
-  //   setUser(getUserLogged());
-  // }, []);
+
+const PagamentosFormaPag = ({ data, userInfos, updateFieldHandler }) => {
+  // const [periodo, setPeriodo] = useState(new Date());
+
+  // const [startDate, setStartDate] = useState(new Date());
+
+  const [selectedDate, setselectedDate] = useState(null);
 
   return (
     <div className="flex flex-wrap gap-5 px-5 sm:px-10">
@@ -36,7 +40,7 @@ const PagamentosFormaPag = ({ data, userInfos, updateFieldHandler }) => {
 
           <div className="w-full flex gap-2">
             <label className="text-sm text-rentBlue">Até:</label>
-            <IMaskInput
+            {/* <IMaskInput
               type="text"
               name="dtFim"
               as={IMaskInput}
@@ -45,8 +49,17 @@ const PagamentosFormaPag = ({ data, userInfos, updateFieldHandler }) => {
               value={data.dtFim || ""}
               onChange={(e) => updateFieldHandler("dtFim", e.target.value)}
               className={`${styles.inputPadrao}`}
+            /> */}
+            <ReactDatePicker
+              id="dtFim"
+              selected={data.dtFim || ""}
+              onChange={e => updateFieldHandler("dtFim", e)}
+              className={`${styles.inputPadrao}`}
+              dateFormat={"yyyy/MM/dd"}
             />
+
           </div>
+
         </div>
       </div>
 
@@ -59,7 +72,7 @@ const PagamentosFormaPag = ({ data, userInfos, updateFieldHandler }) => {
           <input
             type="radio"
             name="cartaoId"
-            checked={data.cartaoId === userInfos.cartaoId}
+            defaultChecked={data.cartaoId === userInfos.cartaoId}
             value={userInfos.cartaoId}
             className="checked:bg-primary"
             onChange={(e) => updateFieldHandler("cartaoId", e.target.value)}
@@ -69,8 +82,8 @@ const PagamentosFormaPag = ({ data, userInfos, updateFieldHandler }) => {
         <CardCartao cartaoInfos={userInfos} showEdit={false}>
           <input
             type="radio"
-            name="cartaoId2"
-            checked={data.cartaoId === userInfos.cartaoId2}
+            name="cartaoId"
+            defaultChecked={data.cartaoId === userInfos.cartaoId2}
             value={userInfos.cartaoId2}
             className="checked:bg-primary"
             onChange={(e) => updateFieldHandler("cartaoId", e.target.value)}
