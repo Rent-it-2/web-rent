@@ -37,7 +37,7 @@ const Pagamentos = () => {
   };
 
   const formComponents = [
-    <PagamentosInfos data={data} updateFieldHandler={updateFieldHandler} />,
+    <PagamentosInfos data={data} userInfos={user} updateFieldHandler={updateFieldHandler} />,
     <PagamentosFormaPag
       data={data}
       userInfos={user}

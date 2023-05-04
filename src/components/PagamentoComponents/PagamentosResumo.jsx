@@ -38,6 +38,7 @@ const PagamentosResumo = ({ data, item, user }) => {
       <div
         className="flex flex-wrap justify-center items-center
        border-[1px] rounded-lg text-gray-500 gap-5 p-2
+       xs:flex-nowrap
        xs:justify-start"
       >
         <i className="mdi mdi-credit-card text-[45px] px-4" />
@@ -46,7 +47,7 @@ const PagamentosResumo = ({ data, item, user }) => {
           <p className="text-sm font-semibold">Mastercard {user.cartaoNum}</p>
           <div className="flex-col justify-start">
             <p className="text-sm">
-              Crédito(O pagamento será cobrado recorreramente se o produto não
+              Crédito (O pagamento será cobrado recorreramente se o produto não
               for devolvido)
             </p>
           </div>
@@ -64,15 +65,21 @@ const PagamentosResumo = ({ data, item, user }) => {
         <i className="mdi mdi-home text-[45px] px-4" />
 
         <div className="flex flex-col gap-3">
-          {/* <p className="text-sm font-semibold">Mastercard {user.cartaoNum}</p>
-          <div className="flex-col justify-start">
-            <p className="text-sm">Crédito(O pagamento será cobrado recorreramente se o produto não for devolvido)</p>
-          </div> */}
+            <p className="text-sm font-semibold">
+              {user.enderecoRua}, {user.enderecoNum}
+            </p>
+          <div className="">
+            <div className="flex flex-col flex-wrap justify-center text-gray-500 text-sm">
+              <p>São Paulo, SP</p>
+              <p>Bairro: {user.enderecoBairro}</p>
+              <p>CEP: {user.enderecoCep}</p>
+            </div>
+          </div>
         </div>
       </div>
 
       <h1 className="text-rentBlue font-semibold font-poppins">
-        Endereço de Cobrança
+        Total
       </h1>
       <div
         className="flex flex-wrap justify-center items-center
@@ -84,18 +91,20 @@ const PagamentosResumo = ({ data, item, user }) => {
           <div className="">
             <p className="text-sm font-semibold">Período</p>
             <div className="flex">
-              <h2 className="text-sm">{data.dtIni} - {data.dtFim} </h2>
+              <h2 className="text-sm">
+                {data.dtIni} - {data.dtFim}{" "}
+              </h2>
             </div>
           </div>
 
           <div className="flex-col justify-start">
-          <p className="text-2xl font-bold">Total</p>
+            <p className="text-2xl font-bold">Total</p>
 
-            <p className="text-sm">
-              X dias
-            </p>
+            <p className="text-sm">X dias</p>
             <div className="flex items-end">
-              <h2 className="text-2xl text-primary font-bold">R$ {item.valorDia} </h2>
+              <h2 className="text-2xl text-primary font-bold">
+                R$ {item.valorDia}{" "}
+              </h2>
             </div>
           </div>
         </div>

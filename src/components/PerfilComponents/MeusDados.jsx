@@ -87,7 +87,7 @@ const MeusDados = () => {
         isOpen={openModal}
         setModalOpen={() => setOpenModal(!openModal)}
       >
-        <FormModal/>
+        <FormModal />
       </Modal>
     </>
   );
@@ -193,7 +193,96 @@ const Form = ({ user }) => {
 };
 
 const FormModal = ({ user }) => {
+  const [formValues, setFormValues] = useState(user || {});
 
-}
+  const handleChange = (event) => {
+    const { name, type } = event.target;
+    let value = null;
+
+    if (type === "file") {
+      value = event.target.files[0];
+    } else if (type === "checkbox") {
+      setIsChecked(event.target.checked);
+      value = event.target.checked;
+    } else {
+      value = event.target.value;
+    }
+
+    setFormValues((prevValues) => ({
+      ...prevValues,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("submit", formValues);
+    // postItem(formValues)
+  };
+
+  // useEffect(() => {
+  //   setFormValues(user);
+  // }, [user]);
+
+  return (
+    <form className="w-96 flex flex-wrap gap-2" onSubmit={handleSubmit}>
+      <div className="w-full">
+        <label className="text-sm text-rentBlue">CEP</label>
+        <IMaskInput
+          type="text"
+          name="cep"
+          mask="00000-000"
+          placeholder= "00000-000"
+          required
+          onChange={handleChange}
+          className={`${styles.inputPadrao}`}
+        />
+      </div>
+
+      <div className="w-full flex justify-between gap-2">
+        <div className="w-full">
+          <label className="text-sm text-rentBlue">Logradouro</label>
+          <input
+            type="text"
+            name="logradouro"
+            onChange={handleChange}
+            className={`${styles.inputPadrao}`}
+          />
+        </div>
+
+        <div className="w-1/3">
+          <label className="text-sm text-rentBlue">Número</label>
+          <input
+            type="text"
+            name="numLogradouro"
+            onChange={handleChange}
+            className={`${styles.inputPadrao}`}
+          />
+        </div>
+      </div>
+
+      <div className="w-full">
+        <label className="text-sm text-rentBlue">Complemento</label>
+        <textarea
+          type="text"
+          name="complemento"
+          rows="4"
+          onChange={handleChange}
+          className={`${styles.inputPadrao} resize-none`}
+        ></textarea>
+      </div>
+
+      <div className="w-1/2">
+        <button
+          type="submit"
+          className={`w-full ${styles.botaoPadraoPrimary} ${styles.hoverPadraoPrimary}`}
+        >
+          <i className="mdi mdi-plus text-[20px]" />
+          Adicionar Endereço
+        </button>
+      </div>
+    </form>
+  );
+};
 
 export default MeusDados;

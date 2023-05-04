@@ -15,7 +15,7 @@ const styles = {
   hoverPadraoPrimary:
     "hover:text-primary hover:bg-transparent hover:border-[1px]  hover:border-primary",
   inputPadrao:
-    "w-full mt-1 block px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary placeholder:italic",
+    "w-full mt-1 block px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 sm:text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary placeholder:italic",
   bgModal: "fixed top-0 bottom-0 right-0 left-0 z-50 bg-bgModalColor",
 };
 

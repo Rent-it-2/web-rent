@@ -11,27 +11,27 @@ const PagamentosFormaPag = ({ data, userInfos, updateFieldHandler }) => {
 
   const dateFormatAux = (date) => {
     var d = new Date(date),
-        month = "" + (d.getMonth() + 1),
-        day = "" + d.getDate(),
-        year = "" + d.getFullYear();
+      month = "" + (d.getMonth() + 1),
+      day = "" + d.getDate(),
+      year = "" + d.getFullYear();
 
     if (month.length < 2) month = "0" + month;
     if (day.length < 2) day = "0" + day;
-    return [ year, month, day].join("/");
+    return [year, month, day].join("/");
   };
 
   const dateFormat = (key, date) => {
     let format = new Date();
 
-    if(key === "dtFim"){
+    if (key === "dtFim") {
       setSelectedDateFim(date);
       format = dateFormatAux(selectedDateFim);
-    };
-    if(key === "dtIni"){
-      setSelectedDateIni(date)
+    }
+    if (key === "dtIni") {
+      setSelectedDateIni(date);
       format = dateFormatAux(selectedDateIni);
-    };
-    
+    }
+
     console.log(key, format);
     updateFieldHandler(key, format);
   };
@@ -95,7 +95,7 @@ const PagamentosFormaPag = ({ data, userInfos, updateFieldHandler }) => {
           <input
             type="radio"
             name="cartaoId"
-            defaultChecked={data.cartaoId === userInfos.cartaoId}
+            defaultChecked={data.cartaoId == userInfos.cartaoId}
             value={userInfos.cartaoId}
             onChange={(e) => updateFieldHandler("cartaoId", e.target.value)}
           />
@@ -105,7 +105,7 @@ const PagamentosFormaPag = ({ data, userInfos, updateFieldHandler }) => {
           <input
             type="radio"
             name="cartaoId"
-            defaultChecked={data.cartaoId === userInfos.cartaoId2}
+            defaultChecked={data.cartaoId == userInfos.cartaoId2}
             value={userInfos.cartaoId2}
             onChange={(e) => updateFieldHandler("cartaoId", e.target.value)}
           />

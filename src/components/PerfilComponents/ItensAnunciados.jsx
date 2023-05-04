@@ -84,7 +84,7 @@ const ItemCard = ({ item }) => {
               !item.isAlugando ? "text-primary" : "text-green-500"
             }`}
           >
-            <b>Status:</b> {!item.isAlugando ? "Anuncio Pausado" : "Anunciando"}
+            <b>Status:</b> {!item.isAlugando ? "Anúncio Pausado" : "Anunciando"}
           </p>
         </div>
       </div>
