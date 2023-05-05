@@ -8,7 +8,7 @@ const Modal = ({isOpen, children, setModalOpen, title}) => {
 
           <div className="w-full flex justify-between items-center">
             <header>
-              <h2 className="text-xl font-bold pr-10">{title}</h2>
+              <h2 className="text-xl font-bold pr-10 text-rentBlue">{title}</h2>
             </header>
             <button className={`border-0 hover:text-primary`} onClick={setModalOpen}>
               <i className="mdi mdi-close text-[25px]"/>

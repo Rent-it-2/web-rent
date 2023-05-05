@@ -46,7 +46,7 @@ const Cartoes = () => {
         isOpen={openModal}
         setModalOpen={() => setOpenModal(!openModal)}
       >
-        <Form/>
+        <Form />
       </Modal>
     </>
   );
@@ -94,11 +94,11 @@ const Form = ({ cartao }) => {
         <IMaskInput
           type="text"
           name="numCartao"
-          // value={formValues.numcartao || ""}
+          value={formValues.numCartao || ""}
           onChange={handleChange}
-          mask= {"0000 0000 0000 0000"}
+          mask={"0000 0000 0000 0000"}
           maxLength={19}
-          placeholderChar='\u2000'
+          placeholderChar="\u2000"
           className={`${styles.inputPadrao}`}
         />
       </div>
@@ -113,7 +113,7 @@ const Form = ({ cartao }) => {
             as={IMaskInput}
             mask="00/00/0000"
             placeholder="00/00/0000"
-            // value={formValues.valCartao || ""}
+            value={formValues.valCartao || ""}
             onChange={handleChange}
             className={`${styles.inputPadrao}`}
           />
@@ -137,8 +137,8 @@ const Form = ({ cartao }) => {
 
         <IMaskInput
           type="text"
-          name="cpfCartao"
-          // value={formValues.cpf || ""}
+          name="cpf"
+          value={formValues.cpf || ""}
           onChange={handleChange}
           as={IMaskInput}
           mask="000.000.000-00"
@@ -150,7 +150,7 @@ const Form = ({ cartao }) => {
       <div className="w-1/2 flex gap-2">
         <button
           type="submit"
-          className={`${styles.botaoPadraoPrimary} p-2 text-sm ${styles.hoverPadraoPrimary}`}
+          className={`${styles.botaoPadraoPrimary} ${styles.hoverPadraoPrimary}`}
         >
           <i className={`mdi mdi-${!cartao ? "plus" : ""} text-[20px]`} />
           {cartao ? "Salvar" : "Cadastrar Cartão"}
@@ -158,7 +158,7 @@ const Form = ({ cartao }) => {
 
         {cartao && (
           <button
-            className={`border-[1px] w-full p-3 border-gray-400 text-gray-400 text-sm rounded-md ${styles.hoverPadraoPrimary}`}
+            className={`${styles.botaoPadraoSecondary} ${styles.hoverPadraoPrimary}`}
           >
             Cancelar
           </button>
