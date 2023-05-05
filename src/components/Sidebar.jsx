@@ -40,7 +40,7 @@ const Sidebar = () => {
                   </a>
                 )}
                 {pagina.title === "Sair" && (
-                  <a href={`${pagina.link}`} onClick={handleLogout} className="flex items-center p-2 rounded-lg dark:hover:bg-gray-200 group-hover:text-gray-900 dark:group-hover:text-white">
+                  <a href={`${pagina.link}`} onClick={handleLogout} className="flex items-center p-2 delay-200 rounded-lg dark:hover:bg-gray-200 group-hover:text-gray-900 dark:group-hover:text-white">
                     <i className={`mdi mdi-${pagina.icon} pr-4 text-[20px]`} />
                     {pagina.title}
                   </a>

@@ -84,23 +84,23 @@ const ItemCard = ({ item }) => {
               !item.isAlugando ? "text-primary" : "text-green-500"
             }`}
           >
-            <b>Status:</b> {!item.isAlugando ? "Anuncio Pausado" : "Anunciando"}
+            <b>Status:</b> {!item.isAlugando ? "Anúncio Pausado" : "Anunciando"}
           </p>
         </div>
       </div>
 
-      <div className="flex items-center justify-end gap-2">
+      <div className="w-2/4 flex items-center justify-end gap-2">
         <button
-          className={`${styles.botaoPadraoPrimary} text-sm rounded-md ${styles.hoverPadraoPrimary}`}
+          className={`${styles.botaoPadraoPrimary} ${styles.hoverPadraoPrimary}`}
         >
           Pausar Anúncio
         </button>
 
         <button
-          className={`rounded-lg border-[1px] border-gray-300 p-1 px-3 text-gray-400 ${styles.hoverPadraoPrimary}`}
+          className={`${styles.botaoPadraoSecondary} text-gray-400 ${styles.hoverPadraoPrimary}`}
           onClick={() => setOpenModal(true)}
         >
-          <i className="mdi mdi-pencil w-1/6 cursor-pointer text-[22px] "></i>
+          <i className="mdi mdi-pencil text-[22px] "></i>
         </button>
       </div>
       <Modal

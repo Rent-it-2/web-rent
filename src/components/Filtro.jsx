@@ -7,7 +7,7 @@ const Filtro = () => {
     <>
       <form
         action=""
-        className={`w-56 text-rentBlue flex flex-col gap-10 px-5`}
+        className={`${styles.cardWhite} w-full text-rentBlue flex flex-col gap-10 px-12 mb-10 lg:px-5 lg:w-56 lg:bg-transparent lg:shadow-none`}
       >
         <h2 className="text-xl font-bold">
           <i className="mdi mdi-filter text-[20px]"/>
@@ -56,7 +56,7 @@ const Filtro = () => {
 
         <div className="">
           <h3 className="font-bold">Categoria:</h3>
-          <div className="flex flex-wrap gap-3 justify-center pt-5">
+          <div className="flex flex-wrap gap-3 lg:justify-center pt-5">
             {categorias.map((categoria) => (
               <button
                 href={`#${categoria.id}`}
