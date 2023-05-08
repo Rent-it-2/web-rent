@@ -2,25 +2,19 @@ import React, { useEffect, useState } from "react";
 // import { addDoc, collection, limit, orderBy, query, serverTimestamp } from "firebase/firestore";
 import { styles } from "../../styles";
 import { Header, Footer, Sidebar } from "..";
-//import { app, databaseApp } from "./services/firebaseConfig";
 import { getUserLogged } from "../../api";
 import { race } from "rxjs";
-//import { collection, limit, orderBy, query } from "firebase/firestore";
-//import { databaseApp } from "../../services/firebase";
-//import { useCollectionData } from "react-firebase-hooks/firestore";
+import { collection, limit, orderBy, query, serverTimestamp } from "firebase/firestore";
+import { databaseApp } from "../../services/firebase";
+import { useCollectionData } from "react-firebase-hooks/firestore";
 
 export const ChatMessage = (props) => {
-  const { text, user, photoURL } = props.message;
+  const {text} = props.message;
 
   const messageClass = user === user ? "sent" : "received";
 
   return (
     <div className={`message ${messageClass}`}>
-      <img
-        src={
-          photoURL || "https://api.adorable.io/avatars/23/abott@adorable.png"
-        }
-      />
       <p>{text}</p>
     </div>
   );
@@ -31,7 +25,16 @@ const Chat = () => {
 const messageRef = collection(databaseApp, "messages");
 const Querymessages = query(messageRef, orderBy("createdAt"),limit(30));
 const [messages] = useCollectionData(Querymessages, {idField: "id"});
+const [formValue, setFormValue] = useState ("");
+const sendMessage = async (e) =>{
+  e.preventDefault();
 
+  await addDoc(messageRef,{
+    text:formValue,
+    createdAt: serverTimestamp
+  })
+
+}
   const [user, setUser] = useState({});
 
   const getUser = async () => {
@@ -42,7 +45,6 @@ const [messages] = useCollectionData(Querymessages, {idField: "id"});
     getUser();
   }, []);
 
- 
 
   return (
     <>
@@ -119,9 +121,12 @@ const [messages] = useCollectionData(Querymessages, {idField: "id"});
                 </div>
 
                 <div className="flex items-center bg-white p-3 border-t border-primary ">
-                  <input
+                   
+                  <input onSubmit={sendMessage}
                     type="text"
+                    value={formValue} onChange={e=> setFormValue(e.target.value)}
                     placeholder="Mensagem"
+                    
                     className="w-full py-2 pl-4 mx-3 bg-gray-100 rounded-full outline-none focus:text-gray-700"
                     name="message"
                     required
