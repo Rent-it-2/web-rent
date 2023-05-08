@@ -5,12 +5,14 @@ import { Header, Footer, Sidebar } from "..";
 //import { app, databaseApp } from "./services/firebaseConfig";
 import { getUserLogged } from "../../api";
 import { race } from "rxjs";
-// import {databaseApp} from "../services/firebase";
+//import { collection, limit, orderBy, query } from "firebase/firestore";
+//import { databaseApp } from "../../services/firebase";
+//import { useCollectionData } from "react-firebase-hooks/firestore";
 
 export const ChatMessage = (props) => {
   const { text, user, photoURL } = props.message;
 
-  const messageClass = user === auth.currentUser.user ? "sent" : "received";
+  const messageClass = user === user ? "sent" : "received";
 
   return (
     <div className={`message ${messageClass}`}>
@@ -25,6 +27,11 @@ export const ChatMessage = (props) => {
 };
 
 const Chat = () => {
+
+const messageRef = collection(databaseApp, "messages");
+const Querymessages = query(messageRef, orderBy("createdAt"),limit(30));
+const [messages] = useCollectionData(Querymessages, {idField: "id"});
+
   const [user, setUser] = useState({});
 
   const getUser = async () => {
@@ -35,9 +42,7 @@ const Chat = () => {
     getUser();
   }, []);
 
-  // const backImageUser = {
-  //   backgroundImage: `url(${user.foto})`,
-  // };
+ 
 
   return (
     <>
@@ -79,23 +84,7 @@ const Chat = () => {
                 </h2>
              
                 <Contato props={user} />
-                <Contato props={user} />
-                <Contato props={user} />
-                <Contato props={user} />
-                <Contato props={user} />
-                <Contato props={user} />
-                <Contato props={user} />
-                <Contato props={user} />
-                <Contato props={user} />
-                <Contato props={user} />
-                <Contato props={user} />
-                <Contato props={user} />
-                <Contato props={user} />
-                <Contato props={user} />
-                <Contato props={user} />
-                <Contato props={user} />
-                <Contato props={user} />
-                <Contato props={user} />
+                
               </ul>
             </div>
 
