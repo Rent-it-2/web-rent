@@ -45,5 +45,5 @@ export {
   PagamentosInfos,
   PagamentosFormaPag,
   Stepper,
-  Endereco
+  Endereco,
 };

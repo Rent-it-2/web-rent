@@ -3,6 +3,7 @@ import { getUserById } from "../api";
 import { Link } from "react-router-dom";
 import { paginas } from "../constants";
 import { AuthContext } from "../contexts/Auth";
+import { Avatar } from "@mui/material";
 
 const Menu = () => {
   const [user, setUser] = useState({});
@@ -38,11 +39,10 @@ const Menu = () => {
   return (
     <>
       <div className="h-fit rounded-full text-white bg-rentBlue border-[0.1px] border-rentBlue flex pr-3 gap-3 items-center">
-        <Link
-          to={"/perfil/meus-dados"}
-          className="rounded-full min-w-[45px] min-h-[45px] bg-cover border-[1px] border-rentBlue"
-          style={backImageUser}
-        ></Link>
+        <Link to={"/perfil/meus-dados"}>
+          <Avatar alt={`${user.nome}`} src={`${user.foto}`} />
+        </Link>
+
         <h3 className="hidden text-md sm:block">{user.apelido}</h3>
         <div className="">
           <i
@@ -69,15 +69,15 @@ const Menu = () => {
                 setActive(pagina.title);
               }}
             >
-              {pagina.title != "Sair" && 
+              {pagina.title != "Sair" && (
                 <a href={`${pagina.link}`}>
-                  <i className={`mdi mdi-${pagina.icon} pr-4 text-[20px]`}/>
+                  <i className={`mdi mdi-${pagina.icon} pr-4 text-[20px]`} />
                   {pagina.title}
                 </a>
-              }
+              )}
               {pagina.title === "Sair" && (
                 <a href={`${pagina.link}`} onClick={handleLogout}>
-                  <i className={`mdi mdi-${pagina.icon} pr-4 text-[20px]`}/>
+                  <i className={`mdi mdi-${pagina.icon} pr-4 text-[20px]`} />
                   {pagina.title}
                 </a>
               )}

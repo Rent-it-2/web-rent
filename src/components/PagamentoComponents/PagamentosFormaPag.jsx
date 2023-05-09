@@ -2,8 +2,16 @@ import React, { useEffect, useState } from "react";
 import CardCartao from "../CardCartao";
 import { IMaskInput } from "react-imask";
 import { styles } from "../../styles";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import {
+  DatePicker,
+  LocalizationProvider,
+  MobileDatePicker,
+} from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
+import dayjs from "dayjs";
+import { Stack } from "@mui/system";
+import Button from "@mui/material/Button";
 
 const PagamentosFormaPag = ({ data, userInfos, updateFieldHandler }) => {
   const [selectedDateIni, setSelectedDateIni] = useState(new Date());
@@ -14,26 +22,18 @@ const PagamentosFormaPag = ({ data, userInfos, updateFieldHandler }) => {
       month = "" + (d.getMonth() + 1),
       day = "" + d.getDate(),
       year = "" + d.getFullYear();
+      month = "" + (d.getMonth() + 1),
+      day = "" + d.getDate(),
+      year = "" + d.getFullYear();
 
     if (month.length < 2) month = "0" + month;
     if (day.length < 2) day = "0" + day;
-    return [year, month, day].join("/");
+    return [day, month, year].join("/");
   };
 
   const dateFormat = (key, date) => {
-    let format = new Date();
-
-    if (key === "dtFim") {
-      setSelectedDateFim(date);
-      format = dateFormatAux(selectedDateFim);
-    }
-    if (key === "dtIni") {
-      setSelectedDateIni(date);
-      format = dateFormatAux(selectedDateIni);
-    }
-
-    console.log(key, format);
-    updateFieldHandler(key, format);
+    console.log(key, dateFormatAux(date));
+    updateFieldHandler(key, dateFormatAux(date));
   };
 
   return (
@@ -43,45 +43,38 @@ const PagamentosFormaPag = ({ data, userInfos, updateFieldHandler }) => {
           Período que é pretendido para locação do item
         </h2>
 
-        <div className="w-full flex flex-wrap gap-5 sm:flex-nowrap">
+        <div className="w-full flex flex-wrap gap-5 items-center sm:flex-nowrap">
           <div className="w-full flex items-center gap-2">
             <label className="text-sm text-rentBlue">De:</label>
-
-            {/* <IMaskInput
-              type="text"
-              name="dtIni"
-              as={IMaskInput}
-              mask="00/00/0000"
-              placeholder="00/00/0000"
-              value={data.dtIni || ""}
-              onChange={(e) => updateFieldHandler("dtIni", e.target.value)}
-              className={`${styles.inputPadrao}`}
-            /> */}
-
-            <DatePicker
-              id="dtIni"
-              selected={selectedDateIni}
-              dateFormat={"dd/MM/yyyy"}
-              placeholderText="00/00/0000"
-              onChange={(date) => {
-                dateFormat("dtIni", date);
-              }}
-              className={`${styles.inputPadrao}`}
-            />
+            <LocalizationProvider dateAdapter={AdapterDayjs} className={`w-full appearance-none`}>
+              <DemoContainer components={["MobileDatePicker"]}>
+                <DemoItem>
+                  <MobileDatePicker
+                    className={`${styles.inputPadrao}`}
+                    onChange={(date) => {
+                      dateFormat("dtIni", date);
+                    }}
+                  />
+                </DemoItem>
+              </DemoContainer>
+            </LocalizationProvider>
           </div>
+
+          <hr className="hidden w-full sm:block" />
 
           <div className="w-full flex items-center gap-2">
             <label className="text-sm text-rentBlue">Até:</label>
-            <DatePicker
-              id="dtFim"
-              selected={selectedDateFim}
-              dateFormat={"dd/MM/yyyy"}
-              placeholderText="00/00/0000"
-              onChange={(date) => {
-                dateFormat("dtFim", date);
-              }}
-              className={`${styles.inputPadrao}`}
-            />
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DemoContainer components={["MobileDatePicker"]}>
+                <DemoItem>
+                  <MobileDatePicker
+                    onChange={(date) => {
+                      dateFormat("dtFim", date);
+                    }}
+                  />
+                </DemoItem>
+              </DemoContainer>
+            </LocalizationProvider>
           </div>
         </div>
       </div>
