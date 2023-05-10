@@ -1,71 +1,130 @@
-import React from "react";
+import React, { useState } from "react";
 import { categorias, zonas } from "../constants";
 import { styles } from "../styles";
+import Slider from "@mui/material/Slider";
+
+const marks = [
+  {
+    value: 100,
+    label: "R$100",
+  },
+  {
+    value: 300,
+    label: "R$300",
+  },
+  {
+    value: 700,
+    label: "R$700",
+  },
+  {
+    value: 1000,
+    label: "R$1000",
+  },
+];
 
 const Filtro = () => {
+  const [isChecked, setIsChecked] = useState(false);
+  const [formValues, setFormValues] = useState({});
+
+  const handleChange = (event) => {
+    const { name, type } = event.target;
+    let value = null;
+
+    if (type === "file") {
+      value = event.target.files[0];
+    } else if (type === "checkbox") {
+      setIsChecked(event.target.checked);
+      value = event.target.checked;
+    } else {
+      value = event.target.value;
+    }
+
+    setFormValues((prevValues) => ({
+      ...prevValues,
+      [name]: value,
+    }));
+
+    handleSubmit();
+  };
+
+  const handleSubmit = () => {
+    // e.preventDefault();
+    console.log("submit", formValues);
+    // postItem(formValues)
+  };
+
+  const valuetext = (value) => {
+    return `R$${value}`;
+  };
+
   return (
     <>
       <form
         action=""
         className={`${styles.cardWhite} w-full text-rentBlue flex flex-col gap-10 px-12 mb-10 lg:px-5 lg:w-56 lg:bg-transparent lg:shadow-none`}
+        onSubmit={handleSubmit}
       >
         <h2 className="text-xl font-bold">
-          <i className="mdi mdi-filter text-[20px]"/>
+          <i className="mdi mdi-filter text-[20px]" />
           Filtrar por:
         </h2>
 
         <div className="">
           <h3 className="font-bold">Região:</h3>
-          <div className="flex flex-wrap pt-5 gap-3">
+          <div className="flex flex-wrap pt-5 gap-3 lg:flex-col">
             {zonas.map((zona) => (
-              <button
+              <span
                 href={`#${zona.id}`}
-                className="rounded-full py-2 text-xs px-1 border-[1px] border-black"
+                className="flex items-center gap-2 rounded-full px-5  py-2 text-xs border-[1px] bg-gray-300"
               >
+                <input type="checkbox" name={zona.id} onChange={handleChange} />
                 {zona.title}
-              </button>
+              </span>
             ))}
           </div>
         </div>
 
         <div className="flex flex-col gap-2">
-          <h3 className="font-bold">Valor por dia:</h3>
-          <div className="flex flex-wrap ">
-            <input type="range" name="" id="" className="w-full" />
+          <h3 className="font-bold">Valor máximo por dia:</h3>
+          <div className="flex flex-wrap justify-center items-start pt-3 px-5 sm:pr-10 sm:px-0">
+            <Slider
+              defaultValue={10}
+              getAriaValueText={valuetext}
+              marks={marks}
+              valueLabelDisplay="auto"
+              orientation="vertical"
+              step={100}
+              min={10}
+              max={1000}
+              sx={{
+                color: "#FF724C",
+                height: 150,
+              }}
+              name={"maxVal"}
+              onChange={handleChange}
+            />
           </div>
-
-          {/* <div className="w-full flex gap-2">
-              <div className="flex items-center gap-2">
-                <label className="text-sm">De:</label>
-                <input
-                  type="number"
-                  placeholder="00,00"
-                  className="w-full border-[1px] rounded-md p-2 border-black outline-none text-xs"
-                />
-              </div>
-              <div className="flex items-center gap-2">
-                <label className="text-sm">Até:</label>
-                <input
-                  type="number"
-                  placeholder="00,00"
-                  className="w-full border-[1px] rounded-md p-2 border-black outline-none text-xs"
-                />
-              </div>
-            </div> */}
         </div>
 
         <div className="">
           <h3 className="font-bold">Categoria:</h3>
-          <div className="flex flex-wrap gap-3 lg:justify-center pt-5">
+          <div className="flex flex-wrap pt-5 gap-3 lg:flex-col">
             {categorias.map((categoria) => (
-              <button
+              <span
                 href={`#${categoria.id}`}
-                className="rounded-full py-2 px-1 border-[1px] border-black text-xs"
+                className="flex items-center gap-2 rounded-full px-5  py-2 text-xs border-[1px] bg-gray-300"
               >
+                <input
+                  type="checkbox"
+                  name={categoria.id}
+                  onChange={handleChange}
+                />
                 {categoria.title}
-              </button>
+              </span>
             ))}
           </div>
+
+          {/* <button type="submit">hello</button> */}
         </div>
       </form>
     </>

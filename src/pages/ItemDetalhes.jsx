@@ -1,9 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Avaliacao, Footer, Header } from "../components";
+import { Footer, Header } from "../components";
 import { ItemContext } from "../contexts/ItemContext";
 import { getItemById, getUserById, putItem } from "../api";
 import { styles } from "../styles";
 import { Link, useNavigate } from "react-router-dom";
+import { Rating } from "@mui/material";
 
 const ItemDetalhes = () => {
   const navigate = useNavigate();
@@ -103,7 +104,8 @@ const ItemDetalhes = () => {
                 <Link to={`/locador/${user.id}`}>
                   <h3 className="text-xl font-bold">{user.apelido}</h3>
                 </Link>
-                <Avaliacao valorSetado={2.5} />
+                {/* <Avaliacao valorSetado={2.5} /> */}
+                <Rating name="read-only" value={3} readOnly precision={0.5} />
               </div>
             </div>
 

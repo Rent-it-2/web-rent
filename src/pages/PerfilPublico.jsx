@@ -1,9 +1,10 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { Avaliacao, Footer, Header, Item } from "../components";
+import { Footer, Header, Item } from "../components";
 import { getUserById, getUserItem } from "../api";
 import { styles } from "../styles";
 import { ItemContext } from "../contexts/ItemContext";
 import { UsuarioLogado } from "../constants";
+import { Rating } from "@mui/material";
 
 const PerfilPublico = () => {
   const { userId } = useContext(ItemContext);
@@ -78,7 +79,8 @@ const PerfilPublico = () => {
           <div className="w-full rounded-2xl border-[1px] border-gray-500 flex p-7 items-center flex-col gap-3">
             <h1 className="">Avaliação média</h1>
             <span className="text-2xl">2.5</span>
-            <Avaliacao valorSetado={2.5}></Avaliacao>
+            {/* <Avaliacao valorSetado={2.5}></Avaliacao> */}
+            <Rating name="read-only" value={2.5} readOnly precision={0.5}/>
           </div>
 
           <div className="w-full rounded-2xl border-[1px] border-gray-500 flex p-7 items-center">

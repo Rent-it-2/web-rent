@@ -4,6 +4,8 @@ import { styles } from "../../styles";
 import { Endereco } from "../index";
 
 const PagamentosInfos = ({ data, userInfos, updateFieldHandler }) => {
+
+  
   return (
     <div className="flex flex-wrap gap-5 px-10">
       <h1 className="text-rentBlue font-semibold font-poppins">
@@ -11,13 +13,14 @@ const PagamentosInfos = ({ data, userInfos, updateFieldHandler }) => {
       </h1>
 
       <div className="w-full">
-        <label className="text-sm text-rentBlue">Nome Compeleto</label>
+        <label className="text-sm text-rentBlue">Nome Completo</label>
         <input
           type="text"
           name="nome"
           value={data.nome || ""}
           onChange={(e) => updateFieldHandler("nome", e.target.value)}
           className={`${styles.inputPadrao}`}
+          required
         />
       </div>
 
@@ -47,6 +50,7 @@ const PagamentosInfos = ({ data, userInfos, updateFieldHandler }) => {
               defaultChecked={data.enderecoId == userInfos.enderecoId}
               value={userInfos.enderecoId}
               onChange={(e) => updateFieldHandler("enderecoId", e.target.value)}
+              required
             />
           </Endereco>
           {/* ))} */}

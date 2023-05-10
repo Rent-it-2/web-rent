@@ -57,6 +57,7 @@ export const Carousel = ({ dataSource }) => {
 
   const handleLeftClick = (e) => {
     e.preventDefault();
+    console.log();
     carousel.current.scrollLeft -= carousel.current.offsetWidth;
   };
 
@@ -66,7 +67,7 @@ export const Carousel = ({ dataSource }) => {
   };
 
   return (
-    <div className="flex items-center gap-1">
+    <div className="flex items-center gap-1 juse">
       <button
         onClick={handleLeftClick}
         className={`bg-rentBlue bg-opacity-0 text-rentBlue hover:bg-opacity-50 sm:text-[35px]`}

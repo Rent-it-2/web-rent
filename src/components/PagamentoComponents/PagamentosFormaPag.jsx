@@ -1,17 +1,9 @@
 import React, { useEffect, useState } from "react";
 import CardCartao from "../CardCartao";
-import { IMaskInput } from "react-imask";
 import { styles } from "../../styles";
-import {
-  DatePicker,
-  LocalizationProvider,
-  MobileDatePicker,
-} from "@mui/x-date-pickers";
+import { LocalizationProvider, MobileDatePicker } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
-import dayjs from "dayjs";
-import { Stack } from "@mui/system";
-import Button from "@mui/material/Button";
 
 const PagamentosFormaPag = ({ data, userInfos, updateFieldHandler }) => {
   const [selectedDateIni, setSelectedDateIni] = useState(new Date());
@@ -19,12 +11,9 @@ const PagamentosFormaPag = ({ data, userInfos, updateFieldHandler }) => {
 
   const dateFormatAux = (date) => {
     var d = new Date(date),
-      month = "" + (d.getMonth() + 1),
-      day = "" + d.getDate(),
-      year = "" + d.getFullYear();
-      month = "" + (d.getMonth() + 1),
-      day = "" + d.getDate(),
-      year = "" + d.getFullYear();
+        month = "" + (d.getMonth() + 1),
+        day = "" + d.getDate(),
+        year = "" + d.getFullYear();
 
     if (month.length < 2) month = "0" + month;
     if (day.length < 2) day = "0" + day;
@@ -46,7 +35,10 @@ const PagamentosFormaPag = ({ data, userInfos, updateFieldHandler }) => {
         <div className="w-full flex flex-wrap gap-5 items-center sm:flex-nowrap">
           <div className="w-full flex items-center gap-2">
             <label className="text-sm text-rentBlue">De:</label>
-            <LocalizationProvider dateAdapter={AdapterDayjs} className={`w-full appearance-none`}>
+            <LocalizationProvider
+              dateAdapter={AdapterDayjs}
+              className={`w-full appearance-none`}
+            >
               <DemoContainer components={["MobileDatePicker"]}>
                 <DemoItem>
                   <MobileDatePicker
@@ -54,6 +46,7 @@ const PagamentosFormaPag = ({ data, userInfos, updateFieldHandler }) => {
                     onChange={(date) => {
                       dateFormat("dtIni", date);
                     }}
+                    required
                   />
                 </DemoItem>
               </DemoContainer>
@@ -71,6 +64,7 @@ const PagamentosFormaPag = ({ data, userInfos, updateFieldHandler }) => {
                     onChange={(date) => {
                       dateFormat("dtFim", date);
                     }}
+                    required
                   />
                 </DemoItem>
               </DemoContainer>
@@ -91,6 +85,7 @@ const PagamentosFormaPag = ({ data, userInfos, updateFieldHandler }) => {
             defaultChecked={data.cartaoId == userInfos.cartaoId}
             value={userInfos.cartaoId}
             onChange={(e) => updateFieldHandler("cartaoId", e.target.value)}
+            required
           />
         </CardCartao>
 

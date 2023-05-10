@@ -2,6 +2,9 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { ItemContext } from "../contexts/ItemContext";
 import { putItem } from "../api";
+import Checkbox from "@mui/material/Checkbox";
+import { Favorite, FavoriteBorder } from "@mui/icons-material";
+// import Fab from '@mui/material/Fab';
 
 const Item = ({
   item: { id, userId, foto, nome, categoria, valorDia, isFavorito },
@@ -56,17 +59,55 @@ const Item = ({
             <h2 className="text-sm sm:text-lg">R$ {valorDia} </h2>
             <span className="text-xs sm:text-sm">/dia</span>
           </div>
-          {!isFavorito && (
-            <i
+
+          {/* <i
               className="hidden mdi mdi-heart-outline cursor-pointer text-[22px] sm:flex"
               onClick={favoritarItem}
-            ></i>
-          )}
+            ></i> */}
           {isFavorito && (
-            <i className="hidden mdi mdi-heart cursor-pointer text-[22px] sm:flex"></i>
+            // <i className="hidden mdi mdi-heart cursor-pointer text-[22px] sm:flex"></i>
+            <Checkbox
+              icon={<FavoriteBorder />}
+              checkedIcon={<Favorite />}
+              onClick={favoritarItem}
+              size="small"
+              sx={{
+                color: "#FF724C",
+                "&.Mui-checked": {
+                  color: "#FF724C",
+                },
+
+                "& .MuiSvgIcon-root": { fontSize: 15 },
+              }}
+              defaultChecked
+            />
           )}
         </div>
       </div>
+
+      {!isFavorito && (
+        // <
+        //   className="hidden mdi mdi-heart-outline cursor-pointer text-[22px] sm:flex"
+        //   onClick={favoritarItem}
+        // ></
+        <div className="-translate-y-[19rem] translate-x-[7rem]">
+          {/* <Fab size="medium"> */}
+            <Checkbox
+              icon={<FavoriteBorder />}
+              checkedIcon={<Favorite />}
+              onClick={favoritarItem}
+              sx={{
+                color: "#fff",
+                "&.Mui-checked": {
+                  color: "#FF724C",
+                },
+
+                "& .MuiSvgIcon-root": { fontSize: 30 },
+              }}
+            />
+          {/* </Fab> */}
+        </div>
+      )}
     </div>
   );
 };
