@@ -5,6 +5,7 @@ import { styles } from "../styles";
 import { ItemContext } from "../contexts/ItemContext";
 import { UsuarioLogado } from "../constants";
 import { Rating } from "@mui/material";
+import { Avatar } from "antd";
 
 const PerfilPublico = () => {
   const { userId } = useContext(ItemContext);
@@ -45,10 +46,11 @@ const PerfilPublico = () => {
         <div className="flex items-end justify-end bg-white rounded-2xl">
           <div className="flex gap-5 p-5">
             <div className="flex flex-col gap-4">
-              <div
+              {/* <div
                 className="rounded-full w-[150px] h-[150px] bg-cover"
                 style={backImageUser}
-              ></div>
+              ></div> */}
+              <Avatar alt={`${user.nome}`} src={`${user.foto}`} className="w-[150px] h-[150px] border-[5px] border-primary"/>
               <h2 className="text-center font-bold text-lg">{user.apelido}</h2>
             </div>
 

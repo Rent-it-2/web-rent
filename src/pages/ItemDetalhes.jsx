@@ -4,7 +4,7 @@ import { ItemContext } from "../contexts/ItemContext";
 import { getItemById, getUserById, putItem } from "../api";
 import { styles } from "../styles";
 import { Link, useNavigate } from "react-router-dom";
-import { Rating } from "@mui/material";
+import { Avatar, Rating } from "@mui/material";
 
 const ItemDetalhes = () => {
   const navigate = useNavigate();
@@ -95,10 +95,7 @@ const ItemDetalhes = () => {
 
             <div className="flex">
               <Link to={`/locador/${user.id}`}>
-                <div
-                  className="rounded-full w-[60px] h-[60px] bg-cover"
-                  style={backImageUser}
-                ></div>
+                <Avatar alt={`${user.nome}`} src={`${user.foto}`} sx={{ width: 56, height: 56 }}/>
               </Link>
               <div className="px-3">
                 <Link to={`/locador/${user.id}`}>
