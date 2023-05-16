@@ -116,17 +116,16 @@ export const paginas = [
     link: "/perfil/meus-dados",
     icon:"account"
   },
-  {
-    title: "Perfil Público",
-    // link: () => UsuarioLogado.id ? '/locador/'+UsuarioLogado.id : '/perfil/meus-dados',
-    // link: `/locador/${UsuarioLogado.id}`,
-    icon:"share-variant"
-  },
-  {
-    title: "Chat",
-    link: "/perfil/chat",
-    icon:"chat"
-  },
+  // {
+  //   title: "Perfil Público",
+  //   link: `/locador/${UsuarioLogado.id}`,
+  //   icon:"share-variant"
+  // },
+  // {
+  //   title: "Chat",
+  //   link: "/perfil/chat",
+  //   icon:"chat"
+  // },
   {
     title: "Transações",
     link: "/perfil/transacoes",

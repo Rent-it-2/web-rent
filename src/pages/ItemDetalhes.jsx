@@ -12,9 +12,10 @@ const ItemDetalhes = () => {
 
   const [item, setItem] = useState({});
   const [user, setUser] = useState({});
+  const [linkWhats, setLinkWhats] = useState({});
 
   const getItem = async () => {
-    const element = [];
+    const element = []; 
 
     try {
       const resposta = await getItemById(userId, itemId).then((res) => {
@@ -37,6 +38,13 @@ const ItemDetalhes = () => {
     }
   };
 
+  function setLink() {
+    const linkBase = "https://wa.me/55";
+    const msg = "?text=Ol%C3%A1%21+Estou+entrando+em+contato+por+conta+do+seu+anuncio%21";
+    const numWhats = user.telefone
+    setLinkWhats(linkBase + numWhats + msg);
+  }
+
   const favoritarItem = () => {
     const itemAtualizado = item;
     itemAtualizado.isFavorito = true;
@@ -56,6 +64,7 @@ const ItemDetalhes = () => {
   useEffect(() => {
     getItem();
     getUser();
+    setLink();
   }, []);
 
   return (
@@ -106,14 +115,15 @@ const ItemDetalhes = () => {
               </div>
             </div>
 
-            <button
-              className={`w-full rounded-lg flex items-center justify-evenly border-[1px] 
-            border-gray-400 p-1 px-3 ${styles.hoverPadraoPrimary}`}
-            onClick={()=>navigate('/perfil/chat')}
-            >
-              <i className="mdi mdi-chat text-[22px]"></i>
-              Conversar com o locador
-            </button>
+            <a href={linkWhats} target="_blank">
+              <button
+                className={`w-full rounded-lg flex items-center justify-evenly border-[1px]
+              border-gray-400 p-1 px-3 ${styles.hoverPadraoPrimary}`}
+              >
+                <i className="mdi mdi-chat text-[22px]"></i>
+                Conversar com o locador
+              </button>
+            </a>
 
             <div className="">
               <div className="flex items-end">

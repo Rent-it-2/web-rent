@@ -10,12 +10,19 @@ import { Avatar } from "antd";
 const PerfilPublico = () => {
   const { userId } = useContext(ItemContext);
   const [user, setUser] = useState({});
+  const [linkWhats, setLinkWhats] = useState({});
+
   // const [itemList, setItem] = useState([]);
 
   // const getItem = async () => {
   //   setItem(await getUserItem(userId));
   // };
-
+  function setLink() {
+    const linkBase = "https://wa.me/55";
+    const msg = "?text=Ol%C3%A1%21+Estou+entrando+em+contato+por+conta+do+seu+anuncio%21";
+    const numWhats = user.telefone
+    setLinkWhats(linkBase + numWhats + msg);
+  }
   const getUser = async () => {
     try {
       const resposta = await getUserById(userId).then((res) => {
@@ -30,7 +37,7 @@ const PerfilPublico = () => {
 
   useEffect(() => {
     getUser();
-    // getItem();
+    setLink();
     console.log(user.itens);
   }, []);
 
@@ -46,33 +53,29 @@ const PerfilPublico = () => {
         <div className="flex items-end justify-end bg-white rounded-2xl">
           <div className="flex gap-5 p-5">
             <div className="flex flex-col gap-4">
-              {/* <div
-                className="rounded-full w-[150px] h-[150px] bg-cover"
-                style={backImageUser}
-              ></div> */}
               <Avatar alt={`${user.nome}`} src={`${user.foto}`} className="w-[150px] h-[150px] border-[5px] border-primary"/>
               <h2 className="text-center font-bold text-lg">{user.apelido}</h2>
             </div>
 
             <div className="flex flex-col justify-between text-gray-400">
-              {/* <p>Na plataforma desde:24/04/2023</p> */}
               <p>
                 <i className="mdi mdi-email-multiple-outline" /> Na plataforma
-                desde:{user.dtCadastro}
+                desde: {user.dtCadastro}
               </p>
-              {/* <p>{user.telefone}</p> */}
               <p>
-                <i className="mdi mdi-email-multiple-outline" /> (11) 9568-4120
+                <i className="mdi mdi-email-multiple-outline" /> {user.telefone}
               </p>
               <p>
                 <i className="mdi mdi-email-multiple-outline" /> {user.email}
               </p>
-              <button
-                className={`flex items-center w-fit gap-2 rounded-full border-[1px] border-rentBlue text-rentBlue py-2 px-8 ${styles.hoverPadraoPrimary}`}
-              >
-                <i className="mdi mdi-chat-processing-outline text-[20px]"></i>{" "}
-                Iniciar chat
-              </button>
+              <a href={linkWhats} target="_blank">
+                <button
+                  className={`flex items-center w-fit gap-2 rounded-full border-[1px] border-rentBlue text-rentBlue py-2 px-8 ${styles.hoverPadraoPrimary}`}
+                >
+                  <i className="mdi mdi-chat-processing-outline text-[20px]"></i>
+                  Iniciar chat
+                </button>
+              </a>
             </div>
           </div>
         </div>
@@ -81,7 +84,6 @@ const PerfilPublico = () => {
           <div className="w-full rounded-2xl border-[1px] border-gray-500 flex p-7 items-center flex-col gap-3">
             <h1 className="">Avaliação média</h1>
             <span className="text-2xl">2.5</span>
-            {/* <Avaliacao valorSetado={2.5}></Avaliacao> */}
             <Rating name="read-only" value={2.5} readOnly precision={0.5}/>
           </div>
 
@@ -120,13 +122,6 @@ export const Carousel = ({ dataSource }) => {
 
   return (
     <div className="flex items-center gap-1">
-      {/* <button
-        onClick={handleLeftClick}
-        className={`bg-rentBlue bg-opacity-0 text-rentBlue hover:bg-opacity-50 sm:text-[35px]`}
-      >
-        <i className="mdi mdi-chevron-left" />
-      </button> */}
-
       <div
         ref={carousel}
         className="max-w-full flex gap-3 items-center justify-center mt-3 overflow-hidden scroll-smooth sm:h-[22rem sm:justify-start"
@@ -135,13 +130,6 @@ export const Carousel = ({ dataSource }) => {
           <Item key={item.userId} item={item} />
         ))}
       </div>
-
-      {/* <button
-        onClick={handleRightClick}
-        className={`bg-rentBlue bg-opacity-0 text-rentBlue hover:bg-opacity-50 sm:text-[35px]`}
-      >
-        <i className="mdi mdi-chevron-right" />
-      </button> */}
     </div>
   );
 };

@@ -8,18 +8,27 @@ import { Avatar } from "@mui/material";
 const MeusDados = () => {
   const [openModal, setOpenModal] = useState(false);
   const [user, setUser] = useState({});
+  const [isPerfil, setIsPerfil] = useState(false);
 
   const getUser = async () => {
     setUser(await getUserLogged());
   };
 
+  const abrirModal = (modalPerfil) =>{
+
+    if(modal){
+
+    }
+    setOpenModal(true)
+  }
+
   useEffect(() => {
     getUser();
   }, []);
 
-  const backImageUser = {
-    backgroundImage: `url(${user.foto})`,
-  };
+  // const backImageUser = {
+  //   backgroundImage: `url(${user.foto})`,
+  // };
 
   return (
     <>
@@ -37,16 +46,17 @@ const MeusDados = () => {
         <div className="flex flex-wrap gap-5 items-end">
           <div className="flex flex-col justify-center items-center sm:justify-satart">
             <h3 className="font-bold">Foto de Perfil</h3>
-            {/* <div
-              className="rounded-full min-w-[120px] min-h-[120px] border-[3px] border-primary bg-contain bg-no-repeat"
-              style={backImageUser}
-            /> */}
-            <Avatar alt={`${user.nome}`} src={`${user.foto}`} className="min-w-[120px] min-h-[120px] border-[3px] border-primary"/>
+            <Avatar
+              alt={`${user.nome}`}
+              src={`${user.foto}`}
+              className="min-w-[120px] min-h-[120px] border-[3px] border-primary"
+            />
           </div>
 
           <div className="flex flex-wrap flex-col gap-2">
             <button
               className={`${styles.botaoPadraoPrimary} text-sm rounded-md ${styles.hoverPadraoPrimary}`}
+              onClick={() => {setOpenModal(true), setIsPerfil(true)}}
             >
               Alterar Foto
             </button>
@@ -77,20 +87,32 @@ const MeusDados = () => {
           className={`w-full flex items-center gap-5 rounded-md p-1 border-[0.1px] 
         border-dashed border-gray-300 text-gray-500 
         ${styles.hoverPadraoPrimary}`}
-          onClick={() => setOpenModal(true)}
+          onClick={() => {setOpenModal(true), setIsPerfil(false)}}
+          
         >
           <i className="mdi mdi-plus text-[22px] "></i>
           <p>Adicionar Endereço</p>
         </button>
       </div>
 
-      <Modal
-        title={"Adicionar Endereço"}
-        isOpen={openModal}
-        setModalOpen={() => setOpenModal(!openModal)}
-      >
-        <FormModal  />
-      </Modal>
+      {!isPerfil ?(     
+        <Modal
+          title={"Adicionar Endereço"}
+          isOpen={openModal}
+          setModalOpen={() => setOpenModal(!openModal)}
+        >
+          <FormModal />
+        </Modal>
+        ) : (      <Modal
+          title={"Alterar Foto de Pefil"}
+          isOpen={openModal}
+          setModalOpen={() => setOpenModal(!openModal)}
+        >
+          <FormModalPerfil />
+        </Modal>)
+      }
+
+
     </>
   );
 };
@@ -234,7 +256,7 @@ const FormModal = ({ user }) => {
           type="text"
           name="cep"
           mask="00000-000"
-          placeholder= "00000-000"
+          placeholder="00000-000"
           required
           onChange={handleChange}
           className={`${styles.inputPadrao}`}
@@ -286,5 +308,60 @@ const FormModal = ({ user }) => {
     </form>
   );
 };
+
+const FormModalPerfil = ({ user }) => {
+  const [formValues, setFormValues] = useState(user || {});
+
+  const handleChange = (event) => {
+    const { name, type } = event.target;
+    let value = null;
+
+    if (type === "file") {
+      value = event.target.files[0];
+    } else if (type === "checkbox") {
+      setIsChecked(event.target.checked);
+      value = event.target.checked;
+    } else {
+      value = event.target.value;
+    }
+
+    setFormValues((prevValues) => ({
+      ...prevValues,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("submit", formValues);
+    // postItem(formValues)
+  };
+
+  useEffect(() => {
+    setFormValues(user);
+  }, [user]);
+
+  return (
+    <form className="w-96 flex flex-wrap gap-2" onSubmit={handleSubmit}>
+      <div className="w-full">
+      {/* <div className=""> */}
+        {/* <label className="text-sm text-rentBlue">Foto do item</label> */}
+        <div className="flex rounded-md bg-gray-300 items-center justify-center py-2 px-10">
+          <label htmlFor="foto">
+            <i className="mdi mdi-plus text-[50px] text-gray-400 cursor-pointer"></i>
+          </label>
+          <input
+            type="file"
+            name="foto"
+            id="foto"
+            className={`hidden`}
+            onChange={handleChange}
+          />
+        </div>
+      </div>
+      {/* </div> */}
+    </form>
+  );
+}
 
 export default MeusDados;
