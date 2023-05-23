@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { Footer, Header, Item } from "../components";
-import { getUserById, getUserItem } from "../api";
+import { getFotoUserById, getUserById, getUserItem } from "../api";
 import { styles } from "../styles";
 import { ItemContext } from "../contexts/ItemContext";
 import { UsuarioLogado } from "../constants";
@@ -12,11 +12,6 @@ const PerfilPublico = () => {
   const [user, setUser] = useState({});
   const [linkWhats, setLinkWhats] = useState({});
 
-  // const [itemList, setItem] = useState([]);
-
-  // const getItem = async () => {
-  //   setItem(await getUserItem(userId));
-  // };
   function setLink() {
     const linkBase = "https://wa.me/55";
     const msg = "?text=Ol%C3%A1%21+Estou+entrando+em+contato+por+conta+do+seu+anuncio%21";
@@ -53,7 +48,7 @@ const PerfilPublico = () => {
         <div className="flex items-end justify-end bg-white rounded-2xl">
           <div className="flex gap-5 p-5">
             <div className="flex flex-col gap-4">
-              <Avatar alt={`${user.nome}`} src={`${user.foto}`} className="w-[150px] h-[150px] border-[5px] border-primary"/>
+              <Avatar alt={`${user.nome}`} src={`${getFotoUserById(userId)}`} className="w-[150px] h-[150px] border-[5px] border-primary"/>
               <h2 className="text-center font-bold text-lg">{user.apelido}</h2>
             </div>
 

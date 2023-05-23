@@ -67,7 +67,7 @@ const Login = () => {
               />
             </div>
             <div className="w-full flex justify-between">
-              <div className="flex gap-1 flex-row-reverse items-center">
+              {/* <div className="flex gap-1 flex-row-reverse items-center">
                 <label htmlFor="" className="text-gray-500 text-sm">
                   Lembrar de mim
                 </label>
@@ -77,11 +77,11 @@ const Login = () => {
                   id="lembrar"
                   className="border-2 rounded-md p-1 border-gray-400"
                 />
-              </div>
-
+              </div> */}
+{/* 
               <a href="" className="font-bold text-sm hover:text-secondary">
                 Esqueci a senha
-              </a>
+              </a> */}
             </div>
 
             <div className="w-full flex flex-col items-center gap-2">

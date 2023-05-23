@@ -16,22 +16,31 @@ const CardCartao = ({ cartaoInfos, showEdit, children }) => {
           />
           <div className="pt-2">
             <p>Nome no cartão</p>
-            <h2 className="text-lg font-semibold">{cartaoInfos.nome}</h2>
+            <h2 className="text-lg font-semibold">{cartaoInfos.nomeUsuario}</h2>
           </div>
-          <div className="pt-2">
+          {/* <div className="pt-2">
             <p>CVV</p>
             <h2 className="text-lg font-semibold">{cartaoInfos.cartaoCvv}</h2>
-          </div>
+          </div> */}
         </div>
 
         <div className="flex gap-3">
           <div className="">
-            <h2 className="text-lg font-semibold">{cartaoInfos.cartaoNum}</h2>
+            {/* <h2 className="text-lg font-semibold">{cartaoInfos.numCartao}</h2> */}
+            <IMaskInput
+              type="text"
+              name="cartaoNum"
+              value={cartaoInfos.numCartao}
+              mask={"0000 0000 0000 0000"}
+              maxLength={19}
+              disabled
+              className={`text-lg font-semibold bg-transparent appearance-none outline-none`}
+            />
             <p>Número do cartão</p>
           </div>
           <div className="">
             {/* <h2 className="text-lg font-semibold">{cartaoInfos.cartaoVal}</h2> */}
-            <h2 className="text-lg font-semibold">12/25</h2>
+            <h2 className="text-lg font-semibold">{cartaoInfos.validade}</h2>
             <p>Good thru</p>
           </div>
         </div>
@@ -39,7 +48,11 @@ const CardCartao = ({ cartaoInfos, showEdit, children }) => {
 
       {showEdit && (
         <div className="py-2 flex items-center justify-center gap-20 sm:flex-col sm:px-2">
-          <button href="" className={`hover:text-primary`} onClick={() => setOpenModal(true)}>
+          <button
+            href=""
+            className={`hover:text-primary`}
+            onClick={() => setOpenModal(true)}
+          >
             <i className="mdi mdi-square-edit-outline text-[20px]" />
           </button>
           <button href="" className={`hover:text-primary`}>
@@ -102,7 +115,6 @@ const Form = ({ cartao }) => {
 
   return (
     <form className="w-96 flex flex-wrap gap-5" onSubmit={handleSubmit}>
-
       <div className="w-full">
         <label className="text-sm text-rentBlue">Numero do Cartão</label>
         <IMaskInput

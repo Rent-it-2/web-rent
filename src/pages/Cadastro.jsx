@@ -94,7 +94,7 @@ const Cadastro = () => {
               />
             </div>
 
-            <div className="flex gap-2">
+            {/* <div className="flex gap-2"> */}
               {/* <div className="w-full flex-col flex">
                 <label htmlFor="" className="text-gray-500 text-xs sm:text-sm">
                   CPF
@@ -124,7 +124,7 @@ const Cadastro = () => {
                   className={`${styles.inputPadrao}`}
                 />
               </div>
-            </div>
+            {/* </div> */}
 
             <div className="flex-col flex">
               <label htmlFor="" className="text-gray-500 text-xs sm:text-sm">
@@ -139,7 +139,7 @@ const Cadastro = () => {
             </div>
 
             <div className="w-full flex justify-between">
-              <div className="flex gap-1 flex-row-reverse items-center">
+              {/* <div className="flex gap-1 flex-row-reverse items-center">
                 <label htmlFor="" className="text-gray-500 text-xs sm:text-sm">
                   Lembrar de mim
                 </label>
@@ -148,11 +148,11 @@ const Cadastro = () => {
                   name="lembrar"
                   className="border-2 rounded-md p-1 border-gray-400 outline-none"
                 />
-              </div>
-
+              </div> */}
+{/* 
               <a href="" className="font-bold text-xs sm:text-sm hover:text-secondary">
                 Esqueci a senha
-              </a>
+              </a> */}
             </div>
 
             <div className="w-full flex flex-col items-center gap-2">

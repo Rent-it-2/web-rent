@@ -17,11 +17,32 @@ export const createSession = async (email, password) => {
   return api.post("/usuarios/login", { email, password });
 };
 
+export const putUsuario = async (formValues) => {
+  return api.put(`/usuarios/${UsuarioLogado.userId}`, {
+    id: UsuarioLogado.userId,
+    nome: formValues.nome,
+    apelido: formValues.apelido,
+    email: formValues.email,
+    telefone: formValues.telefone,
+  })
+  .then((response) => {
+    console.log("sucesso");
+    window.location.reload(true);
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+};
+
 export const getAllItem = async () => {
   return api.get(`/itens`);
 };
 
-export const getItemById = async (itemId) => {
+export const getItemById = async (nome) => {
+  return api.get(`/itens/nome/${nome}`);
+};
+
+export const getItemByNome = async (itemId) => {
   return api.get(`/itens/${itemId}`);
 };
 
@@ -35,19 +56,19 @@ export const getFotoUserById = (userId) => {
 
 export const patchFotoUserById = (userId, file) => {
   return api
-  .patch(`/usuarios/foto/${userId}`, file, {
-    headers: {
-      "Content-Type": "image/jpg",
-      Accept: "*/*",
-    },
-  })
-  .then((response) => {
-    console.log("sucesso");
-    window.location.reload(true);
-  })
-  .catch((error) => {
-    console.log(error);
-  });
+    .patch(`/usuarios/foto/${userId}`, file, {
+      headers: {
+        "Content-Type": "image/jpg",
+        Accept: "*/*",
+      },
+    })
+    .then((response) => {
+      console.log("sucesso");
+      window.location.reload(true);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 };
 
 export const patchFotoItemById = (itemId, foto) => {
@@ -76,55 +97,58 @@ export const getUserItem = async (userId) => {
 };
 
 export const postUserItem = async (formValues) => {
-  return api.post(`/itens/cadastrar`, {
-    id: formValues.id,
-    nome: formValues.nome,
-    categoria: formValues.categoria,
-    usuario: UsuarioLogado.userId,
-    descricao: formValues.descricao,
-    valorDia: formValues.valorDia,
-    disponivel: formValues.disponivel,
-  })
-  .then((response) => {
-    console.log("sucesso");
-    window.location.reload(true);
-  })
-  .catch((error) => {
-    console.log(error);
-  });
+  return api
+    .post(`/itens/cadastrar`, {
+      id: formValues.id,
+      nome: formValues.nome,
+      categoria: formValues.categoria,
+      usuario: UsuarioLogado.userId,
+      descricao: formValues.descricao,
+      valorDia: formValues.valorDia,
+      disponivel: formValues.disponivel,
+    })
+    .then((response) => {
+      console.log("sucesso");
+      window.location.reload(true);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 };
 
-export const putItem = (itemId, formValues) => {
-  return api.put(`/itens/${itemId}`, {
-    id: itemId,
-    nome: formValues.nome,
-    categoria: formValues.categoria,
-    usuario: UsuarioLogado.userId,
-    disponivel: formValues.disponivel,
-    descricao: formValues.descricao,
-    valorDia: formValues.valorDia,
-  })    
-  .then((response) => {
-    console.log("sucesso");
-    window.location.reload(true);
-  })
-  .catch((error) => {
-    console.log(error);
-  });
+export const putItem = async (itemId, formValues) => {
+  return api
+    .put(`/itens/${itemId}`, {
+      id: itemId,
+      nome: formValues.nome,
+      categoria: formValues.categoria,
+      usuario: UsuarioLogado.userId,
+      disponivel: formValues.disponivel,
+      descricao: formValues.descricao,
+      valorDia: formValues.valorDia,
+    })
+    .then((response) => {
+      console.log("sucesso");
+      window.location.reload(true);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 };
 
-export const deleteItem = (itemId) => {
-  return api.delete(`/itens/${itemId}`)
-  .then((response) => {
-    console.log("sucesso");
-    window.location.reload(true);
-  })
-  .catch((error) => {
-    console.log(error);
-  });;
+export const deleteItem = async (itemId) => {
+  return api
+    .delete(`/itens/${itemId}`)
+    .then((response) => {
+      console.log("sucesso");
+      window.location.reload(true);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 };
 
-export const getUserItensFavoritos = () => {
+export const getUserItensFavoritos = async () => {
   let userId = UsuarioLogado.userId;
   return api.get(`/itens/favoritos?id=${userId}`);
 };
@@ -155,29 +179,28 @@ export const getUserLoggedItems = async () => {
   }
 };
 
-export const getUserCartoes = () => {
+export const getUserCartoes = async () => {
   let userId = UsuarioLogado.userId;
   return api.get(`/cartaos/usuario/{id}?id=${userId}`);
 };
 
-export const postUserCartoes = (formValues) => {
-  return api.post(`/cartaos/cadastrar`, 
-    {
+export const postUserCartoes = async (formValues) => {
+  return api
+    .post(`/cartaos/cadastrar`, {
       id: 0,
       numCartao: formValues.numCartao,
       validade: formValues.validade,
       cpfTitular: formValues.cpfTitular,
       usuario: UsuarioLogado.userId,
-      nomeImpresso: formValues.nomeImpresso
-    }
-  )  
-  .then((response) => {
-    console.log("sucesso");
-    window.location.reload(true);
-  })
-  .catch((error) => {
-    console.log(error);
-  });
+      nomeImpresso: formValues.nomeImpresso,
+    })
+    .then((response) => {
+      console.log("sucesso");
+      window.location.reload(true);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 };
 
 export default api;

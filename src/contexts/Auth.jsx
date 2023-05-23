@@ -19,25 +19,16 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = async (email, password) => {
-
     const response = await createSession(email, password);
     const loggedUser = response.data;
     const token = response.data.token;
-    
-    api.defaults.headers.Authorization = `Bearer ${token}`
 
-    // const loggedUser = {
-    //   id: "1",
-    //   email,
-    // };
-    // sessionStorage.setItem("id", JSON.stringify(response.data.userId));
+    api.defaults.headers.Authorization = `Bearer ${token}`;
     sessionStorage.setItem("user", JSON.stringify(loggedUser));
     sessionStorage.setItem("token", JSON.stringify(token));
 
-    // if (password === "secret") {
-      setUser(loggedUser);
-      navigate('');
-    // }
+    setUser(loggedUser);
+    navigate("");
   };
 
   const logout = () => {

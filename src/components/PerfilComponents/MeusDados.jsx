@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getFotoUserById, getUserLogged, patchFotoUserById } from "../../api";
+import { getFotoUserById, getUserLogged, patchFotoUserById, putUsuario } from "../../api";
 import { styles } from "../../styles";
 import { IMaskInput } from "react-imask";
 import { Endereco, Modal } from "../index";
@@ -80,7 +80,7 @@ const MeusDados = () => {
         <Form user={user} />
       </div>
 
-      <div className={`${styles.cardWhite} flex flex-col gap-5`}>
+      {/* <div className={`${styles.cardWhite} flex flex-col gap-5`}>
         <Endereco user={user} showEdit={true} />
 
         <button
@@ -94,7 +94,7 @@ const MeusDados = () => {
           <i className="mdi mdi-plus text-[22px] "></i>
           <p>Adicionar Endereço</p>
         </button>
-      </div>
+      </div> */}
 
       {!isPerfil ? (
         <Modal
@@ -124,9 +124,6 @@ const Form = ({ user }) => {
     const { name, type } = event.target;
     let value = null;
 
-    // if (type === "file") {
-    //   value = event.target.files[0];
-    // } else 
     if (type === "checkbox") {
       setIsChecked(event.target.checked);
       value = event.target.checked;
@@ -143,7 +140,7 @@ const Form = ({ user }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("submit", formValues);
-    // postItem(formValues)
+    putUsuario(formValues);
   };
 
   useEffect(() => {
@@ -367,7 +364,6 @@ const FormModalPerfil = ({ user }) => {
           type="submit"
           className={`w-full ${styles.botaoPadraoPrimary} ${styles.hoverPadraoPrimary}`}
         >
-          <i className="mdi mdi-plus text-[20px]" />
           Alterar Foto
         </button>
       </div>
