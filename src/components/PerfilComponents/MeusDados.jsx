@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getUserLogged } from "../../api";
+import { getFotoUserById, getUserLogged, patchFotoUserById } from "../../api";
 import { styles } from "../../styles";
 import { IMaskInput } from "react-imask";
 import { Endereco, Modal } from "../index";
@@ -14,13 +14,11 @@ const MeusDados = () => {
     setUser(await getUserLogged());
   };
 
-  const abrirModal = (modalPerfil) =>{
-
-    if(modal){
-
+  const abrirModal = (modalPerfil) => {
+    if (modal) {
     }
-    setOpenModal(true)
-  }
+    setOpenModal(true);
+  };
 
   useEffect(() => {
     getUser();
@@ -48,7 +46,7 @@ const MeusDados = () => {
             <h3 className="font-bold">Foto de Perfil</h3>
             <Avatar
               alt={`${user.nome}`}
-              src={`${user.foto}`}
+              src={`${getFotoUserById(user.id)}`}
               className="min-w-[120px] min-h-[120px] border-[3px] border-primary"
             />
           </div>
@@ -56,7 +54,9 @@ const MeusDados = () => {
           <div className="flex flex-wrap flex-col gap-2">
             <button
               className={`${styles.botaoPadraoPrimary} text-sm rounded-md ${styles.hoverPadraoPrimary}`}
-              onClick={() => {setOpenModal(true), setIsPerfil(true)}}
+              onClick={() => {
+                setOpenModal(true), setIsPerfil(true);
+              }}
             >
               Alterar Foto
             </button>
@@ -87,15 +87,16 @@ const MeusDados = () => {
           className={`w-full flex items-center gap-5 rounded-md p-1 border-[0.1px] 
         border-dashed border-gray-300 text-gray-500 
         ${styles.hoverPadraoPrimary}`}
-          onClick={() => {setOpenModal(true), setIsPerfil(false)}}
-          
+          onClick={() => {
+            setOpenModal(true), setIsPerfil(false);
+          }}
         >
           <i className="mdi mdi-plus text-[22px] "></i>
           <p>Adicionar Endereço</p>
         </button>
       </div>
 
-      {!isPerfil ?(     
+      {!isPerfil ? (
         <Modal
           title={"Adicionar Endereço"}
           isOpen={openModal}
@@ -103,16 +104,15 @@ const MeusDados = () => {
         >
           <FormModal />
         </Modal>
-        ) : (      <Modal
+      ) : (
+        <Modal
           title={"Alterar Foto de Pefil"}
           isOpen={openModal}
           setModalOpen={() => setOpenModal(!openModal)}
         >
-          <FormModalPerfil />
-        </Modal>)
-      }
-
-
+          <FormModalPerfil user={user} />
+        </Modal>
+      )}
     </>
   );
 };
@@ -124,9 +124,10 @@ const Form = ({ user }) => {
     const { name, type } = event.target;
     let value = null;
 
-    if (type === "file") {
-      value = event.target.files[0];
-    } else if (type === "checkbox") {
+    // if (type === "file") {
+    //   value = event.target.files[0];
+    // } else 
+    if (type === "checkbox") {
       setIsChecked(event.target.checked);
       value = event.target.checked;
     } else {
@@ -310,20 +311,20 @@ const FormModal = ({ user }) => {
 };
 
 const FormModalPerfil = ({ user }) => {
-  const [formValues, setFormValues] = useState(user || {});
+  const [formValues, setFormValues] = useState({});
 
   const handleChange = (event) => {
     const { name, type } = event.target;
     let value = null;
 
-    if (type === "file") {
+    // if (type === "file") {
       value = event.target.files[0];
-    } else if (type === "checkbox") {
-      setIsChecked(event.target.checked);
-      value = event.target.checked;
-    } else {
-      value = event.target.value;
-    }
+      // } else if (type === "checkbox") {
+      //   setIsChecked(event.target.checked);
+      //   value = event.target.checked;
+    // } else {
+    //   value = event.target.value;
+    // }
 
     setFormValues((prevValues) => ({
       ...prevValues,
@@ -333,8 +334,9 @@ const FormModalPerfil = ({ user }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("submit", formValues);
-    // postItem(formValues)
+    const file = formValues.foto;
+    console.log("submit", file);
+    patchFotoUserById(user.id, file);
   };
 
   useEffect(() => {
@@ -344,7 +346,7 @@ const FormModalPerfil = ({ user }) => {
   return (
     <form className="w-96 flex flex-wrap gap-2" onSubmit={handleSubmit}>
       <div className="w-full">
-      {/* <div className=""> */}
+        {/* <div className=""> */}
         {/* <label className="text-sm text-rentBlue">Foto do item</label> */}
         <div className="flex rounded-md bg-gray-300 items-center justify-center py-2 px-10">
           <label htmlFor="foto">
@@ -359,9 +361,19 @@ const FormModalPerfil = ({ user }) => {
           />
         </div>
       </div>
+
+      <div className="w-1/2">
+        <button
+          type="submit"
+          className={`w-full ${styles.botaoPadraoPrimary} ${styles.hoverPadraoPrimary}`}
+        >
+          <i className="mdi mdi-plus text-[20px]" />
+          Alterar Foto
+        </button>
+      </div>
       {/* </div> */}
     </form>
   );
-}
+};
 
 export default MeusDados;

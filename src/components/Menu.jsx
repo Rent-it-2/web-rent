@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { getUserById } from "../api";
+import { getFotoUserById, getUserById } from "../api";
 import { Link } from "react-router-dom";
 import { paginas } from "../constants";
 import { AuthContext } from "../contexts/Auth";
@@ -19,7 +19,7 @@ const Menu = () => {
   const getUser = async () => {
     let userInfos = JSON.parse(sessionStorage.getItem("user"));
     try {
-      const resposta = await getUserById(userInfos.id).then((res) => {
+      const resposta = await getUserById(userInfos.userId).then((res) => {
         setUser(res.data);
       });
       return resposta;
@@ -40,7 +40,7 @@ const Menu = () => {
     <>
       <div className="h-fit rounded-full text-white bg-rentBlue border-[0.1px] border-rentBlue flex pr-3 gap-3 items-center">
         <Link to={"/perfil/meus-dados"}>
-          <Avatar alt={`${user.nome}`} src={`${user.foto}`} />
+          <Avatar alt={`${user.apelido}`} src={`${getFotoUserById(user.id)}`} />
         </Link>
 
         <h3 className="hidden text-md sm:block">{user.apelido}</h3>

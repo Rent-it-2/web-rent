@@ -4,23 +4,27 @@ import api, { getAllItem } from "../api";
 import { styles } from "../styles";
 
 const Home = () => {
-  const [itemList, setItem] = useState([]);
-  const carousel = useRef(null);
+  const [itemList, setItemList] = useState([]);
+  // const carousel = useRef(null);
   // const carousel2 = useRef(null);
 
   const getItens = async () => {
     try {
-      const element = [];
+      // const element = [];
 
-      for (let index = 1; index <= 5; index++) {
-        const resposta = await getAllItem(index).then((res) => {
-          for (let j = 0; j < res.data.length; j++) {
-            element.push(res.data[j]);
-          }
-        });
-      }
-      console.log("element", element);
-      setItem(element);
+      // for (let index = 1; index <= 5; index++) {
+      //   const resposta = await getAllItem(index).then((res) => {
+      //     for (let j = 0; j < res.data.length; j++) {
+      //       element.push(res.data[j]);
+      //     }
+      //   });
+      // }
+      // console.log("element", element);
+      // setItem(element);
+
+      await getAllItem().then((res) => {
+        setItemList(res.data);
+      });
     } catch (error) {
       console.log(error);
     }
@@ -29,7 +33,6 @@ const Home = () => {
   useEffect(() => {
     getItens();
   }, []);
-
 
   return (
     <>
@@ -80,7 +83,7 @@ export const Carousel = ({ dataSource }) => {
         className="max-w-full flex gap-3 items-center justify-center mt-3 overflow-hidden scroll-smooth sm:h-[22rem sm:justify-start"
       >
         {dataSource?.map((item) => (
-          <Item key={item.userId} item={item} />
+          <Item item={item} />
         ))}
       </div>
 

@@ -1,29 +1,18 @@
 import React, { useEffect, useState } from "react";
-import api from "../../api";
+import api, { getUserItensFavoritos } from "../../api";
 import {Item} from "../index";
 
 const Favoritos = () => {
-  const [itemList, setItem] = useState([]);
+  const [itemList, setItemList] = useState([]);
 
-  const getItens = async () => {
+  useEffect(() => {
     try {
-      const element = [];
-
-      for (let index = 1; index <= 5; index++) {
-        const resposta = await api.get(`/users/${index}/itens`).then((res) => {
-          for (let j = 0; j < res.data.length; j++) {
-            element.push(res.data[j]);
-          }
-        });
-      }
-      setItem(element);
+      getUserItensFavoritos().then((res) => {
+        setItemList(res.data);
+      });
     } catch (error) {
       console.log(error);
     }
-  };
-
-  useEffect(() => {
-    getItens();
   }, []);
 
   return (
@@ -38,7 +27,7 @@ const Favoritos = () => {
 
       <div className="w-full flex flex-wrap gap-5 sm:gap-x-12">
         {itemList?.map((item) => (
-          <Item key={item.userId} item={item} />
+          <Item item={item} />
         ))}
       </div>
     </>

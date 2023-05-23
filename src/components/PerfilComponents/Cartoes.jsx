@@ -1,20 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { styles } from "../../styles";
-import { getUserLogged } from "../../api";
+import { getUserCartoes, postUserCartoes } from "../../api";
 import Modal from "../Modal";
 import CardCartao from "../CardCartao";
 import { IMaskInput } from "react-imask";
 
 const Cartoes = () => {
   const [openModal, setOpenModal] = useState(false);
-  const [user, setUser] = useState({});
+  const [cartoes, setCartoes] = useState([]);
 
-  const getUser = async () => {
-    setUser(await getUserLogged());
+  const getCartoes = async () => {
+    try {
+      const resposta = await getUserCartoes().then((res) => {
+        console.log(res.data);
+        setCartoes(res.data);
+      });
+      return resposta;
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
   };
 
   useEffect(() => {
-    getUser();
+    getCartoes();
   }, []);
 
   return (
@@ -38,7 +47,9 @@ const Cartoes = () => {
       </div>
 
       <div className="flex flex-wrap gap-5">
-        <CardCartao cartaoInfos={user} showEdit={true} />
+        {cartoes?.map((cartao) => (
+          <CardCartao cartaoInfos={cartao} showEdit={true} />
+        ))}
       </div>
 
       <Modal
@@ -78,7 +89,7 @@ const Form = ({ cartao }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("submit", formValues);
-    // postcartao(formValues)
+    postUserCartoes(formValues);
   };
 
   useEffect(() => {
@@ -90,6 +101,15 @@ const Form = ({ cartao }) => {
   return (
     <form className="w-96 flex flex-wrap gap-2" onSubmit={handleSubmit}>
       <div className="w-full">
+        <label className="text-sm text-rentBlue">Nome impresso no cartão</label>
+        <input
+          type="text"
+          name="nomeImpresso"
+          value={formValues.nomeImpresso || ""}
+          onChange={handleChange}
+          className={`${styles.inputPadrao}`}
+        />
+
         <label className="text-sm text-rentBlue">Numero do Cartão</label>
         <IMaskInput
           type="text"
@@ -109,27 +129,29 @@ const Form = ({ cartao }) => {
 
           <IMaskInput
             type="text"
-            name="valCartao"
+            name="validade"
             as={IMaskInput}
-            mask="00/00/0000"
-            placeholder="00/00/0000"
-            value={formValues.valCartao || ""}
+            mask="00/00"
+            placeholder="00/00"
+            value={formValues.validade || ""}
             onChange={handleChange}
             className={`${styles.inputPadrao}`}
           />
         </div>
 
-        <div className="w-full">
+        {/* <div className="w-full">
           <label className="text-sm text-rentBlue">CVV</label>
-
-          <input
+          <IMaskInput
+            as={IMaskInput}
             type="text"
             name="cvvCartao"
             value={formValues.cvvCartao || ""}
+            placeholder="000"
+            mask="000"
             onChange={handleChange}
             className={`${styles.inputPadrao}`}
           />
-        </div>
+        </div> */}
       </div>
 
       <div className="w-full">
@@ -137,8 +159,8 @@ const Form = ({ cartao }) => {
 
         <IMaskInput
           type="text"
-          name="cpf"
-          value={formValues.cpf || ""}
+          name="cpfTitular"
+          value={formValues.cpfTitular || ""}
           onChange={handleChange}
           as={IMaskInput}
           mask="000.000.000-00"

@@ -14,7 +14,8 @@ const Cadastro = () => {
   const postUser = async (user) => {
     try {
       const resposta = await api
-        .post(`/users`, user, { headers: headers })
+        // .post(`/users`, user, { headers: headers })
+        .post(`/usuarios/cadastrar`, user, { headers: headers })
         .then((res) => {
           console.log('res',res.data);
         });
@@ -94,7 +95,7 @@ const Cadastro = () => {
             </div>
 
             <div className="flex gap-2">
-              <div className="w-full flex-col flex">
+              {/* <div className="w-full flex-col flex">
                 <label htmlFor="" className="text-gray-500 text-xs sm:text-sm">
                   CPF
                 </label>
@@ -107,7 +108,7 @@ const Cadastro = () => {
                   placeholder="Digite o seu CPF"
                   className={`${styles.inputPadrao}`}
                 />
-              </div>
+              </div> */}
 
               <div className="flex-col flex">
                 <label htmlFor="" className="text-gray-500 text-xs sm:text-sm">
@@ -118,7 +119,7 @@ const Cadastro = () => {
                   name="telefone"
                   onChange={handleChange}
                   as={IMaskInput}
-                  mask="(00) 0000-0000"
+                  mask="(00)00000-0000"
                   placeholder="(__) ____-____"
                   className={`${styles.inputPadrao}`}
                 />
@@ -131,7 +132,7 @@ const Cadastro = () => {
               </label>
               <input
                 type="password"
-                name="senha"
+                name="password"
                 onChange={handleChange}
                 className={`${styles.inputPadrao}`}
               />

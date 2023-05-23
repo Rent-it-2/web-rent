@@ -69,7 +69,7 @@ const Filtro = () => {
           Filtrar por:
         </h2>
 
-        <div className="">
+        {/* <div className="">
           <h3 className="font-bold">Região:</h3>
           <div className="flex flex-wrap pt-5 gap-3 lg:flex-col">
             {zonas.map((zona) => (
@@ -82,7 +82,7 @@ const Filtro = () => {
               </span>
             ))}
           </div>
-        </div>
+        </div> */}
 
         <div className="flex flex-col gap-2">
           <h3 className="font-bold">Valor máximo por dia:</h3>

@@ -20,23 +20,24 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
 
-    // const response = await createSession(email, password);
-    // const loggedUser = response.data.apelido;
-    // const token = response.data.token;
+    const response = await createSession(email, password);
+    const loggedUser = response.data;
+    const token = response.data.token;
     
-    // api.defaults.headers.Authorization = `Bearer ${token}`
+    api.defaults.headers.Authorization = `Bearer ${token}`
 
-    const loggedUser = {
-      id: "1",
-      email,
-    };
+    // const loggedUser = {
+    //   id: "1",
+    //   email,
+    // };
+    // sessionStorage.setItem("id", JSON.stringify(response.data.userId));
     sessionStorage.setItem("user", JSON.stringify(loggedUser));
-    // sessionStorage.setItem("token", JSON.stringify(token));
+    sessionStorage.setItem("token", JSON.stringify(token));
 
-    if (password === "secret") {
+    // if (password === "secret") {
       setUser(loggedUser);
-      navigate(-1);
-    }
+      navigate('');
+    // }
   };
 
   const logout = () => {
