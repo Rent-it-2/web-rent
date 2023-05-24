@@ -5,14 +5,18 @@ import {Item} from "../index";
 const Favoritos = () => {
   const [itemList, setItemList] = useState([]);
 
-  useEffect(() => {
+  const getFavoritos = async () =>{
     try {
-      getUserItensFavoritos().then((res) => {
+      await getUserItensFavoritos().then((res) => {
         setItemList(res.data);
       });
     } catch (error) {
       console.log(error);
     }
+  }
+
+  useEffect(() => {
+    getFavoritos();
   }, []);
 
   return (

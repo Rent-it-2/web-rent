@@ -17,36 +17,37 @@ export const createSession = async (email, password) => {
   return api.post("/usuarios/login", { email, password });
 };
 
-export const putUsuario = async (formValues) => {
-  return api.put(`/usuarios/${UsuarioLogado.userId}`, {
-    id: UsuarioLogado.userId,
-    nome: formValues.nome,
-    apelido: formValues.apelido,
-    email: formValues.email,
-    telefone: formValues.telefone,
-  })
-  .then((response) => {
-    console.log("sucesso");
-    window.location.reload(true);
-  })
-  .catch((error) => {
-    console.log(error);
-  });
+export const putUsuario = (formValues) => {
+  return api
+    .put(`/usuarios/${UsuarioLogado.userId}`, {
+      id: UsuarioLogado.userId,
+      nome: formValues.nome,
+      apelido: formValues.apelido,
+      email: formValues.email,
+      telefone: formValues.telefone,
+    })
+    .then((response) => {
+      console.log("sucesso");
+      window.location.reload(true);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 };
 
 export const getAllItem = async () => {
   return api.get(`/itens`);
 };
 
-export const getItemById = async (nome) => {
+export const getItemByNome = (nome) => {
   return api.get(`/itens/nome/${nome}`);
 };
 
-export const getItemByNome = async (itemId) => {
+export const getItemById = (itemId) => {
   return api.get(`/itens/${itemId}`);
 };
 
-export const getFotoItemById = (itemId) => {
+export const getFotoItemById = async (itemId) => {
   return `http://localhost:4500/itens/foto/${itemId}`;
 };
 
@@ -88,7 +89,7 @@ export const patchFotoItemById = (itemId, foto) => {
     });
 };
 
-export const getUserById = async (userId) => {
+export const getUserById = (userId) => {
   return api.get(`/usuarios/${userId}`);
 };
 
@@ -142,6 +143,23 @@ export const deleteItem = async (itemId) => {
     .then((response) => {
       console.log("sucesso");
       window.location.reload(true);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+export const postFavoritarItem = async (itemId) => {
+  return api
+    .post(`/itens/favoritar`,
+      {
+        usuario: UsuarioLogado.userId,
+        item: itemId
+      }
+    )
+    .then((response) => {
+      console.log("favoritado com sucesso");
+      // window.location.reload(true);
     })
     .catch((error) => {
       console.log(error);

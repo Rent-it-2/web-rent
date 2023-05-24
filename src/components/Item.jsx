@@ -11,11 +11,6 @@ const Item = ({
   const { setItemId } = useContext(ItemContext);
   const navigate = useNavigate();
 
-
-  useEffect(() => {
-    console.log(getFotoItemById(id));
-  }, []);
-
   const backImage = {
     backgroundImage: `url(${getFotoItemById(id)})`,
   };
@@ -24,7 +19,6 @@ const Item = ({
     console.log(id);
     setItemId(id);
     navigate(`/item/${id}`);
-    // setUserId(userId);
   };
 
   return (

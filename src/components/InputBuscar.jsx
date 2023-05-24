@@ -1,40 +1,37 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getItemByNome } from "../api";
+import { FilterContext } from "../contexts/FilterContext";
 
 const InputBuscar = () => {
   const navigate = useNavigate();
-  const [formValues, setFormValues] = useState({});
+  const { setItemNome, buscar } = useContext(FilterContext);
+  const [formValues, setFormValues] = useState();
+  const [currentPage, setCurrentPage] = useState();
 
   const handleChange = (event) => {
-    const { name, type } = event.target;
-    let value = null;
-
-    if (type === "file") {
-      value = event.target.files[0];
-    } else if (type === "checkbox") {
-      setIsChecked(event.target.checked);
-      value = event.target.checked;
-    } else {
-      value = event.target.value;
-    }
-
-    setFormValues((prevValues) => ({
-      ...prevValues,
-      [name]: value,
-    }));
+    console.log(event.target.value);
+    setFormValues(event.target.value);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formValues);
-    getItemByNome(formValues);
-    navigate("filtros");
+    setItemNome(formValues);
+    buscar(formValues);
+    if(currentPage != "/filtros"){
+      navigate("filtros");
+    }
   };
 
   const navigateFilters = () => {
-    navigate("filtros");
+    if(currentPage != "/filtros"){
+      navigate("filtros");
+    }
   };
+
+  useEffect(() => {
+    setCurrentPage(window.location.pathname);
+  }, []);
 
   return (
     <form
@@ -49,7 +46,7 @@ const InputBuscar = () => {
         type="text"
         name="nomeItem"
         placeholder="O que está procurando?"
-        onSubmit={handleChange}
+        onChange={handleChange}
       />
       <i
         className="mdi mdi-arrow-right-bold-circle text-[20px] text-primary sm:text-[30px]"

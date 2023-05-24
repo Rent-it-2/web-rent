@@ -6,6 +6,7 @@ import {
   getFotoUserById,
   getItemById,
   getUserById,
+  postFavoritarItem,
   putItem,
 } from "../api";
 import { styles } from "../styles";
@@ -30,9 +31,6 @@ const ItemDetalhes = () => {
     telefone: "string",
   });
 
-  // const user = item.usuario;
-
-  // const [user, setUser] = useState({});
   const [linkWhats, setLinkWhats] = useState({});
 
   const getItem = async () => {
@@ -47,18 +45,6 @@ const ItemDetalhes = () => {
     }
   };
 
-  // const getUser = async () => {
-  //   try {
-  //     const resposta = await getUserById(item.usuario.id).then((res) => {
-  //       setUser(res.data);
-  //       console.log(res.data);
-  //     });
-  //     return resposta;
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
   function setLink() {
     const linkBase = "https://wa.me/55";
     const msg =
@@ -67,12 +53,10 @@ const ItemDetalhes = () => {
     setLinkWhats(linkBase + numWhats + msg);
   }
 
-  // const favoritarItem = () => {
-  //   const itemAtualizado = item;
-  //   itemAtualizado.isFavorito = true;
-  //   console.log("Favoritado", itemAtualizado);
-  //   putItem(userId, item.id, itemAtualizado);
-  // };
+  const favoritarItem = async () => {
+    console.log("Favoritado", itemId);
+    await postFavoritarItem(itemId);
+  };
 
   const backImage = {
     backgroundImage: `url(${getFotoItemById(itemId)})`,
@@ -165,11 +149,11 @@ const ItemDetalhes = () => {
                 Alugar
               </Link>
 
-              {/* <button
+              <button
                 className={`${styles.botaoPadraoSecondary} text-gray-300 ${styles.hoverPadraoPrimary}`}
               >
                 <i className="mdi mdi-heart cursor-pointer text-[22px]" onClick={favoritarItem} />
-              </button> */}
+              </button>
             </div>
           </div>
         </div>
