@@ -19,13 +19,13 @@ const InputBuscar = () => {
     setItemNome(formValues);
     buscar(formValues);
     if(currentPage != "/filtros"){
-      navigate("filtros");
+      navigate("/filtros");
     }
   };
 
   const navigateFilters = () => {
     if(currentPage != "/filtros"){
-      navigate("filtros");
+      navigate("/filtros");
     }
   };
 

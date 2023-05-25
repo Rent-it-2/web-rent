@@ -10,6 +10,7 @@ import { Avatar } from "antd";
 const PerfilPublico = () => {
   const { userId } = useContext(ItemContext);
   const [user, setUser] = useState({});
+  const [userItems, setUserItems] = useState([]);
   const [linkWhats, setLinkWhats] = useState({});
 
   function setLink() {
@@ -18,6 +19,7 @@ const PerfilPublico = () => {
     const numWhats = user.telefone
     setLinkWhats(linkBase + numWhats + msg);
   }
+
   const getUser = async () => {
     try {
       const resposta = await getUserById(userId).then((res) => {
@@ -30,71 +32,83 @@ const PerfilPublico = () => {
     }
   };
 
+  const getItens = async () => {
+    try {
+      const resposta = await getUserItem(userId).then((res) => {
+        setUserItems(res.data);
+        console.log(res.data);
+      });
+      return resposta;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     getUser();
+    getItens();
     setLink();
     console.log(user.itens);
   }, []);
-
-  const backImageUser = {
-    backgroundImage: `url(${user.foto})`,
-  };
 
   return (
     <>
       <Header />
       <main className={`${styles.mainConfig}`}>
 
-        <div className="flex items-end justify-end bg-white rounded-2xl">
-          <div className="flex gap-5 p-5">
-            <div className="flex flex-col gap-4">
+        <div className={`${styles.cardWhite}`}>
+          <div className="flex flex-col gap-24 p-5 sm:flex-row">
+
+            <div className="flex flex-col items-center gap-4">
               <Avatar alt={`${user.nome}`} src={`${getFotoUserById(userId)}`} className="w-[150px] h-[150px] border-[5px] border-primary"/>
               <h2 className="text-center font-bold text-lg">{user.apelido}</h2>
             </div>
 
-            <div className="flex flex-col justify-between text-gray-400">
-              <p>
-                <i className="mdi mdi-email-multiple-outline" /> Na plataforma
-                desde: {user.dtCadastro}
+            <div className="w-full rounded-2xl border-[1px] border-gray-500 flex p-7 items-center flex-col gap-3">
+              <p className="flex items-center gap-2">
+                <i className="mdi mdi-phone text-[25px]" /> {user.telefone}
               </p>
-              <p>
-                <i className="mdi mdi-email-multiple-outline" /> {user.telefone}
-              </p>
-              <p>
-                <i className="mdi mdi-email-multiple-outline" /> {user.email}
+              <p className="flex items-center gap-2">
+                <i className="mdi mdi-email-outline text-[25px]" /> {user.email}
               </p>
               <a href={linkWhats} target="_blank">
                 <button
-                  className={`flex items-center w-fit gap-2 rounded-full border-[1px] border-rentBlue text-rentBlue py-2 px-8 ${styles.hoverPadraoPrimary}`}
+                  className={`flex items-center w-fit gap-2 rounded-full border-[1px] border-rentBlue text-rentBlue py-2 px-8 ${styles.hoverPadraoPrimary} w-fit`}
                 >
-                  <i className="mdi mdi-chat-processing-outline text-[20px]"></i>
-                  Iniciar chat
+                  <i className="mdi mdi-whatsapp text-[20px]"></i>
+                  Iniciar Chat
                 </button>
               </a>
             </div>
-          </div>
-        </div>
 
-        <div className="flex flex-wrap gap-3 justify-around mt-10 text-gray-500 font-bold text-xl sm:flex-nowrap">
-          <div className="w-full rounded-2xl border-[1px] border-gray-500 flex p-7 items-center flex-col gap-3">
+            <div className="w-full rounded-2xl border-[1px] border-gray-500 justify-center flex p-7 items-center flex-col gap-3">
             <h1 className="">Avaliação média</h1>
             <span className="text-2xl">2.5</span>
             <Rating name="read-only" value={2.5} readOnly precision={0.5}/>
           </div>
+          </div>
+        </div>
 
-          <div className="w-full rounded-2xl border-[1px] border-gray-500 flex p-7 items-center">
+        {/* <div className="flex flex-wrap gap-3 justify-around mt-10 text-gray-500 font-bold text-xl sm:flex-nowrap"> */}
+          {/* <div className="w-full rounded-2xl border-[1px] border-gray-500 flex p-7 items-center flex-col gap-3">
+            <h1 className="">Avaliação média</h1>
+            <span className="text-2xl">2.5</span>
+            <Rating name="read-only" value={2.5} readOnly precision={0.5}/>
+          </div> */}
+
+          {/* <div className="w-full rounded-2xl border-[1px] border-gray-500 flex p-7 items-center">
             <h1 className="">Negócios feitos nos ultimos 90 dias</h1>
             <p className="text-4xl ml-4">102+</p>
           </div>
           <div className="w-full rounded-2xl border-[1px] border-gray-500 flex p-7 items-center">
             <h1 className="">Intervalo médio de tempo de resposta</h1>
             <p className="text-4xl ml-4">3Horas</p>
-          </div>
-        </div>
+          </div> */}
+        {/* </div> */}
 
-        <div className="rounded-lg bg-white py-5 px-2 mt-10 sm:p-5">
+        <div className={`${styles.cardWhite} mt-10`}>
           <h2 className="text-xl font-bold">Anúncios de {user.apelido}</h2>
-          <Carousel dataSource={user.itens} />
+          <Carousel dataSource={userItems} />
         </div>
       </main>
       <Footer />

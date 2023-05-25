@@ -69,43 +69,6 @@ const Filtro = () => {
           Filtrar por:
         </h2>
 
-        {/* <div className="">
-          <h3 className="font-bold">Região:</h3>
-          <div className="flex flex-wrap pt-5 gap-3 lg:flex-col">
-            {zonas.map((zona) => (
-              <span
-                href={`#${zona.id}`}
-                className="flex items-center gap-2 rounded-full px-5  py-2 text-xs border-[1px] bg-gray-300"
-              >
-                <input type="checkbox" name={zona.id} onChange={handleChange} />
-                {zona.title}
-              </span>
-            ))}
-          </div>
-        </div> */}
-
-        <div className="flex flex-col gap-2">
-          <h3 className="font-bold">Valor máximo por dia:</h3>
-          <div className="flex flex-wrap justify-center items-start pt-3 px-5 sm:pr-10 sm:px-0">
-            <Slider
-              defaultValue={10}
-              getAriaValueText={valuetext}
-              marks={marks}
-              valueLabelDisplay="auto"
-              orientation="vertical"
-              step={100}
-              min={10}
-              max={1000}
-              sx={{
-                color: "#FF724C",
-                height: 150,
-              }}
-              name={"maxVal"}
-              onChange={handleChange}
-            />
-          </div>
-        </div>
-
         <div className="">
           <h3 className="font-bold">Categoria:</h3>
           <div className="flex flex-wrap pt-5 gap-3 lg:flex-col">
@@ -123,9 +86,30 @@ const Filtro = () => {
               </span>
             ))}
           </div>
-
-          {/* <button type="submit">hello</button> */}
         </div>
+
+        <div className="flex flex-col gap-2">
+          <h3 className="font-bold">Valor máximo por dia:</h3>
+          <div className="flex flex-wrap justify-center items-start pt-3 px-5 sm:pr-10 sm:px-0">
+            <Slider
+              defaultValue={10}
+              getAriaValueText={valuetext}
+              marks={marks}
+              valueLabelDisplay="auto"
+              orientation="vertical"
+              step={100}
+              min={1}
+              max={1000}
+              sx={{
+                color: "#FF724C",
+                height: 150,
+              }}
+              name={"maxVal"}
+              onChange={handleChange}
+            />
+          </div>
+        </div>
+
       </form>
     </>
   );

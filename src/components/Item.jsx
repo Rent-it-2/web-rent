@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ItemContext } from "../contexts/ItemContext";
-import { getFotoItemById, putItem } from "../api";
+import { getFotoItemById, postFavoritarItem, putItem } from "../api";
 import Checkbox from "@mui/material/Checkbox";
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
 
@@ -21,11 +21,16 @@ const Item = ({
     navigate(`/item/${id}`);
   };
 
+  const favoritarItem = async () => {
+    console.log("Favoritado", id);
+    await postFavoritarItem(id);
+  };
+
   return (
     <div className="w-[7rem] h-[16rem] text-rentBlue flex-none bg-white border-gray-300 rounded-lg transition hover:scale-105 sm:w-[10rem] sm:h-[18rem] sm:border-[1px]">
       <div onClick={visualizarItem}>
         <div
-          className="aspect-square rounded-lg max-w-full min-w-full bg-cover bg-no-repeat"
+          className="aspect-square rounded-lg max-w-full min-w-full cursor-pointer bg-cover bg-no-repeat"
           style={backImage}
         ></div>
       </div>
@@ -63,7 +68,7 @@ const Item = ({
         </div>
       </div>
 
-      {/* {!isFavorito && (
+      {/* {!isFavorito && ( */}
         <div className="-translate-y-[19rem] translate-x-[7rem]">
           <Checkbox
             icon={<FavoriteBorder />}
@@ -79,7 +84,7 @@ const Item = ({
             }}
           />
         </div>
-      )} */}
+      {/* )} */}
     </div>
   );
 };

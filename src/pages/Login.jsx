@@ -51,8 +51,6 @@ const Login = () => {
               />
             </div>
 
-            {/* <Input label="Email" type="email" name="email" id="email" handleSubmit={handleSubmit} /> */}
-
             <div className="flex-col flex">
               <label htmlFor="" className="text-gray-500 text-sm">
                 Password

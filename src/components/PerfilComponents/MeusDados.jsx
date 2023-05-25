@@ -196,7 +196,7 @@ const Form = ({ user }) => {
           name="telefone"
           value={formValues.telefone || ""}
           onChange={handleChange}
-          mask="(00) 0000-0000"
+          mask="(00)00000-0000"
           as={IMaskInput}
           className={`${styles.inputPadrao}`}
         />

@@ -1,5 +1,6 @@
 import axios from "axios";
 import { UsuarioLogado } from "./constants";
+import { useState } from "react";
 
 const token = JSON.parse(sessionStorage.getItem("token"));
 const headers = {
@@ -47,7 +48,7 @@ export const getItemById = (itemId) => {
   return api.get(`/itens/${itemId}`);
 };
 
-export const getFotoItemById = async (itemId) => {
+export const getFotoItemById = (itemId) => {
   return `http://localhost:4500/itens/foto/${itemId}`;
 };
 
