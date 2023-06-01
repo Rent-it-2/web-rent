@@ -6,41 +6,18 @@ import { AuthContext } from "../contexts/Auth";
 import { Avatar } from "@mui/material";
 
 const Menu = () => {
-  const [user, setUser] = useState({});
   const [toggle, setToggle] = useState(false);
-  const [active, setActive] = useState("");
-  const { logout } = useContext(AuthContext);
+  const { logout, user, foto } = useContext(AuthContext);
 
   const handleLogout = () => {
-    console.log("logout");
     logout();
-  };
-
-  const getUser = async () => {
-    let userInfos = JSON.parse(sessionStorage.getItem("user"));
-    try {
-      const resposta = await getUserById(userInfos.userId).then((res) => {
-        setUser(res.data);
-      });
-      return resposta;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    getUser();
-  }, []);
-
-  const backImageUser = {
-    backgroundImage: `url(${user.foto})`,
   };
 
   return (
     <>
       <div className="h-fit rounded-full text-white bg-rentBlue border-[0.1px] border-rentBlue flex pr-3 gap-3 items-center">
         <Link to={"/perfil/meus-dados"}>
-          <Avatar alt={`${user.apelido}`} src={`${getFotoUserById(user.id)}`} />
+          <Avatar alt={`${user.apelido}`} src={`${foto}`} />
         </Link>
 
         <h3 className="hidden text-md sm:block">{user.apelido}</h3>
@@ -61,12 +38,12 @@ const Menu = () => {
           {paginas.map((pagina) => (
             <li
               key={pagina.title}
-              className={`font-medium cursor-pointer text-[16px] hover:text-secondary ${
-                active === pagina.link ? "text-secondary" : "text-rentBlue"
-              }`}
+              className={`font-medium cursor-pointer text-[16px] hover:text-secondary `}
+              // ${
+              //   active === pagina.link ? "text-secondary" : "text-rentBlue"
+              // }`}
               onClick={() => {
                 setToggle(!toggle);
-                setActive(pagina.title);
               }}
             >
               {pagina.title != "Sair" && (

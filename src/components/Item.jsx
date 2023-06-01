@@ -8,11 +8,12 @@ import { Favorite, FavoriteBorder } from "@mui/icons-material";
 const Item = ({
   item: { id, nome, categoria, valorDia },
 }) => {
-  const { setItemId } = useContext(ItemContext);
+  const { setItemId, foto } = useContext(ItemContext);
   const navigate = useNavigate();
 
   const backImage = {
     backgroundImage: `url(${getFotoItemById(id)})`,
+    // backgroundImage: `url(${foto})`,
   };
 
   const visualizarItem = () => {

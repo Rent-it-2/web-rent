@@ -29,7 +29,7 @@ const Filters = () => {
         </div>
 
         <div className="w-full min-h-full flex flex-wrap">
-          <Filtro />
+          {/* <Filtro nome={itemNome}/> */}
           <div className="w-full pl-2 flex flex-wrap justify-start gap-5 lg:w-4/5">
             {itemList?.map((item) => (
               <Item item={item} />

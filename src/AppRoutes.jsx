@@ -24,8 +24,9 @@ import {
   ItensAnunciados,
   Transacoes,
   Chat,
+  Header,
 } from "./components/index";
-import { FilterProvider } from "./contexts/FilterContext";
+import { FilterContext, FilterProvider } from "./contexts/FilterContext";
 
 const AppRoutes = () => {
   const Private = ({ children }) => {
@@ -40,6 +41,15 @@ const AppRoutes = () => {
     return children;
   };
 
+  const Pesquisa = ({ children }) => {
+    const { itemNome, itemCategoria, itemList, buscar } =
+      useContext(FilterContext);
+    if (!itemNome) {
+      return <Navigate to="/" />;
+    }
+    return children;
+  };
+
   return (
     <Router>
       <AuthProvider>
@@ -49,7 +59,14 @@ const AppRoutes = () => {
               <Route path="/cadastro" element={<Cadastro />} />
               <Route path="/login" element={<Login />} />
               <Route exact path="/" element={<Home />} />
-              <Route path="/filtros" element={<Filters />} />
+              <Route
+                path="/filtros"
+                element={
+                  <Pesquisa>
+                    <Filters />
+                  </Pesquisa>
+                }
+              />
               <Route path="/item/:id" element={<ItemDetalhes />} />
               <Route path="/locador/:id" element={<PerfilPublico />} />
               <Route

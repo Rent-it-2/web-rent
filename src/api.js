@@ -1,6 +1,9 @@
 import axios from "axios";
 import { UsuarioLogado } from "./constants";
 import { useState } from "react";
+// import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const token = JSON.parse(sessionStorage.getItem("token"));
 const headers = {
@@ -36,15 +39,15 @@ export const putUsuario = (formValues) => {
     });
 };
 
-export const getAllItem = async () => {
+export const getAllItem = () => {
   return api.get(`/itens`);
 };
 
-export const getItemByNome = (nome) => {
+export const getItemByNome = async (nome) => {
   return api.get(`/itens/nome/${nome}`);
 };
 
-export const getItemById = (itemId) => {
+export const getItemById = async (itemId) => {
   return api.get(`/itens/${itemId}`);
 };
 
@@ -56,7 +59,7 @@ export const getFotoUserById = (userId) => {
   return `http://localhost:4500/usuarios/foto/${userId}`;
 };
 
-export const patchFotoUserById = (userId, file) => {
+export const patchFotoUserById = async (userId, file) => {
   return api
     .patch(`/usuarios/foto/${userId}`, file, {
       headers: {
@@ -73,13 +76,35 @@ export const patchFotoUserById = (userId, file) => {
     });
 };
 
-export const patchFotoItemById = (itemId, foto) => {
+export const patchFotoItemById = async (itemId, foto) => {
   return api
     .patch(`/itens/foto/${itemId}`, foto, {
       headers: {
         "Content-Type": "image/jpg",
         Accept: "*/*",
       },
+    })
+    .then((response) => {
+      console.log("sucesso");
+      window.location.reload(true);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+export const postPesquisarItem = (nome, formValues) => {
+  console.log("pesquisar",{
+    nome: nome,
+    preco: formValues.preco,
+    categorias: [formValues.categoria],
+  });
+  // let categoria = 
+  return api
+    .get(`/itens/pesquisar`, {
+      nome: nome,
+      preco: formValues.preco,
+      categorias: [formValues.categoria],
     })
     .then((response) => {
       console.log("sucesso");
@@ -152,12 +177,10 @@ export const deleteItem = async (itemId) => {
 
 export const postFavoritarItem = async (itemId) => {
   return api
-    .post(`/itens/favoritar`,
-      {
-        usuario: UsuarioLogado.userId,
-        item: itemId
-      }
-    )
+    .post(`/itens/favoritar`, {
+      usuario: UsuarioLogado.userId,
+      item: itemId,
+    })
     .then((response) => {
       console.log("favoritado com sucesso");
       // window.location.reload(true);
@@ -203,6 +226,18 @@ export const getUserCartoes = async () => {
   return api.get(`/cartaos/usuario/{id}?id=${userId}`);
 };
 
+export const deleteUserCartoes = async (cartaoId) => {
+  return api
+    .delete(`/cartaos/deletar/{id}?id=${cartaoId}`)
+    .then((response) => {
+      console.log("sucesso");
+      window.location.reload(true);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
 export const postUserCartoes = async (formValues) => {
   return api
     .post(`/cartaos/cadastrar`, {
@@ -212,6 +247,47 @@ export const postUserCartoes = async (formValues) => {
       cpfTitular: formValues.cpfTitular,
       usuario: UsuarioLogado.userId,
       nomeImpresso: formValues.nomeImpresso,
+    })
+    .then((response) => {
+      console.log("sucesso");
+      window.location.reload(true);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+export const patchUserCartoes = async (id, formValues) => {
+  return api
+    .patch(`/cartaos/atualizar`, {
+      id: id,
+      numCartao: formValues.numCartao,
+      validade: formValues.validade,
+      cpfTitular: formValues.cpfTitular,
+      usuario: UsuarioLogado.userId,
+      nomeImpresso: formValues.nomeUsuario,
+    })
+    .then((response) => {
+      console.log("sucesso");
+      window.location.reload(true);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+export const getUserEndereco = async () => {
+  return api.get(`/enderecos/usuario/{id}?id=${UsuarioLogado.userId}`);
+};
+
+export const postUserEndereco = async (formValues) => {
+  return api
+    .post(`/enderecos/cadastrar`, {
+      numero: formValues.numero,
+      cep: formValues.cep,
+      complemento: formValues.complemento,
+      cidade: formValues.cidade,
+      usuario: UsuarioLogado.userId,
     })
     .then((response) => {
       console.log("sucesso");

@@ -5,9 +5,7 @@ import {
   getFotoItemById,
   getFotoUserById,
   getItemById,
-  getUserById,
   postFavoritarItem,
-  putItem,
 } from "../api";
 import { styles } from "../styles";
 import { Link, useNavigate } from "react-router-dom";
@@ -15,56 +13,58 @@ import { Avatar, Rating } from "@mui/material";
 
 const ItemDetalhes = () => {
   const navigate = useNavigate();
-  const { itemId, setUserId } = useContext(ItemContext);
+  const { itemId, item, foto, linkWhats, getItem } = useContext(ItemContext);
+  // const [foto, setFoto] = useState();
 
-  const [item, setItem] = useState({
-    id: 0,
-    nomeItem: "string",
-    categoria: "string",
-    disponivel: 0,
-    descricao: "string",
-    valorDia: 0,
-    idUsuario: 0,
-    nomeUsuario: "string",
-    apelidoUsario: "string",
-    email: "string",
-    telefone: "string",
-  });
+  // const [item, setItem] = useState({
+  //   id: 0,
+  //   nomeItem: "string",
+  //   categoria: "string",
+  //   disponivel: 0,
+  //   descricao: "string",
+  //   valorDia: 0,
+  //   idUsuario: 0,
+  //   nomeUsuario: "string",
+  //   apelidoUsario: "string",
+  //   email: "string",
+  //   telefone: "string",
+  // });
 
-  const [linkWhats, setLinkWhats] = useState({});
+  // const [linkWhats, setLinkWhats] = useState({});
 
-  const getItem = async () => {
-    try {
-      const resposta = await getItemById(itemId).then((res) => {
-        setItem(res.data);
-        setUserId(res.data.idUsuario);
-      });
-      return resposta;
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const getItem = async () => {
+  //   try {
+  //     const resposta = await getItemById(itemId).then((res) => {
+  //       setItem(res.data);
+  //       console.log("itemSelecionado", itemId, res.data);
+  //       sessionStorage.setItem("item", JSON.stringify(res.data));
+  //       setUserId(res.data.idUsuario);
+  //       setFoto(getFotoItemById(res.data.id));
+  //     });
+  //     return resposta;
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
-  function setLink() {
-    const linkBase = "https://wa.me/55";
-    const msg =
-      "?text=Ol%C3%A1%21+Estou+entrando+em+contato+por+conta+do+seu+anuncio%21";
-    const numWhats = item.telefone;
-    setLinkWhats(linkBase + numWhats + msg);
-  }
+  // function setLink() {
+  //   const linkBase = "https://wa.me/55";
+  //   const msg =
+  //     "?text=Ol%C3%A1%21+Estou+entrando+em+contato+por+conta+do+seu+anuncio%21";
+  //   const numWhats = item.telefone;
+  //   setLinkWhats(linkBase + numWhats + msg);
+  // }
 
   const favoritarItem = async () => {
-    console.log("Favoritado", itemId);
     await postFavoritarItem(itemId);
   };
 
   const backImage = {
-    backgroundImage: `url(${getFotoItemById(itemId)})`,
+    backgroundImage: `url(${foto})`,
   };
 
   useEffect(() => {
     getItem();
-    setLink();
   }, []);
 
   return (
@@ -100,9 +100,7 @@ const ItemDetalhes = () => {
           >
             <div>
               <h1 className="text-2xl font-bold">{item.nomeItem}</h1>
-              <p className="text-lg text-gray-400">
-                {item.categoria}
-              </p>
+              <p className="text-lg text-gray-400">{item.categoria}</p>
             </div>
 
             <div className="flex">
@@ -152,7 +150,10 @@ const ItemDetalhes = () => {
               <button
                 className={`${styles.botaoPadraoSecondary} text-gray-300 ${styles.hoverPadraoPrimary}`}
               >
-                <i className="mdi mdi-heart cursor-pointer text-[22px]" onClick={favoritarItem} />
+                <i
+                  className="mdi mdi-heart cursor-pointer text-[22px]"
+                  onClick={favoritarItem}
+                />
               </button>
             </div>
           </div>

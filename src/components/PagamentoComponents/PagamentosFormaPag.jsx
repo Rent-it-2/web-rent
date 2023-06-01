@@ -4,16 +4,35 @@ import { styles } from "../../styles";
 import { LocalizationProvider, MobileDatePicker } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
+import { getUserCartoes } from "../../api";
 
 const PagamentosFormaPag = ({ data, userInfos, updateFieldHandler }) => {
   const [selectedDateIni, setSelectedDateIni] = useState(new Date());
   const [selectedDateFim, setSelectedDateFim] = useState(new Date());
+  const [cartoes, setCartoes] = useState([]);
+
+  const getCartoes = async () => {
+    try {
+      const resposta = await getUserCartoes().then((res) => {
+        console.log(res.data);
+        setCartoes(res.data);
+      });
+      return resposta;
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+  };
+
+  useEffect(() => {
+    getCartoes();
+  }, []);
 
   const dateFormatAux = (date) => {
     var d = new Date(date),
-        month = "" + (d.getMonth() + 1),
-        day = "" + d.getDate(),
-        year = "" + d.getFullYear();
+      month = "" + (d.getMonth() + 1),
+      day = "" + d.getDate(),
+      year = "" + d.getFullYear();
 
     if (month.length < 2) month = "0" + month;
     if (day.length < 2) day = "0" + day;
@@ -78,26 +97,18 @@ const PagamentosFormaPag = ({ data, userInfos, updateFieldHandler }) => {
       </h2>
 
       <div className="w-full flex flex-wrap gap-5 justify-center lg:justify-start">
-        <CardCartao cartaoInfos={userInfos} showEdit={false}>
-          <input
-            type="radio"
-            name="cartaoId"
-            defaultChecked={data.cartaoId == userInfos.cartaoId}
-            value={userInfos.cartaoId}
-            onChange={(e) => updateFieldHandler("cartaoId", e.target.value)}
-            required
-          />
-        </CardCartao>
+        {cartoes?.map((cartao) => (
+          <CardCartao cartaoInfos={cartao}>
+            <input
+              type="radio"
+              name="cartaoId"
+              defaultChecked={data.cartaoId == cartao.id}
+              value={cartao.id}
+              onChange={(e) => updateFieldHandler("cartaoId", e.target.value)}
+            />
+          </CardCartao>
+        ))}
 
-        <CardCartao cartaoInfos={userInfos} showEdit={false}>
-          <input
-            type="radio"
-            name="cartaoId"
-            defaultChecked={data.cartaoId == userInfos.cartaoId2}
-            value={userInfos.cartaoId2}
-            onChange={(e) => updateFieldHandler("cartaoId", e.target.value)}
-          />
-        </CardCartao>
       </div>
     </div>
   );

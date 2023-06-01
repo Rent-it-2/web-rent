@@ -2,9 +2,14 @@ import React, { useEffect, useState } from "react";
 import { styles } from "../styles";
 import { Modal } from "./index";
 import { IMaskInput } from "react-imask";
+import { deleteUserCartoes, patchUserCartoes } from "../api";
 
 const CardCartao = ({ cartaoInfos, showEdit, children }) => {
   const [openModal, setOpenModal] = useState(false);
+
+  const deletarCartao = () =>{
+    deleteUserCartoes(cartaoInfos.id)
+  }
 
   return (
     <div className="items-center rounded-3xl text-xs text-gray-500 bg-gray-300 sm:flex">
@@ -26,7 +31,6 @@ const CardCartao = ({ cartaoInfos, showEdit, children }) => {
 
         <div className="flex gap-3">
           <div className="">
-            {/* <h2 className="text-lg font-semibold">{cartaoInfos.numCartao}</h2> */}
             <IMaskInput
               type="text"
               name="cartaoNum"
@@ -39,7 +43,6 @@ const CardCartao = ({ cartaoInfos, showEdit, children }) => {
             <p>Número do cartão</p>
           </div>
           <div className="">
-            {/* <h2 className="text-lg font-semibold">{cartaoInfos.cartaoVal}</h2> */}
             <h2 className="text-lg font-semibold">{cartaoInfos.validade}</h2>
             <p>Good thru</p>
           </div>
@@ -55,7 +58,9 @@ const CardCartao = ({ cartaoInfos, showEdit, children }) => {
           >
             <i className="mdi mdi-square-edit-outline text-[20px]" />
           </button>
-          <button href="" className={`hover:text-primary`}>
+          <button href="" className={`hover:text-primary`}
+            onClick={deletarCartao}
+          >
             <i className="mdi mdi-trash-can-outline text-[20px]" />
           </button>
         </div>
@@ -104,7 +109,7 @@ const Form = ({ cartao }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("submit", formValues);
-    // postcartao(formValues)
+    patchUserCartoes(cartao.id, formValues);
   };
 
   useEffect(() => {
@@ -114,13 +119,22 @@ const Form = ({ cartao }) => {
   }, [cartao]);
 
   return (
-    <form className="w-96 flex flex-wrap gap-5" onSubmit={handleSubmit}>
+    <form className="w-96 flex flex-wrap gap-2" onSubmit={handleSubmit}>
       <div className="w-full">
+        <label className="text-sm text-rentBlue">Nome impresso no cartão</label>
+        <input
+          type="text"
+          name="nomeImpresso"
+          value={formValues.nomeUsuario || ""}
+          onChange={handleChange}
+          className={`${styles.inputPadrao}`}
+        />
+
         <label className="text-sm text-rentBlue">Numero do Cartão</label>
         <IMaskInput
           type="text"
-          name="cartaoNum"
-          value={formValues.cartaoNum || ""}
+          name="numCartao"
+          value={formValues.numCartao || ""}
           onChange={handleChange}
           mask={"0000 0000 0000 0000"}
           maxLength={19}
@@ -135,27 +149,29 @@ const Form = ({ cartao }) => {
 
           <IMaskInput
             type="text"
-            name="cartaoVal"
+            name="validade"
             as={IMaskInput}
-            mask="00/00/0000"
-            placeholder="00/00/0000"
-            value={formValues.cartaoVal || ""}
+            mask="00/00"
+            placeholder="00/00"
+            value={formValues.validade || ""}
             onChange={handleChange}
             className={`${styles.inputPadrao}`}
           />
         </div>
 
-        <div className="w-full">
+        {/* <div className="w-full">
           <label className="text-sm text-rentBlue">CVV</label>
-
-          <input
+          <IMaskInput
+            as={IMaskInput}
             type="text"
-            name="cartaoCvv"
-            value={formValues.cartaoCvv || ""}
+            name="cvvCartao"
+            value={formValues.cvvCartao || ""}
+            placeholder="000"
+            mask="000"
             onChange={handleChange}
             className={`${styles.inputPadrao}`}
           />
-        </div>
+        </div> */}
       </div>
 
       <div className="w-full">
@@ -163,16 +179,17 @@ const Form = ({ cartao }) => {
 
         <IMaskInput
           type="text"
-          name="cpf"
-          value={formValues.cpf || ""}
+          name="cpfTitular"
+          value={formValues.cpfTitular || ""}
           onChange={handleChange}
           as={IMaskInput}
           mask="000.000.000-00"
+          placeholder="Digite o seu CPF"
           className={`${styles.inputPadrao}`}
         />
       </div>
 
-      <div className="flex gap-2">
+      <div className="w-1/2 flex gap-2">
         <button
           type="submit"
           className={`${styles.botaoPadraoPrimary} ${styles.hoverPadraoPrimary}`}

@@ -2,19 +2,28 @@ import React, { useEffect, useRef, useState } from "react";
 import { Buscar, Footer, Header, Item } from "../components";
 import api, { getAllItem } from "../api";
 import { styles } from "../styles";
+import { ToastContainer, toast } from "react-toastify";
 
 const Home = () => {
   const [itemList, setItemList] = useState([]);
+  const [foto, setFoto] = useState();
 
-  const getItens = async () => {
-    try {
-      await getAllItem().then((res) => {
+  const getItens = () => {
+    // try {
+    console.log("helo");
+
+    getAllItem()
+      .then((res) => {
+        console.log("helo");
         setItemList(res.data);
+        // console.log(itemList);
+      })
+      .catch((error) => {
+        console.log(error);
       });
-    } 
-    catch (error) {
-      console.log(error);
-    }
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
 
   useEffect(() => {
@@ -23,6 +32,19 @@ const Home = () => {
 
   return (
     <>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+      <ToastContainer />
       <Header />
       <main className={`${styles.mainConfig} flex flex-col gap-5 sm:gap-10`}>
         <Buscar />
@@ -47,7 +69,6 @@ export const Carousel = ({ dataSource }) => {
 
   const handleLeftClick = (e) => {
     e.preventDefault();
-    console.log();
     carousel.current.scrollLeft -= carousel.current.offsetWidth;
   };
 

@@ -1,7 +1,14 @@
 import React, { useState } from "react";
 import { categorias, zonas } from "../constants";
 import { styles } from "../styles";
+
 import Slider from "@mui/material/Slider";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormControl from "@mui/material/FormControl";
+import FormLabel from "@mui/material/FormLabel";
+import { postPesquisarItem } from "../api";
 
 const marks = [
   {
@@ -22,7 +29,7 @@ const marks = [
   },
 ];
 
-const Filtro = () => {
+const Filtro = ({nome}) => {
   const [isChecked, setIsChecked] = useState(false);
   const [formValues, setFormValues] = useState({});
 
@@ -50,7 +57,7 @@ const Filtro = () => {
   const handleSubmit = () => {
     // e.preventDefault();
     console.log("submit", formValues);
-    // postItem(formValues)
+    postPesquisarItem(nome, formValues);
   };
 
   const valuetext = (value) => {
@@ -72,19 +79,20 @@ const Filtro = () => {
         <div className="">
           <h3 className="font-bold">Categoria:</h3>
           <div className="flex flex-wrap pt-5 gap-3 lg:flex-col">
-            {categorias.map((categoria) => (
-              <span
-                href={`#${categoria.id}`}
-                className="flex items-center gap-2 rounded-full px-5  py-2 text-xs border-[1px] bg-gray-300"
+            <FormControl>
+              <RadioGroup
+                name="categoria"
+                onChange={handleChange}
               >
-                <input
-                  type="checkbox"
-                  name={categoria.id}
-                  onChange={handleChange}
-                />
-                {categoria.title}
-              </span>
-            ))}
+                {categorias.map((categoria) => (
+                  <FormControlLabel
+                    value={categoria.value}
+                    control={<Radio />}
+                    label={categoria.title}
+                  />
+                ))}
+              </RadioGroup>
+            </FormControl>
           </div>
         </div>
 
@@ -104,12 +112,11 @@ const Filtro = () => {
                 color: "#FF724C",
                 height: 150,
               }}
-              name={"maxVal"}
+              name={"preco"}
               onChange={handleChange}
             />
           </div>
         </div>
-
       </form>
     </>
   );

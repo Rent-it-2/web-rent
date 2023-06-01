@@ -1,6 +1,7 @@
 import { styles } from "../styles";
 import { categorias } from "../constants";
 import { InputBuscar } from "./index";
+import { useNavigate } from "react-router-dom";
 
 function Buscar() {
   return (
@@ -18,13 +19,16 @@ function Buscar() {
 }
 
 function Categorias() {
+  const navigate = useNavigate();
   return (
     <>
       <div className="w-full flex flex-wrap justify-center gap-3 py-5 sm:p-10 sm:gap-5 ss:justify-around">
         {categorias.map((categoria) => (
           <button
+            key={categoria.id}
             href={`/filtros`}
             className={`${styles.glassEffect} text-xs p-1 rounded-full hover:text-secondary hover:border-secondary sm:py-2 sm:px-8 sm:text-base`}
+            // onClick={navigate("filtros")}
           >
             {categoria.title}
           </button>

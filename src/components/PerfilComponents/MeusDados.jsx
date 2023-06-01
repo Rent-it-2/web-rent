@@ -1,32 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { getFotoUserById, getUserLogged, patchFotoUserById, putUsuario } from "../../api";
+import React, { useContext, useEffect, useState } from "react";
+import { patchFotoUserById, postUserEndereco, putUsuario } from "../../api";
 import { styles } from "../../styles";
 import { IMaskInput } from "react-imask";
 import { Endereco, Modal } from "../index";
 import { Avatar } from "@mui/material";
+import { AuthContext } from "../../contexts/Auth";
 
 const MeusDados = () => {
+  const { user, foto } = useContext(AuthContext);
   const [openModal, setOpenModal] = useState(false);
-  const [user, setUser] = useState({});
   const [isPerfil, setIsPerfil] = useState(false);
-
-  const getUser = async () => {
-    setUser(await getUserLogged());
-  };
-
-  const abrirModal = (modalPerfil) => {
-    if (modal) {
-    }
-    setOpenModal(true);
-  };
-
-  useEffect(() => {
-    getUser();
-  }, []);
-
-  // const backImageUser = {
-  //   backgroundImage: `url(${user.foto})`,
-  // };
 
   return (
     <>
@@ -46,7 +29,7 @@ const MeusDados = () => {
             <h3 className="font-bold">Foto de Perfil</h3>
             <Avatar
               alt={`${user.nome}`}
-              src={`${getFotoUserById(user.id)}`}
+              src={`${foto}`}
               className="min-w-[120px] min-h-[120px] border-[3px] border-primary"
             />
           </div>
@@ -80,7 +63,7 @@ const MeusDados = () => {
         <Form user={user} />
       </div>
 
-      {/* <div className={`${styles.cardWhite} flex flex-col gap-5`}>
+      <div className={`${styles.cardWhite} flex flex-col gap-5`}>
         <Endereco user={user} showEdit={true} />
 
         <button
@@ -94,7 +77,7 @@ const MeusDados = () => {
           <i className="mdi mdi-plus text-[22px] "></i>
           <p>Adicionar Endereço</p>
         </button>
-      </div> */}
+      </div>
 
       {!isPerfil ? (
         <Modal
@@ -239,12 +222,8 @@ const FormModal = ({ user }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("submit", formValues);
-    // postItem(formValues)
+    postUserEndereco(formValues);
   };
-
-  // useEffect(() => {
-  //   setFormValues(user);
-  // }, [user]);
 
   return (
     <form className="w-96 flex flex-wrap gap-2" onSubmit={handleSubmit}>
@@ -253,9 +232,30 @@ const FormModal = ({ user }) => {
         <IMaskInput
           type="text"
           name="cep"
-          mask="00000-000"
-          placeholder="00000-000"
+          // mask="00000-000"
+          mask="00000000"
+          // placeholder="00000-000"
           required
+          onChange={handleChange}
+          className={`${styles.inputPadrao}`}
+        />
+      </div>
+
+      <div className="w-full">
+        <label className="text-sm text-rentBlue">Cidade</label>
+        <input
+          type="text"
+          name="cidade"
+          onChange={handleChange}
+          className={`${styles.inputPadrao}`}
+        />
+      </div>
+
+      <div className="w-full">
+        <label className="text-sm text-rentBlue">Bairro</label>
+        <input
+          type="text"
+          name="bairro"
           onChange={handleChange}
           className={`${styles.inputPadrao}`}
         />
@@ -274,9 +274,10 @@ const FormModal = ({ user }) => {
 
         <div className="w-1/3">
           <label className="text-sm text-rentBlue">Número</label>
-          <input
+          <IMaskInput
             type="text"
-            name="numLogradouro"
+            name="numero"
+            mask="00000"
             onChange={handleChange}
             className={`${styles.inputPadrao}`}
           />
@@ -299,8 +300,7 @@ const FormModal = ({ user }) => {
           type="submit"
           className={`w-full ${styles.botaoPadraoPrimary} ${styles.hoverPadraoPrimary}`}
         >
-          <i className="mdi mdi-plus text-[20px]" />
-          Adicionar Endereço
+          Salvar
         </button>
       </div>
     </form>
@@ -343,8 +343,6 @@ const FormModalPerfil = ({ user }) => {
   return (
     <form className="w-96 flex flex-wrap gap-2" onSubmit={handleSubmit}>
       <div className="w-full">
-        {/* <div className=""> */}
-        {/* <label className="text-sm text-rentBlue">Foto do item</label> */}
         <div className="flex rounded-md bg-gray-300 items-center justify-center py-2 px-10">
           <label htmlFor="foto">
             <i className="mdi mdi-plus text-[50px] text-gray-400 cursor-pointer"></i>
@@ -367,7 +365,6 @@ const FormModalPerfil = ({ user }) => {
           Alterar Foto
         </button>
       </div>
-      {/* </div> */}
     </form>
   );
 };

@@ -1,20 +1,22 @@
 import React, { useState, createContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { api, createSession } from "../api";
+import { api, createSession, getFotoUserById } from "../api";
+import { toast } from "react-toastify";
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
+  const [foto, setFoto] = useState();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const recoveredUser = sessionStorage.getItem("user");
+    const recoveredUser = JSON.parse(sessionStorage.getItem("user"));
     if (recoveredUser) {
-      setUser(JSON.parse(recoveredUser));
+      setUser(recoveredUser);
+      setFoto(getFotoUserById(recoveredUser.userId));
     }
-
     setLoading(false);
   }, []);
 
@@ -25,9 +27,11 @@ export const AuthProvider = ({ children }) => {
 
     api.defaults.headers.Authorization = `Bearer ${token}`;
     sessionStorage.setItem("user", JSON.stringify(loggedUser));
+    // sessionStorage.setItem("userFoto", getFotoUserById(loggedUser.userId));
     sessionStorage.setItem("token", JSON.stringify(token));
 
     setUser(loggedUser);
+    // setFoto(getFotoUserById(loggedUser.userId));
     navigate("");
   };
 
@@ -40,7 +44,7 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ authenticated: !!user, user, loading, login, logout }}
+      value={{ authenticated: !!user, user, foto, loading, login, logout }}
     >
       {children}
     </AuthContext.Provider>

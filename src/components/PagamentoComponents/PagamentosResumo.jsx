@@ -1,6 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 
-const PagamentosResumo = ({ data, item, user }) => {
+const PagamentosResumo = ({ data }) => {
+
+  const { item, setItem } = useState();
+  const { user, setUser } = useState();
+
+  const gets = () => {
+    getItemById(data.itemId).then((res) => {
+      setItem(res.data);
+    });
+  }
+
   const calculaPeriodo = () => {
     console.log(data);
     const startDate = new Date(data.dtIni);
@@ -28,14 +38,14 @@ const PagamentosResumo = ({ data, item, user }) => {
         <i className="mdi mdi-tag-text text-[45px] px-4" />
 
         <div className="flex flex-col gap-3">
-          <div className="flex-col justify-start">
+          {/* <div className="flex-col justify-start">
             <p className="text-sm font-semibold">{item.nome}</p>
             <p className="text-sm">{item.categoria}</p>
             <div className="flex items-end">
               <h2 className="text-sm">R$ {item.valorDia} </h2>
               <span className="text-xs">/dia</span>
             </div>
-          </div>
+          </div> */}
 
           <div className="">
             <p className="text-sm font-semibold">Devolução Prevista:</p>

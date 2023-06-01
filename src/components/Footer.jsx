@@ -3,7 +3,6 @@ import { footerLinksAjuda, footerLinksLcd, footerLinksLct } from '../constants';
 
 
 const Footer = () => {
-    const [active, setActive] = useState("");
     return (
         <section className='w-full'>
 
@@ -61,13 +60,16 @@ const FooterDiv3 = () => {
         <div className="gap-5 flex flex-col justify-between text-rentBlue sm:w-2/5">
 
             <ul className='w-full list-none flex-col justify-between flex'>
-                <h2 className="font-extrabold text-sm"><a href=""><a href="https://wa.me/5511976408492?text=Ol%C3%A1%21+PRECISO+DE+AJUDA%21">Ajuda</a></a></h2>
+                <h2 className="font-extrabold text-sm">
+                    <a href="https://wa.me/5511976408492?text=Ol%C3%A1%21+PRECISO+DE+AJUDA%21">Ajuda</a>
+                </h2>
                 {footerLinksAjuda.map((nav) => (
                     <li
+                        key={nav.id}
                         className={`text-gray-400 hover:text-secondary text-[18px] font-medium `}
                         onClick={() => setActive(nav.title)}
                     >
-                        <a target="_blank"   href={`${nav.link}`} className="text-xs min-w-fit font-light" >{nav.title}</a>
+                        <a target="_blank" key={nav.id}  href={`${nav.link}`} className="text-xs min-w-fit font-light" >{nav.title}</a>
                     </li>
                 ))}
             </ul>
