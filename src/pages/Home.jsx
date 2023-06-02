@@ -9,25 +9,19 @@ const Home = () => {
   const [foto, setFoto] = useState();
 
   const getItens = () => {
-    // try {
-    console.log("helo");
-
-    getAllItem()
-      .then((res) => {
-        console.log("helo");
+    try {
+      getAllItem().then((res) => {
         setItemList(res.data);
-        // console.log(itemList);
-      })
-      .catch((error) => {
-        console.log(error);
       });
-    // } catch (error) {
-    //   console.log(error);
-    // }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
-    getItens();
+    if(!itemList){
+      getItens();
+    }
   }, []);
 
   return (

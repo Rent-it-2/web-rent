@@ -12,20 +12,20 @@ import { styles } from "../styles";
 import { FilterContext } from "../contexts/FilterContext";
 
 const Filters = () => {
-  const { itemNome, itemCategoria, itemList, buscar } =
-    useContext(FilterContext);
+  const { itemNome, itemCategoria, itemList, buscar } = useContext(FilterContext);
 
   return (
     <>
       <Header />
       <Categorias />
       <main className={`${styles.mainConfig}`}>
-
         <div className={`${styles.cardWhite} mb-10`}>
           <h2 className="text-xl font-bold">
-            {/* <i className="mdi mdi-filter text-[20px]" /> */}
-            Resultados para: {itemNome}
+            <i className="mdi mdi-filter text-[20px]" />
+            Resultados para:
+            <span className="font-normal ml-2">{itemNome}</span>
           </h2>
+          
         </div>
 
         <div className="w-full min-h-full flex flex-wrap">

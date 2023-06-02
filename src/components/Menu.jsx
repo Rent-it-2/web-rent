@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import { getFotoUserById, getUserById } from "../api";
 import { Link } from "react-router-dom";
-import { paginas } from "../constants";
+import { foto, paginas } from "../constants";
 import { AuthContext } from "../contexts/Auth";
 import { Avatar } from "@mui/material";
 
 const Menu = () => {
   const [toggle, setToggle] = useState(false);
-  const { logout, user, foto } = useContext(AuthContext);
+  const { logout, user } = useContext(AuthContext);
 
   const handleLogout = () => {
     logout();

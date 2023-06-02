@@ -1,4 +1,7 @@
 export const UsuarioLogado = JSON.parse(sessionStorage.getItem("user"));
+export const itemList = JSON.parse(sessionStorage.getItem("userItems"));
+export const itemFavoritos = JSON.parse(sessionStorage.getItem("favoritos"));
+export const foto = sessionStorage.getItem("userFoto");
 
 export const footerLinksLct = [
   {

@@ -33,9 +33,8 @@ export const ItemProvider = ({ children }) => {
   const getItem = async () => {
     try {
       const resposta = await getItemById(itemId).then((res) => {
-        setItem(res.data);
-        console.log("itemSelecionado", itemId, res.data);
         sessionStorage.setItem("item", JSON.stringify(res.data));
+        setItem(res.data);
         setUserId(res.data.idUsuario);
         setFoto(getFotoItemById(res.data.id));
       });
@@ -49,6 +48,7 @@ export const ItemProvider = ({ children }) => {
     const recoveredItem = JSON.parse(sessionStorage.getItem("item"));
     if (recoveredItem) {
       setItem(recoveredItem);
+      setFoto(getFotoItemById(recoveredItem.id));
     }
     setLink();
   }, []);

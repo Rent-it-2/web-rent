@@ -1,30 +1,33 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { styles } from "../../styles";
 import { getUserCartoes, postUserCartoes } from "../../api";
 import Modal from "../Modal";
 import CardCartao from "../CardCartao";
 import { IMaskInput } from "react-imask";
+import { AuthContext } from "../../contexts/Auth";
 
 const Cartoes = () => {
   const [openModal, setOpenModal] = useState(false);
-  const [cartoes, setCartoes] = useState([]);
+  const { cartoes } = useContext(AuthContext);
 
-  const getCartoes = async () => {
-    try {
-      const resposta = await getUserCartoes().then((res) => {
-        console.log(res.data);
-        setCartoes(res.data);
-      });
-      return resposta;
-    } catch (error) {
-      console.log(error);
-      return null;
-    }
-  };
+  // const [cartoes, setCartoes] = useState([]);
 
-  useEffect(() => {
-    getCartoes();
-  }, []);
+  // const getCartoes = async () => {
+  //   try {
+  //     const resposta = await getUserCartoes().then((res) => {
+  //       console.log(res.data);
+  //       setCartoes(res.data);
+  //     });
+  //     return resposta;
+  //   } catch (error) {
+  //     console.log(error);
+  //     return null;
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   getCartoes();
+  // }, []);
 
   return (
     <>

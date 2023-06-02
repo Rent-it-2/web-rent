@@ -13,7 +13,6 @@ const Item = ({
 
   const backImage = {
     backgroundImage: `url(${getFotoItemById(id)})`,
-    // backgroundImage: `url(${foto})`,
   };
 
   const visualizarItem = () => {
@@ -70,7 +69,7 @@ const Item = ({
       </div>
 
       {/* {!isFavorito && ( */}
-        <div className="-translate-y-[19rem] translate-x-[7rem]">
+        {/* <div className="-translate-y-[19rem] translate-x-[7rem]">
           <Checkbox
             icon={<FavoriteBorder />}
             checkedIcon={<Favorite />}
@@ -84,7 +83,7 @@ const Item = ({
               "& .MuiSvgIcon-root": { fontSize: 30 },
             }}
           />
-        </div>
+        </div> */}
       {/* )} */}
     </div>
   );

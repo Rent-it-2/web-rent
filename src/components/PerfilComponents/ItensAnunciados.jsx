@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { styles } from "../../styles";
 import {
   deleteItem,
@@ -11,41 +11,45 @@ import {
 } from "../../api";
 import { Modal } from "../index";
 import CurrencyInput from "react-currency-input-field";
-import { UsuarioLogado, categorias } from "../../constants";
+import { UsuarioLogado, categorias, itemList } from "../../constants";
+import { AuthContext } from "../../contexts/Auth";
 
 const ItensAnunciados = () => {
+  // const { itemList } = useContext(AuthContext);
   const [openModal, setOpenModal] = useState(false);
-  const [itemList, setItem] = useState([
-    {
-      id: 0,
-      nome: "string",
-      descricao: "string",
-      valorDia: 0,
-      tempoLocacao: 0,
-      disponivel: 0,
-      dtCadastro: "2023-05-22T17:03:40.878Z",
-      categoria: {
-        id: 0,
-        nomeCategoria: "string",
-      },
-      usuario: {
-        id: 0,
-        nome: "string",
-        apelido: "string",
-        email: "string",
-        password: "string",
-        telefone: "string",
-      },
-    },
-  ]);
+  // itemList
 
-  const getItem = async () => {
-    setItem(await getUserLoggedItems());
-  };
+  // const [itemList, setItem] = useState([
+  //   {
+  //     id: 0,
+  //     nome: "string",
+  //     descricao: "string",
+  //     valorDia: 0,
+  //     tempoLocacao: 0,
+  //     disponivel: 0,
+  //     dtCadastro: "2023-05-22T17:03:40.878Z",
+  //     categoria: {
+  //       id: 0,
+  //       nomeCategoria: "string",
+  //     },
+  //     usuario: {
+  //       id: 0,
+  //       nome: "string",
+  //       apelido: "string",
+  //       email: "string",
+  //       password: "string",
+  //       telefone: "string",
+  //     },
+  //   },
+  // ]);
 
-  useEffect(() => {
-    getItem();
-  }, []);
+  // const getItem = async () => {
+  //   setItem(await getUserLoggedItems());
+  // };
+
+  // useEffect(() => {
+  //   getItem();
+  // }, []);
 
   return (
     <>

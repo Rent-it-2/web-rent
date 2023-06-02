@@ -1,23 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import api, { getUserItensFavoritos } from "../../api";
 import {Item} from "../index";
+import { AuthContext } from "../../contexts/Auth";
+import { itemFavoritos } from "../../constants";
 
 const Favoritos = () => {
-  const [itemList, setItemList] = useState([]);
+  // const { itemFavoritos } = useContext(AuthContext);
+  // const [itemFavoritos, setitemFavoritos] = useState([]);
 
-  const getFavoritos = async () =>{
-    try {
-      await getUserItensFavoritos().then((res) => {
-        setItemList(res.data);
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  // const getFavoritos = async () =>{
+  //   try {
+  //     await getUserItensFavoritos().then((res) => {
+  //       setitemFavoritos(res.data);
+  //     });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
 
-  useEffect(() => {
-    getFavoritos();
-  }, []);
+  // useEffect(() => {
+  //   getFavoritos();
+  // }, []);
 
   return (
     <>
@@ -30,7 +33,7 @@ const Favoritos = () => {
       </div>
 
       <div className="w-full flex flex-wrap gap-5 sm:gap-x-12">
-        {itemList?.map((item) => (
+        {itemFavoritos?.map((item) => (
           <Item item={item} />
         ))}
       </div>

@@ -5,9 +5,10 @@ import { IMaskInput } from "react-imask";
 import { Endereco, Modal } from "../index";
 import { Avatar } from "@mui/material";
 import { AuthContext } from "../../contexts/Auth";
+import { foto } from "../../constants";
 
 const MeusDados = () => {
-  const { user, foto } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const [openModal, setOpenModal] = useState(false);
   const [isPerfil, setIsPerfil] = useState(false);
 
@@ -332,8 +333,8 @@ const FormModalPerfil = ({ user }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const file = formValues.foto;
-    console.log("submit", file);
-    patchFotoUserById(user.id, file);
+    console.log("submit", user.userId);
+    patchFotoUserById(user.userId, file);
   };
 
   useEffect(() => {
