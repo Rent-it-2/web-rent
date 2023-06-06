@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { IMaskInput } from "react-imask";
 import { styles } from "../../styles";
 import { Endereco } from "../index";
+import { ItemContext } from "../../contexts/ItemContext";
+import { AuthContext } from "../../contexts/Auth";
 
-const PagamentosInfos = ({ data, userInfos, updateFieldHandler }) => {
+const PagamentosInfos = ({ data, updateFieldHandler }) => {
+  // const { itemId, item, foto, linkWhats, getItem } = useContext(ItemContext);
+  // const { endereco } = useContext(AuthContext);
 
   
   return (
@@ -43,7 +47,7 @@ const PagamentosInfos = ({ data, userInfos, updateFieldHandler }) => {
       <div className="w-full flex items-center gap-x-10">
         <div className="w-full flex flex-col justify-start gap-y-5 gap-x-7 mt-3">
           {/* {itemList?.map((item) => ( */}
-          <Endereco user={userInfos} showEdit={false}>
+          {/* <Endereco user={userInfos} showEdit={false}>
             <input
               type="radio"
               name="enderecoId"
@@ -52,7 +56,7 @@ const PagamentosInfos = ({ data, userInfos, updateFieldHandler }) => {
               onChange={(e) => updateFieldHandler("enderecoId", e.target.value)}
               required
             />
-          </Endereco>
+          </Endereco> */}
           {/* ))} */}
         </div>
       </div>

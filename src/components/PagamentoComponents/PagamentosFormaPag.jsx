@@ -1,32 +1,37 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import CardCartao from "../CardCartao";
 import { styles } from "../../styles";
 import { LocalizationProvider, MobileDatePicker } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
 import { getUserCartoes } from "../../api";
+import { ItemContext } from "../../contexts/ItemContext";
+import { AuthContext } from "../../contexts/Auth";
 
-const PagamentosFormaPag = ({ data, userInfos, updateFieldHandler }) => {
-  const [selectedDateIni, setSelectedDateIni] = useState(new Date());
-  const [selectedDateFim, setSelectedDateFim] = useState(new Date());
-  const [cartoes, setCartoes] = useState([]);
+const PagamentosFormaPag = ({ data, updateFieldHandler }) => {
+  // const [selectedDateIni, setSelectedDateIni] = useState(new Date());
+  // const [selectedDateFim, setSelectedDateFim] = useState(new Date());
+  // const [cartoes, setCartoes] = useState([]);
+  // const { itemId, item, foto, linkWhats, getItem } = useContext(ItemContext);
+  const { cartoes } = useContext(AuthContext);
 
-  const getCartoes = async () => {
-    try {
-      const resposta = await getUserCartoes().then((res) => {
-        console.log(res.data);
-        setCartoes(res.data);
-      });
-      return resposta;
-    } catch (error) {
-      console.log(error);
-      return null;
-    }
-  };
 
-  useEffect(() => {
-    getCartoes();
-  }, []);
+  // const getCartoes = async () => {
+  //   try {
+  //     const resposta = await getUserCartoes().then((res) => {
+  //       console.log(res.data);
+  //       setCartoes(res.data);
+  //     });
+  //     return resposta;
+  //   } catch (error) {
+  //     console.log(error);
+  //     return null;
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   getCartoes();
+  // }, []);
 
   const dateFormatAux = (date) => {
     var d = new Date(date),

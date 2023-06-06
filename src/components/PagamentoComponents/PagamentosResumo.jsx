@@ -1,15 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { getUserCartoesById } from "../../api";
+import { ItemContext } from "../../contexts/ItemContext";
+import { AuthContext } from "../../contexts/Auth";
 
 const PagamentosResumo = ({ data }) => {
-
-  const { item, setItem } = useState();
-  const { user, setUser } = useState();
-
-  const gets = () => {
-    getItemById(data.itemId).then((res) => {
-      setItem(res.data);
-    });
-  }
+  const [cartao, setCartao] = useState();
+  const { item, itemId } = useContext(ItemContext);
+  const { userId } = useContext(AuthContext);
 
   const calculaPeriodo = () => {
     console.log(data);
@@ -20,9 +17,22 @@ const PagamentosResumo = ({ data }) => {
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
     console.log(diffDays);
-
     return diffDays;
   };
+
+  const calculaTotal = () => {
+    return item.valorDia * calculaPeriodo();
+  };
+
+  useEffect(() => {
+    console.log("q isso mona?");
+    data.itemId = itemId;
+    data.userId = userId;
+    getUserCartoesById(data.cartaoId).then((res) => {
+      console.log("cartao", res.data);
+      setCartao(res.data);
+    });
+  }, []);
 
   return (
     <div className="flex flex-col gap-5">
@@ -38,14 +48,14 @@ const PagamentosResumo = ({ data }) => {
         <i className="mdi mdi-tag-text text-[45px] px-4" />
 
         <div className="flex flex-col gap-3">
-          {/* <div className="flex-col justify-start">
+          <div className="flex-col justify-start">
             <p className="text-sm font-semibold">{item.nome}</p>
             <p className="text-sm">{item.categoria}</p>
             <div className="flex items-end">
               <h2 className="text-sm">R$ {item.valorDia} </h2>
               <span className="text-xs">/dia</span>
             </div>
-          </div> */}
+          </div>
 
           <div className="">
             <p className="text-sm font-semibold">Devolução Prevista:</p>
@@ -67,7 +77,7 @@ const PagamentosResumo = ({ data }) => {
         <i className="mdi mdi-credit-card text-[45px] px-4" />
 
         <div className="flex flex-col gap-3">
-          <p className="text-sm font-semibold">Mastercard {user.cartaoNum}</p>
+          {/* <p className="text-sm font-semibold">{cartao.numCartao}</p> */}
           <div className="flex-col justify-start">
             <p className="text-sm">
               Crédito (O pagamento será cobrado recorreramente se o produto não
@@ -87,7 +97,7 @@ const PagamentosResumo = ({ data }) => {
       >
         <i className="mdi mdi-home text-[45px] px-4" />
 
-        <div className="flex flex-col gap-3">
+        {/* <div className="flex flex-col gap-3">
           <p className="text-sm font-semibold">
             {user.enderecoRua}, {user.enderecoNum}
           </p>
@@ -98,7 +108,7 @@ const PagamentosResumo = ({ data }) => {
               <p>CEP: {user.enderecoCep}</p>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
 
       <h1 className="text-rentBlue font-semibold font-poppins">Total</h1>
@@ -128,7 +138,7 @@ const PagamentosResumo = ({ data }) => {
             <p className="text-sm">{calculaPeriodo()} dias</p>
             <div className="flex items-end">
               <h2 className="text-2xl text-primary font-bold">
-                R$ {item.valorDia}{" "}
+                R$ {calculaTotal()}{" "}
               </h2>
             </div>
           </div>

@@ -1,11 +1,13 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { getFotoItemById, getItemById } from "../api";
+import { getFotoItemById, getFotoUserById, getItemById, getUserById } from "../api";
 
 export const ItemContext = createContext();
 
 export const ItemProvider = ({ children }) => {
   const [itemId, setItemId] = useState();
   const [userId, setUserId] = useState();
+  const [user, setUser] = useState({});
+  const [userFoto, setUserFoto] = useState({});
   const [linkWhats, setLinkWhats] = useState({});
   const [foto, setFoto] = useState();
   const [item, setItem] = useState({
@@ -44,18 +46,32 @@ export const ItemProvider = ({ children }) => {
     }
   };
 
+  const getUser = async () => {
+    try {
+      await getUserById(userId).then((res) => {
+        setUser(res.data);
+        setUserFoto(getFotoUserById(userId));
+        console.log(userFoto);
+      });
+      return resposta;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     const recoveredItem = JSON.parse(sessionStorage.getItem("item"));
     if (recoveredItem) {
       setItem(recoveredItem);
       setFoto(getFotoItemById(recoveredItem.id));
+      getUser();
     }
     setLink();
   }, []);
 
   return (
     <ItemContext.Provider
-      value={{ setItemId, getItem, itemId, item, foto, linkWhats, setUserId, userId }}
+      value={{ setItemId, getItem, itemId, item, foto, linkWhats, user, userFoto, setUserId, userId }}
     >
       {children}
     </ItemContext.Provider>

@@ -3,54 +3,17 @@ import { styles } from "../../styles";
 import {
   deleteItem,
   getFotoItemById,
-  getItemById,
-  getUserLoggedItems,
   patchFotoItemById,
   postUserItem,
   putItem,
 } from "../../api";
-import { Modal } from "../index";
+import { ComboBox, Modal } from "../index";
 import CurrencyInput from "react-currency-input-field";
 import { UsuarioLogado, categorias, itemList } from "../../constants";
-import { AuthContext } from "../../contexts/Auth";
 
 const ItensAnunciados = () => {
-  // const { itemList } = useContext(AuthContext);
   const [openModal, setOpenModal] = useState(false);
-  // itemList
-
-  // const [itemList, setItem] = useState([
-  //   {
-  //     id: 0,
-  //     nome: "string",
-  //     descricao: "string",
-  //     valorDia: 0,
-  //     tempoLocacao: 0,
-  //     disponivel: 0,
-  //     dtCadastro: "2023-05-22T17:03:40.878Z",
-  //     categoria: {
-  //       id: 0,
-  //       nomeCategoria: "string",
-  //     },
-  //     usuario: {
-  //       id: 0,
-  //       nome: "string",
-  //       apelido: "string",
-  //       email: "string",
-  //       password: "string",
-  //       telefone: "string",
-  //     },
-  //   },
-  // ]);
-
-  // const getItem = async () => {
-  //   setItem(await getUserLoggedItems());
-  // };
-
-  // useEffect(() => {
-  //   getItem();
-  // }, []);
-
+ 
   return (
     <>
       <div>
@@ -168,6 +131,7 @@ const ItemCard = ({ item }) => {
 const Form = ({ item }) => {
   const [isChecked, setIsChecked] = useState(0);
   const [formValues, setFormValues] = useState(item || {});
+  const [selectedCategory, setSelectedCategory] = useState("");
 
   const handleChange = (event) => {
     const { name, type } = event.target;
@@ -181,6 +145,13 @@ const Form = ({ item }) => {
         value = 1;
       }
       value = 0;
+    } else if (name === "categoria") {
+      setSelectedCategory(event.target.value);
+      const selectedCategoryObject = categorias.find(
+        (category) => category.title === selectedCategory
+      );
+      value = selectedCategoryObject.value;
+      console.log(value);
     } else {
       value = event.target.value;
     }
@@ -202,10 +173,12 @@ const Form = ({ item }) => {
     }
   };
 
-  const deletarItem = (e) =>{
-    e.preventDefault();
-    deleteItem(item.id)
-  }
+  const deletarItem = () => {
+    // e.preventDefault();
+    sessionStorage.removeItem("userItems");
+    deleteItem(item.id);
+    window.location.reload(true);
+  };
 
   useEffect(() => {
     if (item) {
@@ -213,15 +186,8 @@ const Form = ({ item }) => {
     }
   }, [item]);
 
-  // const categoriaSelecionada = categorias.find(
-  //   (categoria) => categoria.title === item.categoria
-  // );
-
-  // const valorCategoria = categoriaSelecionada ? categoriaSelecionada.value : "";
-
   return (
     <form className="w-96 flex flex-wrap gap-2" onSubmit={handleSubmit}>
-      
       <div className="w-full">
         <label className="text-sm text-rentBlue">Nome</label>
         <div className="flex rounded-md bg-gray-300 text-sm items-center p-2">
@@ -255,18 +221,6 @@ const Form = ({ item }) => {
         <div className="w-1/2">
           <label className="text-sm text-rentBlue">Categoria</label>
           <div className="flex rounded-md bg-gray-300 text-sm items-center p-2">
-            <select
-              name="categoria"
-              value={formValues.categoria|| ""}
-              onChange={handleChange}
-              className={`w-full appearance-none outline-none bg-transparent`}
-            >
-              {categorias.map((option) => (
-                <option key={option.id} value={option.value}>
-                  {option.title}
-                </option>
-              ))}
-            </select>
             {/* <select
               name="categoria"
               value={valorCategoria || ""}
@@ -275,10 +229,23 @@ const Form = ({ item }) => {
             >
               {categorias.map((option) => (
                 <option key={option.id} value={option.value}>
-                  {option.title}
+                  {displaySelecionada}
                 </option>
               ))}
             </select> */}
+            <select
+              name="categoria"
+              value={selectedCategory}
+              onChange={handleChange}
+              className={`w-full appearance-none outline-none bg-transparent`}
+            >
+              {categorias.map((category) => (
+                <option key={category.id} value={category.title}>
+                  {category.title}
+                </option>
+              ))}
+            </select>
+
             <i className="mdi mdi-menu-down text-[25px] pr-1 text-gray-500" />
           </div>
         </div>

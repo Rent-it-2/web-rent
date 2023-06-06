@@ -10,57 +10,31 @@ import {
 import { styles } from "../styles";
 import { Link, useNavigate } from "react-router-dom";
 import { Avatar, Rating } from "@mui/material";
+import { categorias } from "../constants";
 
 const ItemDetalhes = () => {
   const navigate = useNavigate();
-  const { itemId, item, foto, linkWhats, getItem } = useContext(ItemContext);
-  // const [foto, setFoto] = useState();
-
-  // const [item, setItem] = useState({
-  //   id: 0,
-  //   nomeItem: "string",
-  //   categoria: "string",
-  //   disponivel: 0,
-  //   descricao: "string",
-  //   valorDia: 0,
-  //   idUsuario: 0,
-  //   nomeUsuario: "string",
-  //   apelidoUsario: "string",
-  //   email: "string",
-  //   telefone: "string",
-  // });
-
-  // const [linkWhats, setLinkWhats] = useState({});
-
-  // const getItem = async () => {
-  //   try {
-  //     const resposta = await getItemById(itemId).then((res) => {
-  //       setItem(res.data);
-  //       console.log("itemSelecionado", itemId, res.data);
-  //       sessionStorage.setItem("item", JSON.stringify(res.data));
-  //       setUserId(res.data.idUsuario);
-  //       setFoto(getFotoItemById(res.data.id));
-  //     });
-  //     return resposta;
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-  // function setLink() {
-  //   const linkBase = "https://wa.me/55";
-  //   const msg =
-  //     "?text=Ol%C3%A1%21+Estou+entrando+em+contato+por+conta+do+seu+anuncio%21";
-  //   const numWhats = item.telefone;
-  //   setLinkWhats(linkBase + numWhats + msg);
-  // }
-
+  const { itemId, item, foto, linkWhats, getItem, userFoto } = useContext(ItemContext);
+  const [selectedCategory, setSelectedCategory] = useState();
+  
   const favoritarItem = async () => {
     await postFavoritarItem(itemId);
   };
 
   const backImage = {
     backgroundImage: `url(${foto})`,
+  };
+
+  const categoria = () => {
+    const selectedCategoryObject = categorias.find(
+      (categoria) => categoria.value === item.categoria
+    );
+  
+    if (selectedCategoryObject) {
+      return selectedCategoryObject.title;
+    }
+  
+    return "Categoria não encontrada";
   };
 
   useEffect(() => {
@@ -100,14 +74,14 @@ const ItemDetalhes = () => {
           >
             <div>
               <h1 className="text-2xl font-bold">{item.nomeItem}</h1>
-              <p className="text-lg text-gray-400">{item.categoria}</p>
+              <p className="text-lg text-gray-400">{categoria()}</p>
             </div>
 
             <div className="flex">
               <Link to={`/locador/${item.idUsuario}`}>
                 <Avatar
                   alt={`${item.apelidoUsario}`}
-                  src={`${getFotoUserById(item.idUsuario)}`}
+                  src={`${userFoto}`}
                   sx={{ width: 56, height: 56 }}
                 />
               </Link>

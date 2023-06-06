@@ -4,6 +4,7 @@ import { ItemContext } from "../contexts/ItemContext";
 import { getFotoItemById, postFavoritarItem, putItem } from "../api";
 import Checkbox from "@mui/material/Checkbox";
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
+import { categorias } from "../constants";
 
 const Item = ({
   item: { id, nome, categoria, valorDia },
@@ -19,6 +20,19 @@ const Item = ({
     console.log(id);
     setItemId(id);
     navigate(`/item/${id}`);
+  };
+
+  const converteCategoria = () => {
+    console.log(categoria);
+    const selectedCategoryObject = categorias.find(
+      (category) => category.value === categoria
+    );
+  
+    if (selectedCategoryObject) {
+      return selectedCategoryObject.title;
+    }
+  
+    return "Categoria não encontrada";
   };
 
   const favoritarItem = async () => {
@@ -40,7 +54,7 @@ const Item = ({
           <div className="flex text-sm justify-between sm:text-base">
             <h3>{nome}</h3>
           </div>
-          <h4 className="text-xs text-gray-400 sm:text-sm">{categoria}</h4>
+          <h4 className="text-xs text-gray-400 sm:text-sm">{converteCategoria()}</h4>
         </div>
 
         <div className="flex h-1/3 py-2 items-end justify-between hover:drop-shadow-xl">

@@ -5,7 +5,7 @@ import { IMaskInput } from "react-imask";
 import { Endereco, Modal } from "../index";
 import { Avatar } from "@mui/material";
 import { AuthContext } from "../../contexts/Auth";
-import { foto } from "../../constants";
+import { endereco, foto } from "../../constants";
 
 const MeusDados = () => {
   const { user } = useContext(AuthContext);
@@ -65,8 +65,7 @@ const MeusDados = () => {
       </div>
 
       <div className={`${styles.cardWhite} flex flex-col gap-5`}>
-        <Endereco user={user} showEdit={true} />
-
+        {endereco && <Endereco showEdit={true} />}
         <button
           className={`w-full flex items-center gap-5 rounded-md p-1 border-[0.1px] 
         border-dashed border-gray-300 text-gray-500 
@@ -235,7 +234,6 @@ const FormModal = ({ user }) => {
           name="cep"
           // mask="00000-000"
           mask="00000000"
-          // placeholder="00000-000"
           required
           onChange={handleChange}
           className={`${styles.inputPadrao}`}
@@ -301,7 +299,7 @@ const FormModal = ({ user }) => {
           type="submit"
           className={`w-full ${styles.botaoPadraoPrimary} ${styles.hoverPadraoPrimary}`}
         >
-          Salvar
+          Adicionar
         </button>
       </div>
     </form>
@@ -314,16 +312,7 @@ const FormModalPerfil = ({ user }) => {
   const handleChange = (event) => {
     const { name, type } = event.target;
     let value = null;
-
-    // if (type === "file") {
-      value = event.target.files[0];
-      // } else if (type === "checkbox") {
-      //   setIsChecked(event.target.checked);
-      //   value = event.target.checked;
-    // } else {
-    //   value = event.target.value;
-    // }
-
+    value = event.target.files[0];
     setFormValues((prevValues) => ({
       ...prevValues,
       [name]: value,

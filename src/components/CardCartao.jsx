@@ -110,6 +110,7 @@ const Form = ({ cartao }) => {
     e.preventDefault();
     console.log("submit", formValues);
     patchUserCartoes(cartao.id, formValues);
+    
   };
 
   useEffect(() => {
@@ -180,7 +181,7 @@ const Form = ({ cartao }) => {
         <IMaskInput
           type="text"
           name="cpfTitular"
-          value={formValues.cpfTitular || ""}
+          value={formValues.cpf || ""}
           onChange={handleChange}
           as={IMaskInput}
           mask="000.000.000-00"

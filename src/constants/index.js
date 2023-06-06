@@ -1,6 +1,8 @@
 export const UsuarioLogado = JSON.parse(sessionStorage.getItem("user"));
 export const itemList = JSON.parse(sessionStorage.getItem("userItems"));
 export const itemFavoritos = JSON.parse(sessionStorage.getItem("favoritos"));
+export const cartoes = JSON.parse(sessionStorage.getItem("userCartoes"));
+export const endereco = JSON.parse(sessionStorage.getItem("endereco"));
 export const foto = sessionStorage.getItem("userFoto");
 
 export const footerLinksLct = [
@@ -61,27 +63,27 @@ export const categorias = [
   {
     id: "1",
     title: "Vestuário",
-    value: "1",
+    value: 1,  
   },
   {
     id: "2",
     title: "Ferramentas",
-    value: "2",
+    value: 2,
   },
   {
     id: "3",
     title: "Eletrônicos",
-    value: "3",
+    value: 3,
   },
   {
     id: "4",
     title: "Entretenimento",
-    value: "4",
+    value: 4,
   },
   {
     id: "5",
     title: "Utensílios",
-    value: "5",
+    value: 5,
   },
 ];
 

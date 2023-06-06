@@ -10,6 +10,7 @@ import Sidebar from "./Sidebar";
 import Modal from "./Modal";
 import Endereco from "./Endereco";
 import Stepper from "./Stepper";
+import ComboBox from "./ComboBox";
 
 import MeusDados from "./PerfilComponents/MeusDados";
 import ItensAnunciados from "./PerfilComponents/ItensAnunciados";
@@ -44,4 +45,5 @@ export {
   PagamentosFormaPag,
   Stepper,
   Endereco,
+  ComboBox,
 };

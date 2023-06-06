@@ -128,7 +128,7 @@ export const postUserItem = async (formValues) => {
     .post(`/itens/cadastrar`, {
       id: formValues.id,
       nome: formValues.nome,
-      categoria: formValues.categoria,
+      categoria: formValues.categoria || 5,
       usuario: UsuarioLogado.userId,
       descricao: formValues.descricao,
       valorDia: formValues.valorDia,
@@ -148,9 +148,9 @@ export const putItem = async (itemId, formValues) => {
     .put(`/itens/${itemId}`, {
       id: itemId,
       nome: formValues.nome,
-      categoria: formValues.categoria,
+      categoria: formValues.categoria || 5,
       usuario: UsuarioLogado.userId,
-      disponivel: formValues.disponivel,
+      disponivel: 0,
       descricao: formValues.descricao,
       valorDia: formValues.valorDia,
     })
@@ -208,9 +208,9 @@ export const getUserLogged = async () => {
   }
 };
 
-export const getUserLoggedItems = async () => {
+export const getUserLoggedItems = async (userId) => {
   try {
-    const resposta = await getUserItem(UsuarioLogado.userId).then((res) => {
+    const resposta = await getUserItem(userId).then((res) => {
       console.log(res.data);
       return res.data;
     });
@@ -224,6 +224,10 @@ export const getUserLoggedItems = async () => {
 export const getUserCartoes = async () => {
   let userId = UsuarioLogado.userId;
   return api.get(`/cartaos/usuario/{id}?id=${userId}`);
+};
+
+export const getUserCartoesById = async (cartaoId) => {
+  return api.get(`/cartaos/{id}?id=${cartaoId}`);
 };
 
 export const deleteUserCartoes = async (cartaoId) => {
@@ -287,6 +291,8 @@ export const postUserEndereco = async (formValues) => {
       cep: formValues.cep,
       complemento: formValues.complemento,
       cidade: formValues.cidade,
+      bairro: formValues.bairro,
+      logradouro: formValues.logradouro,
       usuario: UsuarioLogado.userId,
     })
     .then((response) => {
@@ -298,4 +304,61 @@ export const postUserEndereco = async (formValues) => {
     });
 };
 
+export const putUserEndereco = async (id, formValues) => {
+  return api
+    .put(`/enderecos/${id}`, {
+      id: id,
+      numero: formValues.numero,
+      cep: formValues.cep,
+      complemento: formValues.complemento,
+      cidade: formValues.cidade,
+      bairro: formValues.bairro,
+      logradouro: formValues.logradouro,
+      usuario: UsuarioLogado.userId,
+    })
+    .then((response) => {
+      console.log("sucesso");
+      window.location.reload(true);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+export const deleteEndereco =  async (id) => {
+  return api
+    .delete(`/enderecos/${id}`)
+    .then((response) => {
+      console.log("sucesso");
+      window.location.reload(true);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
+
+export const postTXT = async (file) => {
+  return api
+    .post(`/transacoes/alugar/${UsuarioLogado.userId}`, file, {
+      headers: {
+        "Content-Type": "image/jpg",
+        Accept: "*/*",
+      },
+    })
+    .then((response) => {
+      console.log("sucesso");
+      window.location.reload(true);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+export const getTXT = async () => {
+  return api.get(`/transacoes/alugados/txt/${UsuarioLogado.userId}`);
+};
+
+export const getCSV = async () => {
+  return api.get(`/transacoes/csv/${UsuarioLogado.userId}`);
+};
 export default api;

@@ -11,6 +11,7 @@ const Home = () => {
   const getItens = () => {
     try {
       getAllItem().then((res) => {
+        console.log("get");
         setItemList(res.data);
       });
     } catch (error) {

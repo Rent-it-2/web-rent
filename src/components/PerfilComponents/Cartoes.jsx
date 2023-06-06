@@ -1,34 +1,14 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { styles } from "../../styles";
-import { getUserCartoes, postUserCartoes } from "../../api";
+import { postUserCartoes } from "../../api";
 import Modal from "../Modal";
 import CardCartao from "../CardCartao";
 import { IMaskInput } from "react-imask";
-import { AuthContext } from "../../contexts/Auth";
+import { cartoes } from "../../constants";
 
 const Cartoes = () => {
   const [openModal, setOpenModal] = useState(false);
-  const { cartoes } = useContext(AuthContext);
-
-  // const [cartoes, setCartoes] = useState([]);
-
-  // const getCartoes = async () => {
-  //   try {
-  //     const resposta = await getUserCartoes().then((res) => {
-  //       console.log(res.data);
-  //       setCartoes(res.data);
-  //     });
-  //     return resposta;
-  //   } catch (error) {
-  //     console.log(error);
-  //     return null;
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   getCartoes();
-  // }, []);
-
+  
   return (
     <>
       <div>
@@ -163,11 +143,10 @@ const Form = ({ cartao }) => {
         <IMaskInput
           type="text"
           name="cpfTitular"
-          value={formValues.cpfTitular || ""}
+          value={formValues.cpf || ""}
           onChange={handleChange}
           as={IMaskInput}
           mask="000.000.000-00"
-          placeholder="Digite o seu CPF"
           className={`${styles.inputPadrao}`}
         />
       </div>

@@ -5,6 +5,7 @@ import {
   createSession,
   getFotoUserById,
   getUserCartoes,
+  getUserEndereco,
   getUserItensFavoritos,
   getUserLoggedItems,
 } from "../api";
@@ -19,8 +20,9 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   const [cartoes, setCartoes] = useState([]);
+  const [endereco, setEndereco] = useState([]);
   const [itemFavoritos, setItemFavoritos] = useState([]);
-  const [itemList, setItem] = useState([
+  const [itemList, setItemList] = useState([
     {
       id: 0,
       nome: "string",
@@ -47,14 +49,20 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const recoveredUser = JSON.parse(sessionStorage.getItem("user"));
     const recoveredItem = JSON.parse(sessionStorage.getItem("userItems"));
+    const recoveredCartao = JSON.parse(sessionStorage.getItem("userCartoes"));
     if (recoveredUser) {
       setUser(recoveredUser);
     }
     setLoading(false);
-    getCartoes();
-    if(!recoveredItem){
-      getItem();
+    if (recoveredUser) {
+      getItem(recoveredUser.userId);
+      getCartoes();
+      getFavoritos();
+      getEndereco();
     }
+    // if(recoveredCartao){
+    // getCartoes();
+    // }
   }, []);
 
   const login = async (email, password) => {
@@ -68,10 +76,13 @@ export const AuthProvider = ({ children }) => {
     sessionStorage.setItem("token", JSON.stringify(token));
 
     setUser(loggedUser);
-    setFoto(getFotoUserById(loggedUser.userId));
-    getItem();
-    getFavoritos();
     navigate("");
+    setFoto(getFotoUserById(loggedUser.userId));
+    getItem(loggedUser.userId);
+    getCartoes();
+    getEndereco();
+    getFavoritos();
+    setFoto(getFotoUserById(loggedUser.userId));
   };
 
   const logout = () => {
@@ -85,20 +96,23 @@ export const AuthProvider = ({ children }) => {
     try {
       const resposta = await getUserCartoes().then((res) => {
         console.log(res.data);
+        sessionStorage.setItem("userCartoes", JSON.stringify(res.data));
         setCartoes(res.data);
       });
-      return resposta;
     } catch (error) {
       console.log(error);
-      return null;
     }
+    // console.log("cartões");
+    // const response = await getUserCartoes();
+    // sessionStorage.setItem("userCartoes", JSON.stringify(response));
+    // setCartoes(response);
   };
 
-  const getItem = async () => {
+  const getItem = async (userId) => {
     console.log("item");
-    const response = await getUserLoggedItems();
+    const response = await getUserLoggedItems(userId);
     sessionStorage.setItem("userItems", JSON.stringify(response));
-    setItem(response);
+    setItemList(response);
   };
 
   const getFavoritos = async () => {
@@ -106,6 +120,18 @@ export const AuthProvider = ({ children }) => {
       await getUserItensFavoritos().then((res) => {
         sessionStorage.setItem("favoritos", JSON.stringify(res.data));
         setItemFavoritos(res.data);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getEndereco = async () => {
+    try {
+      await getUserEndereco().then((res) => {
+        sessionStorage.setItem("endereco", JSON.stringify(res.data));
+        console.log(res.data);
+        setEndereco(res.data);
       });
     } catch (error) {
       console.log(error);
@@ -121,6 +147,7 @@ export const AuthProvider = ({ children }) => {
         cartoes,
         itemList,
         itemFavoritos,
+        endereco,
         loading,
         login,
         logout,

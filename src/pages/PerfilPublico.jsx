@@ -8,8 +8,8 @@ import { Rating } from "@mui/material";
 import { Avatar } from "antd";
 
 const PerfilPublico = () => {
-  const { userId } = useContext(ItemContext);
-  const [user, setUser] = useState({});
+  const { userId, user, userFoto } = useContext(ItemContext);
+  // const [user, setUser] = useState({});
   const [userItems, setUserItems] = useState([]);
   const [linkWhats, setLinkWhats] = useState({});
 
@@ -20,17 +20,6 @@ const PerfilPublico = () => {
     setLinkWhats(linkBase + numWhats + msg);
   }
 
-  const getUser = async () => {
-    try {
-      const resposta = await getUserById(userId).then((res) => {
-        setUser(res.data);
-        console.log(UsuarioLogado);
-      });
-      return resposta;
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   const getItens = async () => {
     try {
@@ -45,10 +34,8 @@ const PerfilPublico = () => {
   };
 
   useEffect(() => {
-    getUser();
     getItens();
     setLink();
-    console.log(user.itens);
   }, []);
 
   return (
@@ -60,7 +47,7 @@ const PerfilPublico = () => {
           <div className="flex flex-col gap-24 p-5 sm:flex-row">
 
             <div className="flex flex-col items-center gap-4">
-              <Avatar alt={`${user.nome}`} src={`${getFotoUserById(userId)}`} className="w-[150px] h-[150px] border-[5px] border-primary"/>
+              <Avatar alt={`${user.nome}`} src={`${userFoto}`} className="w-[150px] h-[150px] border-[5px] border-primary"/>
               <h2 className="text-center font-bold text-lg">{user.apelido}</h2>
             </div>
 
