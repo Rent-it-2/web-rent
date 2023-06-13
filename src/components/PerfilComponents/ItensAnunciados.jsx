@@ -171,6 +171,7 @@ const Form = ({ item }) => {
       console.log("add", formValues);
       postUserItem(formValues);
     }
+    // window.location.reload(true);
   };
 
   const deletarItem = () => {

@@ -22,14 +22,14 @@ const Pagamentos = () => {
   const [openModal, setOpenModal] = useState(false);
 
   const formTemplate = {
-    userId: userId,
-    itemId: itemId,
-    nome: "",
+    cartaoId:"",
     cpf: "",
-    dtIni: "",
     dtFim: "",
-    enderecoId: "",
-    cartaoId: "",
+    dtInicio: "",
+    enderecoId:"",
+    itemId:"",
+    idUso:"",
+    valorFinal:""
   };
 
   const [data, setData] = useState(formTemplate);

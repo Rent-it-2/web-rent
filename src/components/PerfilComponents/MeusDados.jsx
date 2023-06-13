@@ -64,7 +64,7 @@ const MeusDados = () => {
         <Form user={user} />
       </div>
 
-      <div className={`${styles.cardWhite} flex flex-col gap-5`}>
+      {/* <div className={`${styles.cardWhite} flex flex-col gap-5`}>
         {endereco && <Endereco showEdit={true} />}
         <button
           className={`w-full flex items-center gap-5 rounded-md p-1 border-[0.1px] 
@@ -77,7 +77,7 @@ const MeusDados = () => {
           <i className="mdi mdi-plus text-[22px] "></i>
           <p>Adicionar Endereço</p>
         </button>
-      </div>
+      </div> */}
 
       {!isPerfil ? (
         <Modal

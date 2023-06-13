@@ -68,11 +68,11 @@ const PerfilPublico = () => {
               </a>
             </div>
 
-            <div className="w-full rounded-2xl border-[1px] border-gray-500 justify-center flex p-7 items-center flex-col gap-3">
+            {/* <div className="w-full rounded-2xl border-[1px] border-gray-500 justify-center flex p-7 items-center flex-col gap-3">
             <h1 className="">Avaliação média</h1>
             <span className="text-2xl">2.5</span>
             <Rating name="read-only" value={2.5} readOnly precision={0.5}/>
-          </div>
+          </div> */}
           </div>
         </div>
 

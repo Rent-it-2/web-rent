@@ -143,7 +143,7 @@ const Form = ({ cartao }) => {
         <IMaskInput
           type="text"
           name="cpfTitular"
-          value={formValues.cpf || ""}
+          // value={formValues.cpf || ""}
           onChange={handleChange}
           as={IMaskInput}
           mask="000.000.000-00"

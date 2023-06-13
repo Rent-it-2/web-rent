@@ -8,6 +8,7 @@ const CardCartao = ({ cartaoInfos, showEdit, children }) => {
   const [openModal, setOpenModal] = useState(false);
 
   const deletarCartao = () =>{
+    sessionStorage.removeItem("userCartoes");
     deleteUserCartoes(cartaoInfos.id)
   }
 

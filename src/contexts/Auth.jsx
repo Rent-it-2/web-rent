@@ -58,7 +58,7 @@ export const AuthProvider = ({ children }) => {
       getItem(recoveredUser.userId);
       getCartoes();
       getFavoritos();
-      getEndereco();
+      // getEndereco();
     }
     // if(recoveredCartao){
     // getCartoes();
@@ -80,7 +80,7 @@ export const AuthProvider = ({ children }) => {
     setFoto(getFotoUserById(loggedUser.userId));
     getItem(loggedUser.userId);
     getCartoes();
-    getEndereco();
+    // getEndereco();
     getFavoritos();
     setFoto(getFotoUserById(loggedUser.userId));
   };
@@ -94,7 +94,7 @@ export const AuthProvider = ({ children }) => {
 
   const getCartoes = async () => {
     try {
-      const resposta = await getUserCartoes().then((res) => {
+      await getUserCartoes().then((res) => {
         console.log(res.data);
         sessionStorage.setItem("userCartoes", JSON.stringify(res.data));
         setCartoes(res.data);
@@ -102,10 +102,6 @@ export const AuthProvider = ({ children }) => {
     } catch (error) {
       console.log(error);
     }
-    // console.log("cartões");
-    // const response = await getUserCartoes();
-    // sessionStorage.setItem("userCartoes", JSON.stringify(response));
-    // setCartoes(response);
   };
 
   const getItem = async (userId) => {

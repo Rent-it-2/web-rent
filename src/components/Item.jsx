@@ -11,19 +11,19 @@ const Item = ({
 }) => {
   const { setItemId, foto } = useContext(ItemContext);
   const navigate = useNavigate();
+  // const [foto, setFoto] = useState();
+
 
   const backImage = {
     backgroundImage: `url(${getFotoItemById(id)})`,
   };
 
   const visualizarItem = () => {
-    console.log(id);
     setItemId(id);
     navigate(`/item/${id}`);
   };
 
   const converteCategoria = () => {
-    console.log(categoria);
     const selectedCategoryObject = categorias.find(
       (category) => category.value === categoria
     );

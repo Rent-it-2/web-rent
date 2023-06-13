@@ -1,5 +1,5 @@
 import axios from "axios";
-import { UsuarioLogado } from "./constants";
+import { UsuarioLogado, endereco } from "./constants";
 import { useState } from "react";
 // import { toast } from "react-toastify";
 import { ToastContainer, toast } from "react-toastify";
@@ -94,12 +94,12 @@ export const patchFotoItemById = async (itemId, foto) => {
 };
 
 export const postPesquisarItem = (nome, formValues) => {
-  console.log("pesquisar",{
+  console.log("pesquisar", {
     nome: nome,
     preco: formValues.preco,
     categorias: [formValues.categoria],
   });
-  // let categoria = 
+  // let categoria =
   return api
     .get(`/itens/pesquisar`, {
       nome: nome,
@@ -132,11 +132,11 @@ export const postUserItem = async (formValues) => {
       usuario: UsuarioLogado.userId,
       descricao: formValues.descricao,
       valorDia: formValues.valorDia,
-      disponivel: formValues.disponivel,
+      disponivel: 0,
     })
     .then((response) => {
       console.log("sucesso");
-      window.location.reload(true);
+      // window.location.reload(true);
     })
     .catch((error) => {
       console.log(error);
@@ -325,7 +325,7 @@ export const putUserEndereco = async (id, formValues) => {
     });
 };
 
-export const deleteEndereco =  async (id) => {
+export const deleteEndereco = async (id) => {
   return api
     .delete(`/enderecos/${id}`)
     .then((response) => {
@@ -335,7 +335,7 @@ export const deleteEndereco =  async (id) => {
     .catch((error) => {
       console.log(error);
     });
-}
+};
 
 export const postTXT = async (file) => {
   return api
@@ -355,10 +355,35 @@ export const postTXT = async (file) => {
 };
 
 export const getTXT = async () => {
-  return api.get(`/transacoes/alugados/txt/${UsuarioLogado.userId}`);
+  console.log("txt");
+  return `http://localhost:4500/transacoes/alugados/txt/${UsuarioLogado.userId}`;
 };
 
 export const getCSV = async () => {
-  return api.get(`/transacoes/csv/${UsuarioLogado.userId}`);
+  console.log("csv");
+  return `http://localhost:4500/transacoes/csv/${UsuarioLogado.userId}`;
 };
+
+export const postAlugarItem = async (formValues) => {
+  console.log("post alugar", formValues);
+  return api
+    .post(`/itens/cadastrar`, {
+      cartaoId: formValues.cartaoId,
+      cpf: formValues.cpf,
+      dtFim: formValues.dtFim,
+      dtInicio: formValues.dtInicio,
+      enderecoId: endereco.id,
+      itemId: formValues.cartaoId,
+      idUso: formValues.cartaoId,
+      valorFinal: formValues.total,
+    })
+    .then((response) => {
+      console.log("sucesso");
+      window.location.reload(true);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
 export default api;

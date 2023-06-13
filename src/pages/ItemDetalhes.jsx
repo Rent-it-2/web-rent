@@ -89,7 +89,7 @@ const ItemDetalhes = () => {
                 <Link to={`/locador/${item.idUsuario}`}>
                   <h3 className="text-xl font-bold">{item.apelidoUsario}</h3>
                 </Link>
-                <Rating name="read-only" value={3} readOnly precision={0.5} />
+                {/* <Rating name="read-only" value={3} readOnly precision={0.5} /> */}
               </div>
             </div>
 

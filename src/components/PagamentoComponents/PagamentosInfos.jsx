@@ -16,7 +16,7 @@ const PagamentosInfos = ({ data, updateFieldHandler }) => {
         Dados Pessoais
       </h1>
 
-      <div className="w-full">
+      {/* <div className="w-full">
         <label className="text-sm text-rentBlue">Nome Completo</label>
         <input
           type="text"
@@ -26,7 +26,7 @@ const PagamentosInfos = ({ data, updateFieldHandler }) => {
           className={`${styles.inputPadrao}`}
           required
         />
-      </div>
+      </div> */}
 
       <div className="w-full">
         <label className="text-sm text-rentBlue">CPF</label>
@@ -43,11 +43,11 @@ const PagamentosInfos = ({ data, updateFieldHandler }) => {
         />
       </div>
 
-      <h1 className="text-rentBlue font-semibold font-poppins">Endereço</h1>
+      {/* <h1 className="text-rentBlue font-semibold font-poppins">Endereço</h1>
       <div className="w-full flex items-center gap-x-10">
         <div className="w-full flex flex-col justify-start gap-y-5 gap-x-7 mt-3">
-          {/* {itemList?.map((item) => ( */}
-          {/* <Endereco user={userInfos} showEdit={false}>
+          {itemList?.map((item) => (
+          <Endereco user={userInfos} showEdit={false}>
             <input
               type="radio"
               name="enderecoId"
@@ -56,10 +56,10 @@ const PagamentosInfos = ({ data, updateFieldHandler }) => {
               onChange={(e) => updateFieldHandler("enderecoId", e.target.value)}
               required
             />
-          </Endereco> */}
-          {/* ))} */}
+          </Endereco>
+          ))}
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

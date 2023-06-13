@@ -3,16 +3,20 @@ import { Buscar, Footer, Header, Item } from "../components";
 import api, { getAllItem } from "../api";
 import { styles } from "../styles";
 import { ToastContainer, toast } from "react-toastify";
+import { itensHome } from "../constants";
 
 const Home = () => {
-  const [itemList, setItemList] = useState([]);
-  const [foto, setFoto] = useState();
+  // const [itemList, setItemList] = useState([]);
+  // const [foto, setFoto] = useState();
+
+  // const itensHome = JSON.parse(sessionStorage.getItem("itensHome"));
 
   const getItens = () => {
     try {
       getAllItem().then((res) => {
         console.log("get");
-        setItemList(res.data);
+        // sessionStorage.removeItem("itensHome");
+        sessionStorage.setItem("itensHome", JSON.stringify(res.data));
       });
     } catch (error) {
       console.log(error);
@@ -20,9 +24,10 @@ const Home = () => {
   };
 
   useEffect(() => {
-    if(!itemList){
+    // const recoveredItens = JSON.parse(sessionStorage.getItem("itensHome"));
+    // if(!recoveredItens){
       getItens();
-    }
+    // }
   }, []);
 
   return (
@@ -46,12 +51,12 @@ const Home = () => {
 
         <div className={`${styles.cardWhite}`}>
           <h2 className="text-xl font-bold">Mais Procurados</h2>
-          <Carousel dataSource={itemList} />
+          <Carousel dataSource={itensHome} />
         </div>
 
         <div className={`${styles.cardWhite}`}>
           <h2 className="text-xl font-bold">Sugestões</h2>
-          <Carousel dataSource={itemList} />
+          <Carousel dataSource={itensHome} />
         </div>
       </main>
       <Footer />

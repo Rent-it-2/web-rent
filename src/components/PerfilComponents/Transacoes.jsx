@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { styles } from "../../styles";
 import { ComboBox, Modal } from "../index";
-import { getTXT, postTXT } from "../../api";
+import { getCSV, getTXT, postTXT } from "../../api";
 
 const Transacoes = () => {
   const [openModal, setOpenModal] = useState(false);
 
   const txt = () => {
-    getTXT
+    return getTXT();
+  }
+
+  const csv = () => {
+    return getCSV();
   }
 
   return (
@@ -20,30 +24,30 @@ const Transacoes = () => {
         <p className="text-gray-400 text-sm pt-2">Seu histórico de transações bem sucedidas</p>
       </div>
 
-      <div className="flex">
+      <div className="flex flex-col-reverse gap-5">
         <button
-          className={`p-2 text-xs flex cartaos-center border-[1px] rounded-full bg-primary text-white ${styles.hoverPadraoPrimary} sm:text-base`}
+          className={`p-2 text-xs flex gap-3 cartaos-center border-[1px] rounded-md bg-primary text-white ${styles.hoverPadraoPrimary} sm:text-base`}
           onClick={() => setOpenModal(true)}
         >
           <i className="mdi mdi-plus text-[22px] "></i>
-          Add Itens
+          Adicionar itens por TXT
         </button>
 
-        <button
-          className={`p-2 text-xs flex cartaos-center border-[1px] rounded-full bg-primary text-white ${styles.hoverPadraoPrimary} sm:text-base`}
-          onClick={() => setOpenModal(true)}
+        {/* <button
+          className={`p-2 text-xs flex gap-3 cartaos-center border-[1px] rounded-md bg-primary text-white ${styles.hoverPadraoPrimary} sm:text-base`}
+          onClick={csv}
         >
-          <i className="mdi mdi-plus text-[22px] "></i>
+          <i className="mdi mdi-file-excel-outline text-[22px] "></i>
           Gerar Excel
         </button>
 
         <button
-          className={`p-2 text-xs flex cartaos-center border-[1px] rounded-full bg-primary text-white ${styles.hoverPadraoPrimary} sm:text-base`}
-          onClick={() => setOpenModal(true)}
+          className={`p-2 text-xs flex gap-3 cartaos-center border-[1px] rounded-md bg-primary text-white ${styles.hoverPadraoPrimary} sm:text-base`}
+          onClick={txt}
         >
-          <i className="mdi mdi-plus text-[22px] "></i>
+          <i className="mdi mdi-file-account-outline text-[22px] "></i>
           Trazer transações
-        </button>
+        </button> */}
       </div>
 
       <Modal

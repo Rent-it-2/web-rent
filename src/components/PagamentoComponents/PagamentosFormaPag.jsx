@@ -1,20 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
 import CardCartao from "../CardCartao";
 import { styles } from "../../styles";
-import { LocalizationProvider, MobileDatePicker } from "@mui/x-date-pickers";
+import { DateTimeField, LocalizationProvider, MobileDatePicker } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
 import { getUserCartoes } from "../../api";
 import { ItemContext } from "../../contexts/ItemContext";
 import { AuthContext } from "../../contexts/Auth";
+import { cartoes } from "../../constants";
 
 const PagamentosFormaPag = ({ data, updateFieldHandler }) => {
-  // const [selectedDateIni, setSelectedDateIni] = useState(new Date());
-  // const [selectedDateFim, setSelectedDateFim] = useState(new Date());
-  // const [cartoes, setCartoes] = useState([]);
-  // const { itemId, item, foto, linkWhats, getItem } = useContext(ItemContext);
-  const { cartoes } = useContext(AuthContext);
-
+  // const { cartoes } = useContext(AuthContext);
 
   // const getCartoes = async () => {
   //   try {
@@ -34,18 +30,20 @@ const PagamentosFormaPag = ({ data, updateFieldHandler }) => {
   // }, []);
 
   const dateFormatAux = (date) => {
-    var d = new Date(date),
-      month = "" + (d.getMonth() + 1),
-      day = "" + d.getDate(),
-      year = "" + d.getFullYear();
+    var d = new Date(date)
+    //   ,month = "" + (d.getMonth() + 1),
+    //   day = "" + d.getDate(),
+    //   year = "" + d.getFullYear();
 
-    if (month.length < 2) month = "0" + month;
-    if (day.length < 2) day = "0" + day;
-    return [day, month, year].join("/");
+    // if (month.length < 2) month = "0" + month;
+    // if (day.length < 2) day = "0" + day;
+    // return [day, month, year].join("/");
+    return d.toISOString();
   };
 
   const dateFormat = (key, date) => {
     console.log(key, dateFormatAux(date));
+
     updateFieldHandler(key, dateFormatAux(date));
   };
 
@@ -68,13 +66,29 @@ const PagamentosFormaPag = ({ data, updateFieldHandler }) => {
                   <MobileDatePicker
                     className={`${styles.inputPadrao}`}
                     onChange={(date) => {
-                      dateFormat("dtIni", date);
+                      dateFormat("dtInicio", date);
                     }}
                     required
                   />
                 </DemoItem>
               </DemoContainer>
             </LocalizationProvider>
+
+              {/* <DemoContainer components={["MobileDatePicker"]}>
+                <DemoItem>
+                  <MobileDatePicker
+                    className={`${styles.inputPadrao}`}
+                    // onChange={(date) => {
+                    //   dateFormat("dtInicio", date);
+                    // }}
+                    // onChange={(e) => {
+                    //   updateFieldHandler("dateInicio", e.target.value);
+                    // }}
+                    required
+                  />
+                </DemoItem>
+              </DemoContainer>
+            </LocalizationProvider> */}
           </div>
 
           <hr className="hidden w-full sm:block" />
@@ -85,6 +99,9 @@ const PagamentosFormaPag = ({ data, updateFieldHandler }) => {
               <DemoContainer components={["MobileDatePicker"]}>
                 <DemoItem>
                   <MobileDatePicker
+                    // onChange={(e) => {
+                    //   updateFieldHandler("dateFim", e.target.value);
+                    // }}
                     onChange={(date) => {
                       dateFormat("dtFim", date);
                     }}
@@ -114,6 +131,9 @@ const PagamentosFormaPag = ({ data, updateFieldHandler }) => {
           </CardCartao>
         ))}
 
+{/* {cartoes?.map((cartao) => (
+          <CardCartao cartaoInfos={cartao} showEdit={true} />
+        ))} */}
       </div>
     </div>
   );
