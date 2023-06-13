@@ -48,8 +48,8 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const recoveredUser = JSON.parse(sessionStorage.getItem("user"));
-    const recoveredItem = JSON.parse(sessionStorage.getItem("userItems"));
-    const recoveredCartao = JSON.parse(sessionStorage.getItem("userCartoes"));
+    // const recoveredItem = JSON.parse(sessionStorage.getItem("userItems"));
+    // const recoveredCartao = JSON.parse(sessionStorage.getItem("userCartoes"));
     if (recoveredUser) {
       setUser(recoveredUser);
     }
@@ -60,9 +60,6 @@ export const AuthProvider = ({ children }) => {
       getFavoritos();
       // getEndereco();
     }
-    // if(recoveredCartao){
-    // getCartoes();
-    // }
   }, []);
 
   const login = async (email, password) => {
@@ -95,7 +92,6 @@ export const AuthProvider = ({ children }) => {
   const getCartoes = async () => {
     try {
       await getUserCartoes().then((res) => {
-        console.log(res.data);
         sessionStorage.setItem("userCartoes", JSON.stringify(res.data));
         setCartoes(res.data);
       });
@@ -105,7 +101,6 @@ export const AuthProvider = ({ children }) => {
   };
 
   const getItem = async (userId) => {
-    console.log("item");
     const response = await getUserLoggedItems(userId);
     sessionStorage.setItem("userItems", JSON.stringify(response));
     setItemList(response);

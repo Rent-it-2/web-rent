@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Footer, Header } from "../components";
 import { ItemContext } from "../contexts/ItemContext";
 import {
+  getAvaliacao,
   getFotoItemById,
   getFotoUserById,
   getItemById,
@@ -15,8 +16,8 @@ import { categorias } from "../constants";
 const ItemDetalhes = () => {
   const navigate = useNavigate();
   const { itemId, item, foto, linkWhats, getItem, userFoto } = useContext(ItemContext);
-  const [selectedCategory, setSelectedCategory] = useState();
-  
+  const [value, setValue] = useState(0);
+
   const favoritarItem = async () => {
     await postFavoritarItem(itemId);
   };
@@ -39,6 +40,10 @@ const ItemDetalhes = () => {
 
   useEffect(() => {
     getItem();
+    getAvaliacao(itemId).then((res) => {
+      // console.log("ava", res.data);
+      setValue(res.data);
+    })
   }, []);
 
   return (
@@ -89,7 +94,7 @@ const ItemDetalhes = () => {
                 <Link to={`/locador/${item.idUsuario}`}>
                   <h3 className="text-xl font-bold">{item.apelidoUsario}</h3>
                 </Link>
-                {/* <Rating name="read-only" value={3} readOnly precision={0.5} /> */}
+                <Rating name="read-only" value={value} readOnly precision={0.5} />
               </div>
             </div>
 

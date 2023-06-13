@@ -13,7 +13,7 @@ const Cadastro = () => {
 
   const postUser = async (user) => {
     try {
-      const resposta = await api
+      await api
         // .post(`/users`, user, { headers: headers })
         .post(`/usuarios/cadastrar`, user, { headers: headers })
         .then((res) => {

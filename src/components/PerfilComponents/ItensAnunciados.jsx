@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { styles } from "../../styles";
 import {
   deleteItem,
@@ -7,9 +7,9 @@ import {
   postUserItem,
   putItem,
 } from "../../api";
-import { ComboBox, Modal } from "../index";
+import { Modal } from "../index";
 import CurrencyInput from "react-currency-input-field";
-import { UsuarioLogado, categorias, itemList } from "../../constants";
+import {categorias, itemList } from "../../constants";
 
 const ItensAnunciados = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -151,7 +151,7 @@ const Form = ({ item }) => {
         (category) => category.title === selectedCategory
       );
       value = selectedCategoryObject.value;
-      console.log(value);
+      console.log(selectedCategory, value);
     } else {
       value = event.target.value;
     }

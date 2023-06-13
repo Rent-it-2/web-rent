@@ -5,7 +5,7 @@ export const cartoes = JSON.parse(sessionStorage.getItem("userCartoes"));
 export const endereco = JSON.parse(sessionStorage.getItem("endereco"));
 export const foto = sessionStorage.getItem("userFoto");
 export const itensHome = JSON.parse(sessionStorage.getItem("itensHome"));
-
+export const Transacao = JSON.parse(sessionStorage.getItem("transacao"));
 
 export const footerLinksLct = [
   {

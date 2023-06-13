@@ -10,7 +10,7 @@ import {
   Stepper,
 } from "../components";
 import { styles } from "../styles";
-import { getItemById, getUserById } from "../api";
+import { getItemById, getUserById, postAlugarItem, postAvaliacao } from "../api";
 import { usePagamentoForm } from "../hooks/usePagamentoForm";
 import { Rating } from "@mui/material";
 import { useNavigate } from "react-router-dom";
@@ -53,6 +53,11 @@ const Pagamentos = () => {
     />,
     <PagamentosResumo data={data} item={item} user={user} />,
   ];
+
+  const concluir = () => {
+    console.log("concluir", data);
+    postAlugarItem(data);
+  }
 
   const { currentStep, currentComponent, changeStep, isLastStep, isFirstStep } =
     usePagamentoForm(formComponents);
@@ -123,7 +128,7 @@ const Pagamentos = () => {
                 <button
                   type="submit"
                   className={`w-full ${styles.botaoPadraoPrimary} ${styles.hoverPadraoPrimary}`}
-                  onClick={() => setOpenModal(true)}
+                  onClick={() => {setOpenModal(true) | concluir()}}
                 >
                   Concluir
                   <i className="mdi mdi-check text-[20px]" />
@@ -164,7 +169,12 @@ export const Form = ({ userId }) => {
 
   const avaliar = (newValue) => {
     setValue(newValue);
-    console.log(newValue);
+  }
+
+  const enviarAvaliar = () => {
+    console.log(value);
+    postAvaliacao(value);
+    navigate("/")
   }
 
   useEffect(() => {
@@ -189,7 +199,7 @@ export const Form = ({ userId }) => {
       <button
         type="submit"
         className={`w-full ${styles.botaoPadraoPrimary} ${styles.hoverPadraoPrimary}`}
-        onClick={() => navigate("/")}
+        onClick={enviarAvaliar}
       >
         Enviar
       </button>

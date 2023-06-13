@@ -48,10 +48,10 @@ export const ItemProvider = ({ children }) => {
 
   const getUser = async () => {
     try {
-      await getUserById(userId).then((res) => {
+      console.log(userId);
+      await getUserById(item.idUsuario).then((res) => {
         setUser(res.data);
-        setUserFoto(getFotoUserById(userId));
-        console.log(userFoto);
+        setUserFoto(getFotoUserById(item.idUsuario));
       });
       return resposta;
     } catch (error) {

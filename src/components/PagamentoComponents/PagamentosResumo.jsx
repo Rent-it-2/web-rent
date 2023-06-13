@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { getUserCartoesById } from "../../api";
+import { getItemById, getUserCartoesById } from "../../api";
 import { ItemContext } from "../../contexts/ItemContext";
 import { AuthContext } from "../../contexts/Auth";
 import { UsuarioLogado } from "../../constants";
@@ -7,20 +7,14 @@ import { IMaskInput } from "react-imask";
 
 const PagamentosResumo = ({ data }) => {
   const [cartao, setCartao] = useState();
-  // const { itemId } = useContext(ItemContext);
-
+  const [itemSelecionado, setItemSelecionado] = useState();
   const item = JSON.parse(sessionStorage.getItem("item"));
-  const { userId } = useContext(AuthContext);
 
   const calculaPeriodo = () => {
-    console.log(data);
     const startDate = new Date(data.dtInicio);
     const endDate = new Date(data.dtFim);
-
     const diffTime = Math.abs(endDate.getTime() - startDate.getTime());
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-    console.log(diffDays);
     return diffDays;
   };
 
@@ -51,14 +45,14 @@ const PagamentosResumo = ({ data }) => {
   }
 
   useEffect(() => {
-    console.log("q isso mona?");
     data.itemId = item.id;
-    data.idUso = UsuarioLogado.userId;
+    data.valorFinal = calculaTotal();
     getUserCartoesById(data.cartaoId).then((res) => {
-      console.log("cartao", res.data);
       setCartao(res.data);
     });
   }, []);
+
+
 
   return (
     <div className="flex flex-col gap-5">
@@ -75,7 +69,7 @@ const PagamentosResumo = ({ data }) => {
 
         <div className="flex flex-col gap-3">
           <div className="flex-col justify-start">
-            {/* <p className="text-sm font-semibold">{item.nome}</p> */}
+            <p className="text-sm font-semibold">{item.nomeItem}</p>
             <p className="text-sm">{categoria}</p>
             <div className="flex items-end">
               <h2 className="text-sm">R$ {item.valorDia} </h2>
@@ -91,7 +85,7 @@ const PagamentosResumo = ({ data }) => {
       </div>
 
       {cartao && (
-        <div className="">
+        <div className="flex flex-col gap-5">
           <h1 className="text-rentBlue font-semibold font-poppins">
             Forma de Pagamento
           </h1>
@@ -175,7 +169,7 @@ const PagamentosResumo = ({ data }) => {
             <p className="text-sm">{calculaPeriodo()} dias</p>
             <div className="flex items-end">
               <h2 className="text-2xl text-primary font-bold">
-                R$ {calculaTotal()}{" "}
+                R$ {calculaTotal()}
               </h2>
             </div>
           </div>

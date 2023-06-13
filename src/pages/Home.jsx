@@ -6,17 +6,13 @@ import { ToastContainer, toast } from "react-toastify";
 import { itensHome } from "../constants";
 
 const Home = () => {
-  // const [itemList, setItemList] = useState([]);
-  // const [foto, setFoto] = useState();
-
-  // const itensHome = JSON.parse(sessionStorage.getItem("itensHome"));
+  const [itemList, setItemList] = useState([]);
 
   const getItens = () => {
     try {
       getAllItem().then((res) => {
-        console.log("get");
-        // sessionStorage.removeItem("itensHome");
         sessionStorage.setItem("itensHome", JSON.stringify(res.data));
+        setItemList(res.data);
       });
     } catch (error) {
       console.log(error);
@@ -24,39 +20,23 @@ const Home = () => {
   };
 
   useEffect(() => {
-    // const recoveredItens = JSON.parse(sessionStorage.getItem("itensHome"));
-    // if(!recoveredItens){
-      getItens();
-    // }
+    getItens();
   }, []);
 
   return (
     <>
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
-      <ToastContainer />
       <Header />
       <main className={`${styles.mainConfig} flex flex-col gap-5 sm:gap-10`}>
         <Buscar />
 
         <div className={`${styles.cardWhite}`}>
           <h2 className="text-xl font-bold">Mais Procurados</h2>
-          <Carousel dataSource={itensHome} />
+          <Carousel dataSource={itemList} />
         </div>
 
         <div className={`${styles.cardWhite}`}>
           <h2 className="text-xl font-bold">Sugestões</h2>
-          <Carousel dataSource={itensHome} />
+          <Carousel dataSource={itemList} />
         </div>
       </main>
       <Footer />

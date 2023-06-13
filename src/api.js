@@ -1,8 +1,5 @@
 import axios from "axios";
-import { UsuarioLogado, endereco } from "./constants";
-import { useState } from "react";
-// import { toast } from "react-toastify";
-import { ToastContainer, toast } from "react-toastify";
+import { Transacao, UsuarioLogado } from "./constants";
 import "react-toastify/dist/ReactToastify.css";
 
 const token = JSON.parse(sessionStorage.getItem("token"));
@@ -12,8 +9,6 @@ const headers = {
 };
 
 export const api = axios.create({
-  // baseURL: "https://642ec65b2b883abc6416b7b6.mockapi.io/rent-it",
-  // baseURL: "http://localhost:8080"
   baseURL: "http://localhost:4500",
 });
 
@@ -124,11 +119,24 @@ export const getUserItem = async (userId) => {
 };
 
 export const postUserItem = async (formValues) => {
+  console.log(
+    "Post",
+
+    {
+      id: 0,
+      nome: formValues.nome,
+      categoria: formValues.categoria,
+      usuario: UsuarioLogado.userId,
+      descricao: formValues.descricao,
+      valorDia: formValues.valorDia,
+      disponivel: 0,
+    }
+  );
   return api
     .post(`/itens/cadastrar`, {
-      id: formValues.id,
+      id: 0,
       nome: formValues.nome,
-      categoria: formValues.categoria || 5,
+      categoria: formValues.categoria,
       usuario: UsuarioLogado.userId,
       descricao: formValues.descricao,
       valorDia: formValues.valorDia,
@@ -365,25 +373,50 @@ export const getCSV = async () => {
 };
 
 export const postAlugarItem = async (formValues) => {
-  console.log("post alugar", formValues);
+  console.log("post alugar", {
+    cartaoId: formValues.cartaoId,
+    cpf: formValues.cpf,
+    dtFim: formValues.dtFim,
+    dtInicio: formValues.dtInicio,
+    itemId: formValues.itemId,
+    idUso: UsuarioLogado.userId,
+    valorFinal: formValues.valorFinal,
+  });
   return api
-    .post(`/itens/cadastrar`, {
+    .post(`/transacoes/alugar-item`, {
       cartaoId: formValues.cartaoId,
       cpf: formValues.cpf,
       dtFim: formValues.dtFim,
       dtInicio: formValues.dtInicio,
-      enderecoId: endereco.id,
-      itemId: formValues.cartaoId,
-      idUso: formValues.cartaoId,
-      valorFinal: formValues.total,
+      itemId: formValues.itemId,
+      idUso: UsuarioLogado.userId,
+      valorFinal: formValues.valorFinal,
     })
     .then((response) => {
       console.log("sucesso");
-      window.location.reload(true);
+      sessionStorage.setItem("transacao", JSON.stringify(response.data));
     })
     .catch((error) => {
       console.log(error);
     });
 };
+
+export const postAvaliacao = async (valor) => {
+  return api
+    .post(`/transacoes/avaliar`, {
+      transacao: Transacao.idTransacao,
+      nota: valor
+    })
+    .then((response) => {
+      console.log("sucesso");
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+export const getAvaliacao = async (itemId) => {
+  return api.get(`/transacoes/get-avaliar?id=${itemId}`);
+}
 
 export default api;
