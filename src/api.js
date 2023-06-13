@@ -136,7 +136,7 @@ export const postUserItem = async (formValues) => {
     })
     .then((response) => {
       console.log("sucesso");
-      // window.location.reload(true);
+      window.location.reload(true);
     })
     .catch((error) => {
       console.log(error);
