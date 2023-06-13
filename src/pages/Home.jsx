@@ -2,49 +2,61 @@ import React, { useEffect, useRef, useState } from "react";
 import { Buscar, Footer, Header, Item } from "../components";
 import api, { getAllItem } from "../api";
 import { styles } from "../styles";
+import { ToastContainer, toast } from "react-toastify";
+import { itensHome } from "../constants";
 
 const Home = () => {
-  const [itemList, setItem] = useState([]);
-  const carousel = useRef(null);
-  // const carousel2 = useRef(null);
+  // const [itemList, setItemList] = useState([]);
+  // const [foto, setFoto] = useState();
 
-  const getItens = async () => {
+  // const itensHome = JSON.parse(sessionStorage.getItem("itensHome"));
+
+  const getItens = () => {
     try {
-      const element = [];
-
-      for (let index = 1; index <= 5; index++) {
-        const resposta = await getAllItem(index).then((res) => {
-          for (let j = 0; j < res.data.length; j++) {
-            element.push(res.data[j]);
-          }
-        });
-      }
-      console.log("element", element);
-      setItem(element);
+      getAllItem().then((res) => {
+        console.log("get");
+        // sessionStorage.removeItem("itensHome");
+        sessionStorage.setItem("itensHome", JSON.stringify(res.data));
+      });
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
-    getItens();
+    // const recoveredItens = JSON.parse(sessionStorage.getItem("itensHome"));
+    // if(!recoveredItens){
+      getItens();
+    // }
   }, []);
-
 
   return (
     <>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+      <ToastContainer />
       <Header />
       <main className={`${styles.mainConfig} flex flex-col gap-5 sm:gap-10`}>
         <Buscar />
 
         <div className={`${styles.cardWhite}`}>
           <h2 className="text-xl font-bold">Mais Procurados</h2>
-          <Carousel dataSource={itemList} />
+          <Carousel dataSource={itensHome} />
         </div>
 
         <div className={`${styles.cardWhite}`}>
           <h2 className="text-xl font-bold">Sugestões</h2>
-          <Carousel dataSource={itemList} />
+          <Carousel dataSource={itensHome} />
         </div>
       </main>
       <Footer />
@@ -66,7 +78,7 @@ export const Carousel = ({ dataSource }) => {
   };
 
   return (
-    <div className="flex items-center gap-1">
+    <div className="flex items-center gap-1 juse">
       <button
         onClick={handleLeftClick}
         className={`bg-rentBlue bg-opacity-0 text-rentBlue hover:bg-opacity-50 sm:text-[35px]`}
@@ -79,7 +91,7 @@ export const Carousel = ({ dataSource }) => {
         className="max-w-full flex gap-3 items-center justify-center mt-3 overflow-hidden scroll-smooth sm:h-[22rem sm:justify-start"
       >
         {dataSource?.map((item) => (
-          <Item key={item.userId} item={item} />
+          <Item item={item} />
         ))}
       </div>
 

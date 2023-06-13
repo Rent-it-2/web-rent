@@ -1,22 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { styles } from "../../styles";
-import { getUserLogged } from "../../api";
+import { postUserCartoes } from "../../api";
 import Modal from "../Modal";
 import CardCartao from "../CardCartao";
 import { IMaskInput } from "react-imask";
+import { cartoes } from "../../constants";
 
 const Cartoes = () => {
   const [openModal, setOpenModal] = useState(false);
-  const [user, setUser] = useState({});
-
-  const getUser = async () => {
-    setUser(await getUserLogged());
-  };
-
-  useEffect(() => {
-    getUser();
-  }, []);
-
+  
   return (
     <>
       <div>
@@ -38,7 +30,9 @@ const Cartoes = () => {
       </div>
 
       <div className="flex flex-wrap gap-5">
-        <CardCartao cartaoInfos={user} showEdit={true} />
+        {cartoes?.map((cartao) => (
+          <CardCartao cartaoInfos={cartao} showEdit={true} />
+        ))}
       </div>
 
       <Modal
@@ -46,7 +40,7 @@ const Cartoes = () => {
         isOpen={openModal}
         setModalOpen={() => setOpenModal(!openModal)}
       >
-        <Form/>
+        <Form />
       </Modal>
     </>
   );
@@ -78,7 +72,7 @@ const Form = ({ cartao }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("submit", formValues);
-    // postcartao(formValues)
+    postUserCartoes(formValues);
   };
 
   useEffect(() => {
@@ -90,15 +84,24 @@ const Form = ({ cartao }) => {
   return (
     <form className="w-96 flex flex-wrap gap-2" onSubmit={handleSubmit}>
       <div className="w-full">
+        <label className="text-sm text-rentBlue">Nome impresso no cartão</label>
+        <input
+          type="text"
+          name="nomeImpresso"
+          value={formValues.nomeImpresso || ""}
+          onChange={handleChange}
+          className={`${styles.inputPadrao}`}
+        />
+
         <label className="text-sm text-rentBlue">Numero do Cartão</label>
         <IMaskInput
           type="text"
           name="numCartao"
-          // value={formValues.numcartao || ""}
+          value={formValues.numCartao || ""}
           onChange={handleChange}
-          mask= {"0000 0000 0000 0000"}
+          mask={"0000 0000 0000 0000"}
           maxLength={19}
-          placeholderChar='\u2000'
+          placeholderChar="\u2000"
           className={`${styles.inputPadrao}`}
         />
       </div>
@@ -109,27 +112,29 @@ const Form = ({ cartao }) => {
 
           <IMaskInput
             type="text"
-            name="valCartao"
+            name="validade"
             as={IMaskInput}
-            mask="00/00/0000"
-            placeholder="00/00/0000"
-            // value={formValues.valCartao || ""}
+            mask="00/00"
+            placeholder="00/00"
+            value={formValues.validade || ""}
             onChange={handleChange}
             className={`${styles.inputPadrao}`}
           />
         </div>
 
-        <div className="w-full">
+        {/* <div className="w-full">
           <label className="text-sm text-rentBlue">CVV</label>
-
-          <input
+          <IMaskInput
+            as={IMaskInput}
             type="text"
             name="cvvCartao"
             value={formValues.cvvCartao || ""}
+            placeholder="000"
+            mask="000"
             onChange={handleChange}
             className={`${styles.inputPadrao}`}
           />
-        </div>
+        </div> */}
       </div>
 
       <div className="w-full">
@@ -137,12 +142,11 @@ const Form = ({ cartao }) => {
 
         <IMaskInput
           type="text"
-          name="cpfCartao"
+          name="cpfTitular"
           // value={formValues.cpf || ""}
           onChange={handleChange}
           as={IMaskInput}
           mask="000.000.000-00"
-          placeholder="Digite o seu CPF"
           className={`${styles.inputPadrao}`}
         />
       </div>
@@ -150,7 +154,7 @@ const Form = ({ cartao }) => {
       <div className="w-1/2 flex gap-2">
         <button
           type="submit"
-          className={`${styles.botaoPadraoPrimary} p-2 text-sm ${styles.hoverPadraoPrimary}`}
+          className={`${styles.botaoPadraoPrimary} ${styles.hoverPadraoPrimary}`}
         >
           <i className={`mdi mdi-${!cartao ? "plus" : ""} text-[20px]`} />
           {cartao ? "Salvar" : "Cadastrar Cartão"}
@@ -158,7 +162,7 @@ const Form = ({ cartao }) => {
 
         {cartao && (
           <button
-            className={`border-[1px] w-full p-3 border-gray-400 text-gray-400 text-sm rounded-md ${styles.hoverPadraoPrimary}`}
+            className={`${styles.botaoPadraoSecondary} ${styles.hoverPadraoPrimary}`}
           >
             Cancelar
           </button>

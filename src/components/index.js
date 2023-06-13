@@ -8,8 +8,9 @@ import Menu from "./Menu";
 import InputBuscar from "./InputBuscar";
 import Sidebar from "./Sidebar";
 import Modal from "./Modal";
-import Avaliacao from "./Avaliacao";
+import Endereco from "./Endereco";
 import Stepper from "./Stepper";
+import ComboBox from "./ComboBox";
 
 import MeusDados from "./PerfilComponents/MeusDados";
 import ItensAnunciados from "./PerfilComponents/ItensAnunciados";
@@ -35,7 +36,6 @@ export {
   Sidebar,
   MeusDados,
   InputBuscar,
-  Avaliacao,
   Cartoes,
   Favoritos,
   Transacoes,
@@ -44,4 +44,6 @@ export {
   PagamentosInfos,
   PagamentosFormaPag,
   Stepper,
+  Endereco,
+  ComboBox,
 };

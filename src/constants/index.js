@@ -1,4 +1,11 @@
 export const UsuarioLogado = JSON.parse(sessionStorage.getItem("user"));
+export const itemList = JSON.parse(sessionStorage.getItem("userItems"));
+export const itemFavoritos = JSON.parse(sessionStorage.getItem("favoritos"));
+export const cartoes = JSON.parse(sessionStorage.getItem("userCartoes"));
+export const endereco = JSON.parse(sessionStorage.getItem("endereco"));
+export const foto = sessionStorage.getItem("userFoto");
+export const itensHome = JSON.parse(sessionStorage.getItem("itensHome"));
+
 
 export const footerLinksLct = [
   {
@@ -32,7 +39,7 @@ export const footerLinksLcd = [
   {
     id: "impulsionar",
     title: "Impulsionar seu produto",
-    link: "",
+    link: "perfil/itens",
   },
 ];
 
@@ -40,45 +47,45 @@ export const footerLinksAjuda = [
   {
     id: "faq",
     title: "FAQ",
-    link: "",
+    link: "https://wa.me/5511976408492?text=Ol%C3%A1%21+Preciso+de+ajuda%21",
   },
   {
     id: "contato",
     title: "Contato",
-    link: "",
+    link: "https://wa.me/5511976408492?text=Ol%C3%A1%21+Preciso+de+ajuda%21",
   },
   {
     id: "sobre",
     title: "Sobre nós",
-    link: "",
+    link: "https://wa.me/5511976408492?text=Ol%C3%A1%21+Preciso+de+ajuda%21",
   },
 ];
 
 export const categorias = [
   {
-    id: "vest",
+    id: "1",
     title: "Vestuário",
-    value: "vestuario",
+    value: 1,  
   },
   {
-    id: "ferr",
+    id: "2",
     title: "Ferramentas",
-    value: "ferramenta",
+    value: 2,
   },
   {
-    id: "elet",
+    id: "3",
     title: "Eletrônicos",
-    value: "eletronico",
+    value: 3,
   },
   {
-    id: "ente",
+    id: "4",
     title: "Entretenimento",
-    value: "entretenimento",
+    value: 4,
   },
   {
-    id: "uten",
+    id: "5",
     title: "Utensílios",
-    value: "utensilio",
+    value: 5,
   },
 ];
 
@@ -116,17 +123,16 @@ export const paginas = [
     link: "/perfil/meus-dados",
     icon:"account"
   },
-  {
-    title: "Perfil Público",
-    // link: () => UsuarioLogado.id ? '/locador/'+UsuarioLogado.id : '/perfil/meus-dados',
-    // link: `/locador/${UsuarioLogado.id}`,
-    icon:"share-variant"
-  },
-  {
-    title: "Chat",
-    link: "/perfil/chat",
-    icon:"chat"
-  },
+  // {
+  //   title: "Perfil Público",
+  //   link: `/locador/${UsuarioLogado.id}`,
+  //   icon:"share-variant"
+  // },
+  // {
+  //   title: "Chat",
+  //   link: "/perfil/chat",
+  //   icon:"chat"
+  // },
   {
     title: "Transações",
     link: "/perfil/transacoes",

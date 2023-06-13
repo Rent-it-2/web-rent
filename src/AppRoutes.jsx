@@ -17,7 +17,16 @@ import {
 } from "./pages";
 import { AuthProvider, AuthContext } from "./contexts/Auth";
 import { ItemProvider } from "./contexts/ItemContext";
-import { MeusDados, Cartoes, Favoritos, ItensAnunciados, Transacoes, Chat } from "./components/index";
+import {
+  MeusDados,
+  Cartoes,
+  Favoritos,
+  ItensAnunciados,
+  Transacoes,
+  Chat,
+  Header,
+} from "./components/index";
+import { FilterContext, FilterProvider } from "./contexts/FilterContext";
 
 const AppRoutes = () => {
   const Private = ({ children }) => {
@@ -32,36 +41,61 @@ const AppRoutes = () => {
     return children;
   };
 
+  const Pesquisa = ({ children }) => {
+    const { itemNome, itemCategoria, itemList, buscar } =
+      useContext(FilterContext);
+    if (!itemNome) {
+      return <Navigate to="/" />;
+    }
+    return children;
+  };
+
   return (
     <Router>
       <AuthProvider>
-        <ItemProvider>
-          <Routes>
-            <Route path="/cadastro" element={<Cadastro />} />
-            <Route path="/login" element={<Login />} />
-            <Route exact path="/" element={<Home />} />
-            <Route path="/filtros" element={<Filters />} />
-            <Route path="/item/:id" element={<ItemDetalhes />} />
-            <Route path="/locador/:id" element={<PerfilPublico />} />
-            <Route path="item/alugar/:id" element={<Private><Pagamentos /></Private>} />
-            <Route
-              path="/perfil"
-              element={
-                <Private>
-                  <Perfil />
-                </Private>
-              }
-            >
-              <Route path="meus-dados" element={<MeusDados/>} />
-              <Route path="favoritos" element={<Favoritos/>} />
-              <Route path="meus-itens" element={<ItensAnunciados/>} />
-              <Route path="transacoes" element={<Transacoes/>} />
-              <Route path="cartoes" element={<Cartoes/>} />
-              <Route path="favoritos" element={<Favoritos/>} />
-              <Route path="chat" element={<Chat/>} />
-            </Route>
-          </Routes>
-        </ItemProvider>
+        <FilterProvider>
+          <ItemProvider>
+            <Routes>
+              <Route path="/cadastro" element={<Cadastro />} />
+              <Route path="/login" element={<Login />} />
+              <Route exact path="/" element={<Home />} />
+              <Route
+                path="/filtros"
+                element={
+                  <Pesquisa>
+                    <Filters />
+                  </Pesquisa>
+                }
+              />
+              <Route path="/item/:id" element={<ItemDetalhes />} />
+              <Route path="/locador/:id" element={<PerfilPublico />} />
+              <Route
+                path="item/alugar/:id"
+                element={
+                  <Private>
+                    <Pagamentos />
+                  </Private>
+                }
+              />
+              <Route
+                path="/perfil"
+                element={
+                  <Private>
+                    <Perfil />
+                  </Private>
+                }
+              >
+                <Route path="meus-dados" element={<MeusDados />} />
+                <Route path="favoritos" element={<Favoritos />} />
+                <Route path="meus-itens" element={<ItensAnunciados />} />
+                <Route path="transacoes" element={<Transacoes />} />
+                <Route path="cartoes" element={<Cartoes />} />
+                <Route path="favoritos" element={<Favoritos />} />
+                <Route path="chat" element={<Chat />} />
+              </Route>
+            </Routes>
+          </ItemProvider>
+        </FilterProvider>
       </AuthProvider>
     </Router>
   );

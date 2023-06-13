@@ -1,22 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { styles } from "../../styles";
-import { getUserLoggedItems } from "../../api";
-import { Modal } from "../index";
+import {
+  deleteItem,
+  getFotoItemById,
+  patchFotoItemById,
+  postUserItem,
+  putItem,
+} from "../../api";
+import { ComboBox, Modal } from "../index";
 import CurrencyInput from "react-currency-input-field";
-import { categorias } from "../../constants";
+import { UsuarioLogado, categorias, itemList } from "../../constants";
 
 const ItensAnunciados = () => {
   const [openModal, setOpenModal] = useState(false);
-  const [itemList, setItem] = useState([]);
-
-  const getItem = async () => {
-    setItem(await getUserLoggedItems());
-  };
-
-  useEffect(() => {
-    getItem();
-  }, []);
-
+ 
   return (
     <>
       <div>
@@ -60,16 +57,17 @@ const ItensAnunciados = () => {
 
 const ItemCard = ({ item }) => {
   const [openModal, setOpenModal] = useState(false);
+  const [isFoto, setIsFoto] = useState(false);
 
   const backImage = {
-    backgroundImage: `url(${item.foto})`,
+    backgroundImage: `url(${getFotoItemById(item.id)})`,
   };
 
   return (
     <div className="flex flex-wrap items-center justify-between gap-5 rounded-lg p-1 border-[0.1px] border-gray-300">
       <div className="flex flex-wrap items-center justify-center gap-5">
         <div
-          className="aspect-[4/3] min-w-[70px] min-h-[70px] rounded-lg bg-contain"
+          className="aspect-[4/3] min-w-[70px] min-h-[70px] rounded-lg bg-cover"
           style={backImage}
         />
 
@@ -84,39 +82,56 @@ const ItemCard = ({ item }) => {
               !item.isAlugando ? "text-primary" : "text-green-500"
             }`}
           >
-            <b>Status:</b> {!item.isAlugando ? "Anuncio Pausado" : "Anunciando"}
+            {/* <b>Status:</b> {!item.isAlugando ? "Anúncio Pausado" : "Anunciando"} */}
           </p>
         </div>
       </div>
 
-      <div className="flex items-center justify-end gap-2">
+      <div className="w-2/4 flex items-center justify-end gap-2">
         <button
           className={`${styles.botaoPadraoPrimary} text-sm rounded-md ${styles.hoverPadraoPrimary}`}
+          onClick={() => {
+            setOpenModal(true), setIsFoto(true);
+          }}
         >
-          Pausar Anúncio
+          Alterar Foto
         </button>
 
         <button
-          className={`rounded-lg border-[1px] border-gray-300 p-1 px-3 text-gray-400 ${styles.hoverPadraoPrimary}`}
-          onClick={() => setOpenModal(true)}
+          className={`${styles.botaoPadraoSecondary} text-gray-400 ${styles.hoverPadraoPrimary}`}
+          onClick={() => {
+            setOpenModal(true), setIsFoto(false);
+          }}
         >
-          <i className="mdi mdi-pencil w-1/6 cursor-pointer text-[22px] "></i>
+          <i className="mdi mdi-pencil text-[22px] "></i>
         </button>
       </div>
-      <Modal
-        title={"Editar Item"}
-        isOpen={openModal}
-        setModalOpen={() => setOpenModal(!openModal)}
-      >
-        <Form item={item} />
-      </Modal>
+
+      {!isFoto ? (
+        <Modal
+          title={"Editar Item"}
+          isOpen={openModal}
+          setModalOpen={() => setOpenModal(!openModal)}
+        >
+          <Form item={item} />
+        </Modal>
+      ) : (
+        <Modal
+          title={"Alterar Foto do Item"}
+          isOpen={openModal}
+          setModalOpen={() => setOpenModal(!openModal)}
+        >
+          <FormModalFoto item={item} />
+        </Modal>
+      )}
     </div>
   );
 };
 
 const Form = ({ item }) => {
-  const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState(0);
   const [formValues, setFormValues] = useState(item || {});
+  const [selectedCategory, setSelectedCategory] = useState("");
 
   const handleChange = (event) => {
     const { name, type } = event.target;
@@ -126,7 +141,17 @@ const Form = ({ item }) => {
       value = event.target.files[0];
     } else if (type === "checkbox") {
       setIsChecked(event.target.checked);
-      value = event.target.checked;
+      if (event.target.checked) {
+        value = 1;
+      }
+      value = 0;
+    } else if (name === "categoria") {
+      setSelectedCategory(event.target.value);
+      const selectedCategoryObject = categorias.find(
+        (category) => category.title === selectedCategory
+      );
+      value = selectedCategoryObject.value;
+      console.log(value);
     } else {
       value = event.target.value;
     }
@@ -139,8 +164,21 @@ const Form = ({ item }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("submit", formValues);
-    // postItem(formValues)
+    if (item) {
+      console.log("editar", formValues);
+      putItem(item.id, formValues);
+    } else {
+      console.log("add", formValues);
+      postUserItem(formValues);
+    }
+    // window.location.reload(true);
+  };
+
+  const deletarItem = () => {
+    // e.preventDefault();
+    sessionStorage.removeItem("userItems");
+    deleteItem(item.id);
+    window.location.reload(true);
   };
 
   useEffect(() => {
@@ -151,22 +189,6 @@ const Form = ({ item }) => {
 
   return (
     <form className="w-96 flex flex-wrap gap-2" onSubmit={handleSubmit}>
-      <div className="">
-        <label className="text-sm text-rentBlue">Foto do item</label>
-        <div className="w-fit flex rounded-md bg-gray-300 items-center justify-center py-2 px-10">
-          <label htmlFor="foto">
-            <i className="mdi mdi-plus text-[50px] text-gray-400 cursor-pointer"></i>
-          </label>
-          <input
-            type="file"
-            name="foto"
-            id="foto"
-            className={`hidden`}
-            onChange={handleChange}
-          />
-        </div>
-      </div>
-
       <div className="w-full">
         <label className="text-sm text-rentBlue">Nome</label>
         <div className="flex rounded-md bg-gray-300 text-sm items-center p-2">
@@ -190,9 +212,8 @@ const Form = ({ item }) => {
               placeholder="0,00"
               value={formValues.valorDia || ""}
               onChange={handleChange}
-              decimalSeparator=","
-              groupSeparator="."
-              // prefix="R$ "
+              decimalSeparator="."
+              groupSeparator=","
               className={`w-full appearance-none outline-none bg-transparent`}
             />
           </div>
@@ -201,18 +222,31 @@ const Form = ({ item }) => {
         <div className="w-1/2">
           <label className="text-sm text-rentBlue">Categoria</label>
           <div className="flex rounded-md bg-gray-300 text-sm items-center p-2">
-            <select
+            {/* <select
               name="categoria"
-              value={formValues.categoria || ""}
+              value={valorCategoria || ""}
               onChange={handleChange}
               className={`w-full appearance-none outline-none bg-transparent`}
             >
               {categorias.map((option) => (
                 <option key={option.id} value={option.value}>
-                  {option.title}
+                  {displaySelecionada}
+                </option>
+              ))}
+            </select> */}
+            <select
+              name="categoria"
+              value={selectedCategory}
+              onChange={handleChange}
+              className={`w-full appearance-none outline-none bg-transparent`}
+            >
+              {categorias.map((category) => (
+                <option key={category.id} value={category.title}>
+                  {category.title}
                 </option>
               ))}
             </select>
+
             <i className="mdi mdi-menu-down text-[25px] pr-1 text-gray-500" />
           </div>
         </div>
@@ -238,7 +272,7 @@ const Form = ({ item }) => {
           <input
             type="checkbox"
             checked={isChecked}
-            name="isAlugando"
+            name="disponivel"
             value={formValues.isAlugando || ""}
             onChange={handleChange}
             className="border-2 rounded-md p-1 border-gray-400"
@@ -251,17 +285,71 @@ const Form = ({ item }) => {
           type="submit"
           className={`${styles.botaoPadraoPrimary} p-2 text-sm ${styles.hoverPadraoPrimary}`}
         >
-          <i className={`mdi mdi-${!item ? "plus": ""} text-[20px]`}/>
+          <i className={`mdi mdi-${!item ? "plus" : ""} text-[20px]`} />
           {item ? "Salvar" : "Cadastrar Item"}
         </button>
 
         {item && (
           <button
             className={`border-[1px] w-full p-3 border-gray-400 text-gray-400 text-sm rounded-md ${styles.hoverPadraoPrimary}`}
+            onClick={deletarItem}
           >
-            Cancelar
+            Remover Item
           </button>
         )}
+      </div>
+    </form>
+  );
+};
+
+const FormModalFoto = ({ item }) => {
+  const [formValues, setFormValues] = useState();
+
+  const handleChange = (event) => {
+    const file = event.target.files[0];
+    setFormValues(file);
+    console.log(formValues);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (formValues) {
+      try {
+        console.log("submit", formValues);
+        patchFotoItemById(item.id, formValues);
+      } catch (error) {
+        console.log("Erro ao atualizar a foto:", error);
+      }
+    }
+  };
+
+  useEffect(() => {}, [item]);
+
+  return (
+    <form className="w-96 flex flex-wrap gap-2" onSubmit={handleSubmit}>
+      <div className="w-full">
+        <div className="flex rounded-md bg-gray-300 items-center justify-center py-2 px-10">
+          <label htmlFor="foto">
+            <i className="mdi mdi-plus text-[50px] text-gray-400 cursor-pointer"></i>
+          </label>
+          <input
+            type="file"
+            accept=".jpg, .png, image/jpeg, image/png"
+            name="foto"
+            id="foto"
+            className={`hidden`}
+            onChange={handleChange}
+          />
+        </div>
+      </div>
+
+      <div className="w-1/2">
+        <button
+          type="submit"
+          className={`w-full ${styles.botaoPadraoPrimary} ${styles.hoverPadraoPrimary}`}
+        >
+          Salvar
+        </button>
       </div>
     </form>
   );

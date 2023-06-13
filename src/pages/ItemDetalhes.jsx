@@ -1,60 +1,44 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Avaliacao, Footer, Header } from "../components";
+import { Footer, Header } from "../components";
 import { ItemContext } from "../contexts/ItemContext";
-import { getItemById, getUserById, putItem } from "../api";
+import {
+  getFotoItemById,
+  getFotoUserById,
+  getItemById,
+  postFavoritarItem,
+} from "../api";
 import { styles } from "../styles";
 import { Link, useNavigate } from "react-router-dom";
+import { Avatar, Rating } from "@mui/material";
+import { categorias } from "../constants";
 
 const ItemDetalhes = () => {
   const navigate = useNavigate();
-  const { itemId, userId } = useContext(ItemContext);
-
-  const [item, setItem] = useState({});
-  const [user, setUser] = useState({});
-
-  const getItem = async () => {
-    const element = [];
-
-    try {
-      const resposta = await getItemById(userId, itemId).then((res) => {
-        setItem(res.data);
-      });
-      return resposta;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const getUser = async () => {
-    try {
-      const resposta = await getUserById(userId).then((res) => {
-        setUser(res.data);
-      });
-      return resposta;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const favoritarItem = () => {
-    const itemAtualizado = item;
-    itemAtualizado.isFavorito = true;
-    console.log("Favoritado", itemAtualizado);
-    putItem(userId, item.id, itemAtualizado);
+  const { itemId, item, foto, linkWhats, getItem, userFoto } = useContext(ItemContext);
+  const [selectedCategory, setSelectedCategory] = useState();
+  
+  const favoritarItem = async () => {
+    await postFavoritarItem(itemId);
   };
 
   const backImage = {
-    backgroundImage: `url(${item.foto})`,
-    // backgroundImage: `url(${foto && foto[0]})` *Código para trazer o primeira imagem quando for um array, não apagar
+    backgroundImage: `url(${foto})`,
   };
 
-  const backImageUser = {
-    backgroundImage: `url(${user.foto})`,
+  const categoria = () => {
+    const selectedCategoryObject = categorias.find(
+      (categoria) => categoria.value === item.categoria
+    );
+  
+    if (selectedCategoryObject) {
+      return selectedCategoryObject.title;
+    }
+  
+    return "Categoria não encontrada";
   };
 
   useEffect(() => {
     getItem();
-    getUser();
   }, []);
 
   return (
@@ -63,7 +47,7 @@ const ItemDetalhes = () => {
       <main className={`${styles.mainConfig}`}>
         <div className="py-2">
           <button
-          onClick={()=>navigate(-1)}
+            onClick={() => navigate(-1)}
             to={"/filtros"}
             className="text-md flex items-center text-gray-400"
           >
@@ -83,38 +67,41 @@ const ItemDetalhes = () => {
               <h2 className="text-xl font-bold pb-10">Detalhes</h2>
               <p>{item.descricao}</p>
             </div>
-
           </div>
 
-          <div className={`${styles.cardWhite} flex flex-col mt-10 gap-10 p-8 lg:bg-transparent lg:shadow-none lg:mt-0`}>
+          <div
+            className={`${styles.cardWhite} flex flex-col mt-10 gap-10 p-8 lg:bg-transparent lg:shadow-none lg:mt-0`}
+          >
             <div>
-              <p className="text-lg text-gray-400">{item.categoria}</p>
-              <h1 className="text-2xl font-bold">{item.nome}</h1>
+              <h1 className="text-2xl font-bold">{item.nomeItem}</h1>
+              <p className="text-lg text-gray-400">{categoria()}</p>
             </div>
 
             <div className="flex">
-              <Link to={`/locador/${user.id}`}>
-                <div
-                  className="rounded-full w-[60px] h-[60px] bg-cover"
-                  style={backImageUser}
-                ></div>
+              <Link to={`/locador/${item.idUsuario}`}>
+                <Avatar
+                  alt={`${item.apelidoUsario}`}
+                  src={`${userFoto}`}
+                  sx={{ width: 56, height: 56 }}
+                />
               </Link>
               <div className="px-3">
-                <Link to={`/locador/${user.id}`}>
-                  <h3 className="text-xl font-bold">{user.apelido}</h3>
+                <Link to={`/locador/${item.idUsuario}`}>
+                  <h3 className="text-xl font-bold">{item.apelidoUsario}</h3>
                 </Link>
-                <Avaliacao valorSetado={2.5} />
+                {/* <Rating name="read-only" value={3} readOnly precision={0.5} /> */}
               </div>
             </div>
 
-            <button
-              className={`w-full rounded-lg flex items-center justify-evenly border-[1px] 
-            border-gray-400 p-1 px-3 ${styles.hoverPadraoPrimary}`}
-            onClick={()=>navigate('/perfil/chat')}
-            >
-              <i className="mdi mdi-chat text-[22px]"></i>
-              Conversar com o locador
-            </button>
+            <a href={linkWhats} target="_blank">
+              <button
+                className={`w-full rounded-lg flex items-center justify-evenly border-[1px]
+              border-gray-400 p-1 px-3 ${styles.hoverPadraoPrimary}`}
+              >
+                <i className="mdi mdi-chat text-[22px]"></i>
+                Conversar com o locador
+              </button>
+            </a>
 
             <div className="">
               <div className="flex items-end">
@@ -127,14 +114,20 @@ const ItemDetalhes = () => {
             </div>
 
             <div className="w-full flex gap-2">
-              <Link to={`/item/alugar/${item.id}`} className={`w-5/6 ${styles.botaoPadraoPrimary} ${styles.hoverPadraoPrimary}`}>
+              <Link
+                to={`/item/alugar/${item.id}`}
+                className={`w-5/6 ${styles.botaoPadraoPrimary} ${styles.hoverPadraoPrimary}`}
+              >
                 Alugar
               </Link>
 
               <button
-                className={`rounded-lg border-[1px] text-gray-400 border-gray-300 p-1 px-3  ${styles.hoverPadraoPrimary}`}
+                className={`${styles.botaoPadraoSecondary} text-gray-300 ${styles.hoverPadraoPrimary}`}
               >
-                <i className="mdi mdi-heart w-1/6 cursor-pointer text-[22px]" onClick={favoritarItem} />
+                <i
+                  className="mdi mdi-heart cursor-pointer text-[22px]"
+                  onClick={favoritarItem}
+                />
               </button>
             </div>
           </div>

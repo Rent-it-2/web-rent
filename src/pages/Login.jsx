@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../contexts/Auth";
 import { styles } from "../styles";
+import { ToastContainer } from "react-toastify";
 
 const Login = () => {
   const { authenticated, login } = useContext(AuthContext);
@@ -15,11 +16,15 @@ const Login = () => {
 
   return (
     <div className="flex w-full text-rentBlue">
+
       <div className="w-full min-w-fit flex-col justify-center items-center h-screen overflow-hidden sm:w-1/2">
-        
         <header className="w-full flex items-start self-start justify-self-start py-2 sm:px-8">
           <a href="/">
-            <img src="../../public/logo.svg" alt="home" className="w-20 sm:w-28" />
+            <img
+              src="../../public/logo.svg"
+              alt="home"
+              className="w-20 sm:w-28"
+            />
           </a>
         </header>
 
@@ -28,8 +33,12 @@ const Login = () => {
           className="w-full h-full gap-5 p-20 flex flex-col justify-center items-center xs:gap-20 xs:p-32 ss:p-44 sm:p-48 md:p-48"
         >
           <div className={`flex flex-col items-center`}>
-            <h1 className="font-bold font text-xl text-center xs:text-3xl">Bem vindo(a) de volta</h1>
-            <h3 className="text-gray-500 text-xs xs:text-base">Por favor, preencha os detalhes</h3>
+            <h1 className="font-bold font text-xl text-center xs:text-3xl">
+              Bem vindo(a) de volta
+            </h1>
+            <h3 className="text-gray-500 text-xs xs:text-base">
+              Por favor, preencha os detalhes
+            </h3>
           </div>
 
           <form
@@ -51,8 +60,6 @@ const Login = () => {
               />
             </div>
 
-            {/* <Input label="Email" type="email" name="email" id="email" handleSubmit={handleSubmit} /> */}
-
             <div className="flex-col flex">
               <label htmlFor="" className="text-gray-500 text-sm">
                 Password
@@ -67,7 +74,7 @@ const Login = () => {
               />
             </div>
             <div className="w-full flex justify-between">
-              <div className="flex gap-1 flex-row-reverse items-center">
+              {/* <div className="flex gap-1 flex-row-reverse items-center">
                 <label htmlFor="" className="text-gray-500 text-sm">
                   Lembrar de mim
                 </label>
@@ -77,16 +84,16 @@ const Login = () => {
                   id="lembrar"
                   className="border-2 rounded-md p-1 border-gray-400"
                 />
-              </div>
-
+              </div> */}
+              {/* 
               <a href="" className="font-bold text-sm hover:text-secondary">
                 Esqueci a senha
-              </a>
+              </a> */}
             </div>
 
             <div className="w-full flex flex-col items-center gap-2">
               <button
-                className={`${styles.botaoPadraoPrimary} ${styles.hoverPadraoPrimary}`}
+                className={`w-full ${styles.botaoPadraoPrimary} ${styles.hoverPadraoPrimary}`}
                 type="submit"
               >
                 Entrar

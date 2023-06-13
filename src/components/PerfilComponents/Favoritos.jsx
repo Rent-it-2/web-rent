@@ -1,30 +1,26 @@
-import React, { useEffect, useState } from "react";
-import api from "../../api";
+import React, { useContext, useEffect, useState } from "react";
+import api, { getUserItensFavoritos } from "../../api";
 import {Item} from "../index";
+import { AuthContext } from "../../contexts/Auth";
+import { itemFavoritos } from "../../constants";
 
 const Favoritos = () => {
-  const [itemList, setItem] = useState([]);
+  // const { itemFavoritos } = useContext(AuthContext);
+  // const [itemFavoritos, setitemFavoritos] = useState([]);
 
-  const getItens = async () => {
-    try {
-      const element = [];
+  // const getFavoritos = async () =>{
+  //   try {
+  //     await getUserItensFavoritos().then((res) => {
+  //       setitemFavoritos(res.data);
+  //     });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
 
-      for (let index = 1; index <= 5; index++) {
-        const resposta = await api.get(`/users/${index}/itens`).then((res) => {
-          for (let j = 0; j < res.data.length; j++) {
-            element.push(res.data[j]);
-          }
-        });
-      }
-      setItem(element);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    getItens();
-  }, []);
+  // useEffect(() => {
+  //   getFavoritos();
+  // }, []);
 
   return (
     <>
@@ -37,8 +33,8 @@ const Favoritos = () => {
       </div>
 
       <div className="w-full flex flex-wrap gap-5 sm:gap-x-12">
-        {itemList?.map((item) => (
-          <Item key={item.userId} item={item} />
+        {itemFavoritos?.map((item) => (
+          <Item item={item} />
         ))}
       </div>
     </>

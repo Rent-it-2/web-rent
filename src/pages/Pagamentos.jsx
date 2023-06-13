@@ -3,6 +3,7 @@ import { ItemContext } from "../contexts/ItemContext";
 import {
   Footer,
   Header,
+  Modal,
   PagamentosFormaPag,
   PagamentosInfos,
   PagamentosResumo,
@@ -11,21 +12,24 @@ import {
 import { styles } from "../styles";
 import { getItemById, getUserById } from "../api";
 import { usePagamentoForm } from "../hooks/usePagamentoForm";
+import { Rating } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const Pagamentos = () => {
   const { itemId, userId } = useContext(ItemContext);
   const [user, setUser] = useState({});
   const [item, setItem] = useState({});
+  const [openModal, setOpenModal] = useState(false);
 
   const formTemplate = {
-    userId: userId,
-    itemId: itemId,
-    nome: "",
+    cartaoId:"",
     cpf: "",
-    dtIni: "",
     dtFim: "",
-    enderecoId: "",
-    cartaoId: "",
+    dtInicio: "",
+    enderecoId:"",
+    itemId:"",
+    idUso:"",
+    valorFinal:""
   };
 
   const [data, setData] = useState(formTemplate);
@@ -37,16 +41,21 @@ const Pagamentos = () => {
   };
 
   const formComponents = [
-    <PagamentosInfos data={data} updateFieldHandler={updateFieldHandler} />,
+    <PagamentosInfos
+      data={data}
+      userInfos={user}
+      updateFieldHandler={updateFieldHandler}
+    />,
     <PagamentosFormaPag
       data={data}
       userInfos={user}
       updateFieldHandler={updateFieldHandler}
     />,
-    <PagamentosResumo data={data} item={item} user={user}/>,
+    <PagamentosResumo data={data} item={item} user={user} />,
   ];
 
-  const { currentStep, currentComponent, changeStep, isLastStep, isFirstStep } = usePagamentoForm(formComponents);
+  const { currentStep, currentComponent, changeStep, isLastStep, isFirstStep } =
+    usePagamentoForm(formComponents);
 
   const getItem = async () => {
     try {
@@ -80,7 +89,9 @@ const Pagamentos = () => {
       <Header />
       <main className={`${styles.mainConfig}`}>
         <form
-          onSubmit={(e) => changeStep(currentStep + 1, e) | console.log("data", data)}
+          onSubmit={(e) =>
+            changeStep(currentStep + 1, e) | console.log("data", data)
+          }
           className="w-full flex justify-center flex-wrap gap-10"
         >
           <div
@@ -92,7 +103,7 @@ const Pagamentos = () => {
               {!isFirstStep && (
                 <button
                   type="button"
-                  className={`${styles.botaoPadraoPrimary} ${styles.hoverPadraoPrimary}`}
+                  className={`w-full ${styles.botaoPadraoPrimary} ${styles.hoverPadraoPrimary}`}
                   onClick={() => changeStep(currentStep - 1)}
                 >
                   <i className="mdi mdi-chevron-left text-[20px]" />
@@ -103,7 +114,7 @@ const Pagamentos = () => {
               {!isLastStep ? (
                 <button
                   type="submit"
-                  className={`${styles.botaoPadraoPrimary} ${styles.hoverPadraoPrimary}`}
+                  className={`w-full ${styles.botaoPadraoPrimary} ${styles.hoverPadraoPrimary}`}
                 >
                   Próximo
                   <i className="mdi mdi-chevron-right text-[20px]" />
@@ -111,18 +122,78 @@ const Pagamentos = () => {
               ) : (
                 <button
                   type="submit"
-                  className={`${styles.botaoPadraoPrimary} ${styles.hoverPadraoPrimary}`}
+                  className={`w-full ${styles.botaoPadraoPrimary} ${styles.hoverPadraoPrimary}`}
+                  onClick={() => setOpenModal(true)}
                 >
                   Concluir
                   <i className="mdi mdi-check text-[20px]" />
                 </button>
               )}
             </div>
+
+            <Modal
+              title={"Transação Completa"}
+              isOpen={openModal}
+              setModalOpen={() => setOpenModal(!openModal)}
+            >
+              <Form userId={userId} />
+            </Modal>
           </div>
         </form>
       </main>
       <Footer />
     </>
+  );
+};
+
+export const Form = ({ userId }) => {
+  const [value, setValue] = useState(0);
+  const [user, setUser] = useState({});
+  const navigate = useNavigate();
+
+  const getUser = async () => {
+    try {
+      const resposta = await getUserById(userId).then((res) => {
+        setUser(res.data);
+      });
+      return resposta;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const avaliar = (newValue) => {
+    setValue(newValue);
+    console.log(newValue);
+  }
+
+  useEffect(() => {
+    getUser();
+  }, []);
+
+  return (
+    <form className="flex flex-col items-center gap-5 mt-5">
+      <h1 className="font-poppins font-bold text-lg">Avaliar {user.apelido}</h1>
+      <div className="">
+        <Rating
+          name="simple-controlled"
+          precision={0.5}
+          value={value}
+          onChange={(event, newValue) => {
+            avaliar(newValue);
+          }}
+          size="large"
+        />
+      </div>
+
+      <button
+        type="submit"
+        className={`w-full ${styles.botaoPadraoPrimary} ${styles.hoverPadraoPrimary}`}
+        onClick={() => navigate("/")}
+      >
+        Enviar
+      </button>
+    </form>
   );
 };
 

@@ -1,15 +1,51 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import CardCartao from "../CardCartao";
-import { getUserLogged } from "../../api";
-import { IMaskInput } from "react-imask";
 import { styles } from "../../styles";
+import { DateTimeField, LocalizationProvider, MobileDatePicker } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
+import { getUserCartoes } from "../../api";
+import { ItemContext } from "../../contexts/ItemContext";
+import { AuthContext } from "../../contexts/Auth";
+import { cartoes } from "../../constants";
 
-const PagamentosFormaPag = ({ data, userInfos, updateFieldHandler }) => {
-  // const [user, setUser] = useState({});
+const PagamentosFormaPag = ({ data, updateFieldHandler }) => {
+  // const { cartoes } = useContext(AuthContext);
+
+  // const getCartoes = async () => {
+  //   try {
+  //     const resposta = await getUserCartoes().then((res) => {
+  //       console.log(res.data);
+  //       setCartoes(res.data);
+  //     });
+  //     return resposta;
+  //   } catch (error) {
+  //     console.log(error);
+  //     return null;
+  //   }
+  // };
 
   // useEffect(() => {
-  //   setUser(getUserLogged());
+  //   getCartoes();
   // }, []);
+
+  const dateFormatAux = (date) => {
+    var d = new Date(date)
+    //   ,month = "" + (d.getMonth() + 1),
+    //   day = "" + d.getDate(),
+    //   year = "" + d.getFullYear();
+
+    // if (month.length < 2) month = "0" + month;
+    // if (day.length < 2) day = "0" + day;
+    // return [day, month, year].join("/");
+    return d.toISOString();
+  };
+
+  const dateFormat = (key, date) => {
+    console.log(key, dateFormatAux(date));
+
+    updateFieldHandler(key, dateFormatAux(date));
+  };
 
   return (
     <div className="flex flex-wrap gap-5 px-5 sm:px-10">
@@ -18,34 +54,62 @@ const PagamentosFormaPag = ({ data, userInfos, updateFieldHandler }) => {
           Período que é pretendido para locação do item
         </h2>
 
-        <div className="w-full flex flex-wrap gap-5 sm:flex-nowrap">
-          <div className="w-full flex gap-2">
+        <div className="w-full flex flex-wrap gap-5 items-center sm:flex-nowrap">
+          <div className="w-full flex items-center gap-2">
             <label className="text-sm text-rentBlue">De:</label>
+            <LocalizationProvider
+              dateAdapter={AdapterDayjs}
+              className={`w-full appearance-none`}
+            >
+              <DemoContainer components={["MobileDatePicker"]}>
+                <DemoItem>
+                  <MobileDatePicker
+                    className={`${styles.inputPadrao}`}
+                    onChange={(date) => {
+                      dateFormat("dtInicio", date);
+                    }}
+                    required
+                  />
+                </DemoItem>
+              </DemoContainer>
+            </LocalizationProvider>
 
-            <IMaskInput
-              type="text"
-              name="dtIni"
-              as={IMaskInput}
-              mask="00/00/0000"
-              placeholder="00/00/0000"
-              value={data.dtIni || ""}
-              onChange={(e) => updateFieldHandler("dtIni", e.target.value)}
-              className={`${styles.inputPadrao}`}
-            />
+              {/* <DemoContainer components={["MobileDatePicker"]}>
+                <DemoItem>
+                  <MobileDatePicker
+                    className={`${styles.inputPadrao}`}
+                    // onChange={(date) => {
+                    //   dateFormat("dtInicio", date);
+                    // }}
+                    // onChange={(e) => {
+                    //   updateFieldHandler("dateInicio", e.target.value);
+                    // }}
+                    required
+                  />
+                </DemoItem>
+              </DemoContainer>
+            </LocalizationProvider> */}
           </div>
 
-          <div className="w-full flex gap-2">
+          <hr className="hidden w-full sm:block" />
+
+          <div className="w-full flex items-center gap-2">
             <label className="text-sm text-rentBlue">Até:</label>
-            <IMaskInput
-              type="text"
-              name="dtFim"
-              as={IMaskInput}
-              mask="00/00/0000"
-              placeholder="00/00/0000"
-              value={data.dtFim || ""}
-              onChange={(e) => updateFieldHandler("dtFim", e.target.value)}
-              className={`${styles.inputPadrao}`}
-            />
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DemoContainer components={["MobileDatePicker"]}>
+                <DemoItem>
+                  <MobileDatePicker
+                    // onChange={(e) => {
+                    //   updateFieldHandler("dateFim", e.target.value);
+                    // }}
+                    onChange={(date) => {
+                      dateFormat("dtFim", date);
+                    }}
+                    required
+                  />
+                </DemoItem>
+              </DemoContainer>
+            </LocalizationProvider>
           </div>
         </div>
       </div>
@@ -55,27 +119,21 @@ const PagamentosFormaPag = ({ data, userInfos, updateFieldHandler }) => {
       </h2>
 
       <div className="w-full flex flex-wrap gap-5 justify-center lg:justify-start">
-        <CardCartao cartaoInfos={userInfos} showEdit={false}>
-          <input
-            type="radio"
-            name="cartaoId"
-            checked={data.cartaoId === userInfos.cartaoId}
-            value={userInfos.cartaoId}
-            className="checked:bg-primary"
-            onChange={(e) => updateFieldHandler("cartaoId", e.target.value)}
-          />
-        </CardCartao>
+        {cartoes?.map((cartao) => (
+          <CardCartao cartaoInfos={cartao}>
+            <input
+              type="radio"
+              name="cartaoId"
+              defaultChecked={data.cartaoId == cartao.id}
+              value={cartao.id}
+              onChange={(e) => updateFieldHandler("cartaoId", e.target.value)}
+            />
+          </CardCartao>
+        ))}
 
-        <CardCartao cartaoInfos={userInfos} showEdit={false}>
-          <input
-            type="radio"
-            name="cartaoId2"
-            checked={data.cartaoId === userInfos.cartaoId2}
-            value={userInfos.cartaoId2}
-            className="checked:bg-primary"
-            onChange={(e) => updateFieldHandler("cartaoId", e.target.value)}
-          />
-        </CardCartao>
+{/* {cartoes?.map((cartao) => (
+          <CardCartao cartaoInfos={cartao} showEdit={true} />
+        ))} */}
       </div>
     </div>
   );

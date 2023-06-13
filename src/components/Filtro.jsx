@@ -1,70 +1,120 @@
-import React from "react";
+import React, { useState } from "react";
 import { categorias, zonas } from "../constants";
 import { styles } from "../styles";
 
-const Filtro = () => {
+import Slider from "@mui/material/Slider";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormControl from "@mui/material/FormControl";
+import FormLabel from "@mui/material/FormLabel";
+import { postPesquisarItem } from "../api";
+
+const marks = [
+  {
+    value: 100,
+    label: "R$100",
+  },
+  {
+    value: 300,
+    label: "R$300",
+  },
+  {
+    value: 700,
+    label: "R$700",
+  },
+  {
+    value: 1000,
+    label: "R$1000",
+  },
+];
+
+const Filtro = ({nome}) => {
+  const [isChecked, setIsChecked] = useState(false);
+  const [formValues, setFormValues] = useState({});
+
+  const handleChange = (event) => {
+    const { name, type } = event.target;
+    let value = null;
+
+    if (type === "file") {
+      value = event.target.files[0];
+    } else if (type === "checkbox") {
+      setIsChecked(event.target.checked);
+      value = event.target.checked;
+    } else {
+      value = event.target.value;
+    }
+
+    setFormValues((prevValues) => ({
+      ...prevValues,
+      [name]: value,
+    }));
+
+    handleSubmit();
+  };
+
+  const handleSubmit = () => {
+    // e.preventDefault();
+    console.log("submit", formValues);
+    postPesquisarItem(nome, formValues);
+  };
+
+  const valuetext = (value) => {
+    return `R$${value}`;
+  };
+
   return (
     <>
       <form
         action=""
-        className={`w-56 text-rentBlue flex flex-col gap-10 px-5`}
+        className={`${styles.cardWhite} w-full text-rentBlue flex flex-col gap-10 px-12 mb-10 lg:px-5 lg:w-56 lg:bg-transparent lg:shadow-none`}
+        onSubmit={handleSubmit}
       >
         <h2 className="text-xl font-bold">
-          <i className="mdi mdi-filter text-[20px]"/>
+          <i className="mdi mdi-filter text-[20px]" />
           Filtrar por:
         </h2>
 
         <div className="">
-          <h3 className="font-bold">Região:</h3>
-          <div className="flex flex-wrap pt-5 gap-3">
-            {zonas.map((zona) => (
-              <button
-                href={`#${zona.id}`}
-                className="rounded-full py-2 text-xs px-1 border-[1px] border-black"
+          <h3 className="font-bold">Categoria:</h3>
+          <div className="flex flex-wrap pt-5 gap-3 lg:flex-col">
+            <FormControl>
+              <RadioGroup
+                name="categoria"
+                onChange={handleChange}
               >
-                {zona.title}
-              </button>
-            ))}
+                {categorias.map((categoria) => (
+                  <FormControlLabel
+                    value={categoria.value}
+                    control={<Radio />}
+                    label={categoria.title}
+                  />
+                ))}
+              </RadioGroup>
+            </FormControl>
           </div>
         </div>
 
         <div className="flex flex-col gap-2">
-          <h3 className="font-bold">Valor por dia:</h3>
-          <div className="flex flex-wrap ">
-            <input type="range" name="" id="" className="w-full" />
-          </div>
-
-          {/* <div className="w-full flex gap-2">
-              <div className="flex items-center gap-2">
-                <label className="text-sm">De:</label>
-                <input
-                  type="number"
-                  placeholder="00,00"
-                  className="w-full border-[1px] rounded-md p-2 border-black outline-none text-xs"
-                />
-              </div>
-              <div className="flex items-center gap-2">
-                <label className="text-sm">Até:</label>
-                <input
-                  type="number"
-                  placeholder="00,00"
-                  className="w-full border-[1px] rounded-md p-2 border-black outline-none text-xs"
-                />
-              </div>
-            </div> */}
-        </div>
-
-        <div className="">
-          <h3 className="font-bold">Categoria:</h3>
-          <div className="flex flex-wrap gap-3 justify-center pt-5">
-            {categorias.map((categoria) => (
-              <button
-                href={`#${categoria.id}`}
-                className="rounded-full py-2 px-1 border-[1px] border-black text-xs"
-              >
-                {categoria.title}
-              </button>
-            ))}
+          <h3 className="font-bold">Valor máximo por dia:</h3>
+          <div className="flex flex-wrap justify-center items-start pt-3 px-5 sm:pr-10 sm:px-0">
+            <Slider
+              defaultValue={10}
+              getAriaValueText={valuetext}
+              marks={marks}
+              valueLabelDisplay="auto"
+              orientation="vertical"
+              step={100}
+              min={1}
+              max={1000}
+              sx={{
+                color: "#FF724C",
+                height: 150,
+              }}
+              name={"preco"}
+              onChange={handleChange}
+            />
           </div>
         </div>
       </form>

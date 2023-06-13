@@ -1,48 +1,25 @@
 import React, { useContext, useEffect, useState } from "react";
-import { getUserById } from "../api";
+import { getFotoUserById, getUserById } from "../api";
 import { Link } from "react-router-dom";
-import { paginas } from "../constants";
+import { foto, paginas } from "../constants";
 import { AuthContext } from "../contexts/Auth";
+import { Avatar } from "@mui/material";
 
 const Menu = () => {
-  const [user, setUser] = useState({});
   const [toggle, setToggle] = useState(false);
-  const [active, setActive] = useState("");
-  const { logout } = useContext(AuthContext);
+  const { logout, user } = useContext(AuthContext);
 
   const handleLogout = () => {
-    console.log("logout");
     logout();
-  };
-
-  const getUser = async () => {
-    let userInfos = JSON.parse(sessionStorage.getItem("user"));
-    try {
-      const resposta = await getUserById(userInfos.id).then((res) => {
-        setUser(res.data);
-      });
-      return resposta;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    getUser();
-  }, []);
-
-  const backImageUser = {
-    backgroundImage: `url(${user.foto})`,
   };
 
   return (
     <>
       <div className="h-fit rounded-full text-white bg-rentBlue border-[0.1px] border-rentBlue flex pr-3 gap-3 items-center">
-        <Link
-          to={"/perfil/meus-dados"}
-          className="rounded-full min-w-[45px] min-h-[45px] bg-cover border-[1px] border-rentBlue"
-          style={backImageUser}
-        ></Link>
+        <Link to={"/perfil/meus-dados"}>
+          <Avatar alt={`${user.apelido}`} src={`${foto}`} />
+        </Link>
+
         <h3 className="hidden text-md sm:block">{user.apelido}</h3>
         <div className="">
           <i
@@ -61,23 +38,23 @@ const Menu = () => {
           {paginas.map((pagina) => (
             <li
               key={pagina.title}
-              className={`font-medium cursor-pointer text-[16px] hover:text-secondary ${
-                active === pagina.link ? "text-secondary" : "text-rentBlue"
-              }`}
+              className={`font-medium cursor-pointer text-[16px] hover:text-secondary `}
+              // ${
+              //   active === pagina.link ? "text-secondary" : "text-rentBlue"
+              // }`}
               onClick={() => {
                 setToggle(!toggle);
-                setActive(pagina.title);
               }}
             >
-              {pagina.title != "Sair" && 
+              {pagina.title != "Sair" && (
                 <a href={`${pagina.link}`}>
-                  <i className={`mdi mdi-${pagina.icon} pr-4 text-[20px]`}/>
+                  <i className={`mdi mdi-${pagina.icon} pr-4 text-[20px]`} />
                   {pagina.title}
                 </a>
-              }
+              )}
               {pagina.title === "Sair" && (
                 <a href={`${pagina.link}`} onClick={handleLogout}>
-                  <i className={`mdi mdi-${pagina.icon} pr-4 text-[20px]`}/>
+                  <i className={`mdi mdi-${pagina.icon} pr-4 text-[20px]`} />
                   {pagina.title}
                 </a>
               )}
