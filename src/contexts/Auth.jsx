@@ -63,7 +63,9 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = async (email, password) => {
-    const response = await createSession(email, password);
+    const response = 
+// await
+ createSession(email, password);
     const loggedUser = response.data;
     const token = response.data.token;
 
@@ -91,7 +93,9 @@ export const AuthProvider = ({ children }) => {
 
   const getCartoes = async () => {
     try {
-      await getUserCartoes().then((res) => {
+      
+// await
+ getUserCartoes().then((res) => {
         sessionStorage.setItem("userCartoes", JSON.stringify(res.data));
         setCartoes(res.data);
       });
@@ -101,14 +105,18 @@ export const AuthProvider = ({ children }) => {
   };
 
   const getItem = async (userId) => {
-    const response = await getUserLoggedItems(userId);
+    const response = 
+// await
+ getUserLoggedItems(userId);
     sessionStorage.setItem("userItems", JSON.stringify(response));
     setItemList(response);
   };
 
   const getFavoritos = async () => {
     try {
-      await getUserItensFavoritos().then((res) => {
+      
+// await
+ getUserItensFavoritos().then((res) => {
         sessionStorage.setItem("favoritos", JSON.stringify(res.data));
         setItemFavoritos(res.data);
       });
@@ -119,7 +127,9 @@ export const AuthProvider = ({ children }) => {
 
   const getEndereco = async () => {
     try {
-      await getUserEndereco().then((res) => {
+      
+// await
+ getUserEndereco().then((res) => {
         sessionStorage.setItem("endereco", JSON.stringify(res.data));
         console.log(res.data);
         setEndereco(res.data);

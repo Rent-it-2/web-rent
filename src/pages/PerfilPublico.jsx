@@ -29,7 +29,9 @@ const PerfilPublico = () => {
 
   const getItens = async () => {
     try {
-      const resposta = await getUserItem(userId).then((res) => {
+      const resposta = 
+// await
+ getUserItem(userId).then((res) => {
         setUserItems(res.data);
         console.log(res.data);
       });
@@ -42,7 +44,9 @@ const PerfilPublico = () => {
   const getUser = async () => {
     try {
       console.log(userId);
-      await getUserById(userId).then((res) => {
+      
+// await
+ getUserById(userId).then((res) => {
         setUser(res.data);
       });
       return resposta;

@@ -207,7 +207,11 @@ export const getUserItensFavoritos = async () => {
 
 export const getUserLogged = async () => {
   try {
-    const resposta = await getUserById(UsuarioLogado.userId).then((res) => {
+    const resposta = 
+    // 
+// await
+
+     getUserById(UsuarioLogado.userId).then((res) => {
       console.log(res.data);
       return res.data;
     });
@@ -220,7 +224,9 @@ export const getUserLogged = async () => {
 
 export const getUserLoggedItems = async (userId) => {
   try {
-    const resposta = await getUserItem(userId).then((res) => {
+    const resposta = 
+// await
+ getUserItem(userId).then((res) => {
       console.log(res.data);
       return res.data;
     });

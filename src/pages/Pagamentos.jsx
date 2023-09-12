@@ -64,7 +64,9 @@ const Pagamentos = () => {
 
   const getItem = async () => {
     try {
-      const resposta = await getItemById(userId, itemId).then((res) => {
+      const resposta = 
+// await
+ getItemById(userId, itemId).then((res) => {
         setItem(res.data);
       });
       return resposta;
@@ -75,7 +77,9 @@ const Pagamentos = () => {
 
   const getUser = async () => {
     try {
-      const resposta = await getUserById(userId).then((res) => {
+      const resposta = 
+// await
+ getUserById(userId).then((res) => {
         setUser(res.data);
       });
       return resposta;
@@ -158,7 +162,9 @@ export const Form = ({ userId }) => {
 
   const getUser = async () => {
     try {
-      const resposta = await getUserById(userId).then((res) => {
+      const resposta = 
+// await
+ getUserById(userId).then((res) => {
         setUser(res.data);
       });
       return resposta;

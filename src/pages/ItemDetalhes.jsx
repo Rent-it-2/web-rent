@@ -19,7 +19,9 @@ const ItemDetalhes = () => {
   const [value, setValue] = useState(0);
 
   const favoritarItem = async () => {
-    await postFavoritarItem(itemId);
+    
+// await
+ postFavoritarItem(itemId);
   };
 
   const backImage = {

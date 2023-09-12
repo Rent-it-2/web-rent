@@ -28,7 +28,9 @@ const Chat = () => {
   const [user, setUser] = useState({});
 
   const getUser = async () => {
-    setUser(await getUserLogged());
+    setUser(
+// await
+ getUserLogged());
   };
 
   useEffect(() => {
