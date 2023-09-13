@@ -2,6 +2,8 @@ import React, { useContext, useState } from "react";
 import { AuthContext } from "../contexts/Auth";
 import { styles } from "../styles";
 import { ToastContainer } from "react-toastify";
+import Logo from "../images/logo.svg"
+
 
 const Login = () => {
   const { authenticated, login } = useContext(AuthContext);
@@ -21,7 +23,7 @@ const Login = () => {
         <header className="w-full flex items-start self-start justify-self-start py-2 sm:px-8">
           <a href="/">
             <img
-              src="../../public/logo.svg"
+              src={Logo}
               alt="home"
               className="w-20 sm:w-28"
             />

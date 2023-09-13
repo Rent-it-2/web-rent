@@ -3,6 +3,7 @@ import { styles } from "../styles";
 import { Modal } from "./index";
 import { IMaskInput } from "react-imask";
 import { deleteUserCartoes, patchUserCartoes } from "../api";
+import Card from "../images/card-ship.png"
 
 const CardCartao = ({ cartaoInfos, showEdit, children }) => {
   const [openModal, setOpenModal] = useState(false);
@@ -17,7 +18,7 @@ const CardCartao = ({ cartaoInfos, showEdit, children }) => {
       <div className="flex flex-wrap flex-col gap-5 bg-black rounded-3xl py-10 px-8 bg-gradient-to-r from-rentBlue via-gray-950 to-gray-950">
         <div className="flex items-start gap-3">
           <img
-            src="../../public/card-ship.png"
+            src={Card}
             className="hidden aspect-square h-16 sm:flex"
           />
           <div className="pt-2">
