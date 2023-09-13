@@ -6,7 +6,7 @@ import { Endereco, Modal } from "../index";
 import { Avatar } from "@mui/material";
 import { AuthContext } from "../../contexts/Auth";
 import { endereco, foto } from "../../constants";
-import MeusDadosImg from "../images/image_MeusDados.svg"
+import MeusDadosImg from "../images/meusDados.svg"
 
 const MeusDados = () => {
   const { user } = useContext(AuthContext);
