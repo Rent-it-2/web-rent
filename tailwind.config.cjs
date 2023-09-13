@@ -19,9 +19,9 @@ module.exports = {
         poppins: ["'Poppins', sans-serif"],
       },
       backgroundImage: {
-        'art-login': "url('./public/banner-login.jpg')",
-        'art-cadastro': "url('./public/banner-cadastro.gif')",
-        'art-buscar': "url('./public/search-banner.jpg')",
+        'art-login': "url('./src/images/banner-login.jpg')",
+        'art-cadastro': "url('./src/images/banner-cadastro.gif')",
+        'art-buscar': "url('./src/images/search-banner.jpg')",
       },
       gradientColorStopPositions: {
         33: '33%',
