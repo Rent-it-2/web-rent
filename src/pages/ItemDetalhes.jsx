@@ -20,7 +20,7 @@ const ItemDetalhes = () => {
 
   const favoritarItem = async () => {
     
-// await
+await
  postFavoritarItem(itemId);
   };
 

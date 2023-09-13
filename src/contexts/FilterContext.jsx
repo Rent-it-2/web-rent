@@ -14,7 +14,7 @@ export const FilterProvider = ({ children }) => {
     console.log("buscar", nome);
     try {
       const resposta = 
-// await
+await
  getItemByNome(nome).then((res) => {
         setItemList(res.data);
         return res.data;

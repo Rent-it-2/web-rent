@@ -109,7 +109,7 @@ const Login = () => {
               <span className="text-gray-500 text-sm">
                 Não tem uma conta?{" "}
                 <a
-                  href="./cadastro"
+                  href="/cadastro"
                   className={`font-bold text-sm text-rentBlue cursor-pointer hover:text-secondary`}
                 >
                   Cadastre-se

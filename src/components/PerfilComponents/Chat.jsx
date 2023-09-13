@@ -29,7 +29,7 @@ const Chat = () => {
 
   const getUser = async () => {
     setUser(
-// await
+await
  getUserLogged());
   };
 

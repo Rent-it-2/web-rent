@@ -209,7 +209,7 @@ export const getUserLogged = async () => {
   try {
     const resposta = 
     // 
-// await
+await
 
      getUserById(UsuarioLogado.userId).then((res) => {
       console.log(res.data);
@@ -225,7 +225,7 @@ export const getUserLogged = async () => {
 export const getUserLoggedItems = async (userId) => {
   try {
     const resposta = 
-// await
+await
  getUserItem(userId).then((res) => {
       console.log(res.data);
       return res.data;

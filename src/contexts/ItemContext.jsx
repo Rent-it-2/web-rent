@@ -35,7 +35,7 @@ export const ItemProvider = ({ children }) => {
   const getItem = async () => {
     try {
       const resposta = 
-// await
+await
  getItemById(itemId).then((res) => {
         sessionStorage.setItem("item", JSON.stringify(res.data));
         setItem(res.data);
@@ -52,7 +52,7 @@ export const ItemProvider = ({ children }) => {
     try {
       console.log(userId);
       
-// await
+await
  getUserById(item.idUsuario).then((res) => {
         setUser(res.data);
         setUserFoto(getFotoUserById(item.idUsuario));
