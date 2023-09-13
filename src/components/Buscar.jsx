@@ -2,11 +2,17 @@ import { styles } from "../styles";
 import { categorias } from "../constants";
 import { InputBuscar } from "./index";
 import { useNavigate } from "react-router-dom";
+import Banner from "../images/search-banner.jpg"
 
 function Buscar() {
+  const backImage = {
+    backgroundImage: `url(${Banner})`,
+  };
+
   return (
     <section className="w-full flex items-center justify-center">
-      <div className=" w-full rounded-2xl flex flex-col items-center justify-center bg-art-buscar bg-cover px-5 py-6 overflow-hidden sm:px-20 shadow-lg shadow-[#959595a8]">
+      <div style={backImage} className=" w-full rounded-2xl flex flex-col items-center justify-center 
+       bg-cover px-5 py-6 overflow-hidden sm:px-20 shadow-lg shadow-[#959595a8]">
         <h1 className="text-white font-bold text-xl py-10 drop-shadow-xl shadow-black text-center sm:text-4xl">
           Bem vindo a <b className="">RENT-IT</b>, seu site para{" "}
           <b className="text-pri">alugar</b> o que precisar

@@ -2,7 +2,8 @@ import React, { useContext, useState } from "react";
 import { AuthContext } from "../contexts/Auth";
 import { styles } from "../styles";
 import { ToastContainer } from "react-toastify";
-import Logo from "../images/logo.svg"
+import Logo from "../images/logo.svg";
+import Banner from "../images/banner-login.jpg"
 
 
 const Login = () => {
@@ -14,6 +15,10 @@ const Login = () => {
     e.preventDefault();
     console.log("submit", { email, password });
     login(email, password);
+  };
+
+  const backImage = {
+    backgroundImage: `url(${Banner})`,
   };
 
   return (
@@ -117,8 +122,9 @@ const Login = () => {
       </div>
 
       <div
+      style={backImage}
         className="hidden bg-primary w-1/2 h-screen overflow-hidden 
-            bg-art-login bg-center bg-cover bg-no-repeat sm:flex"
+            bg-center bg-cover bg-no-repeat sm:flex"
       ></div>
     </div>
   );

@@ -3,7 +3,8 @@ import { IMaskInput } from "react-imask";
 import { styles } from "../styles";
 import api from "../api";
 import { useNavigate } from "react-router-dom";
-import Logo from "../images/logo.svg"
+import Logo from "../images/logo.svg";
+import Banner from "../images/banner-cadastro.gif";
 
 const Cadastro = () => {
   const [user, setUser] = useState({});
@@ -39,11 +40,16 @@ const Cadastro = () => {
     console.log("change", user);
   };
 
+  const backImage = {
+    backgroundImage: `url(${Banner})`,
+  };
+
   return (
     <div className="flex w-full justify-center text-rentBlue">
       <div
+      style={backImage}
         className="bg-primary sm:w-1/2 h-screen overflow-hidden 
-      bg-art-cadastro bg-center bg-cover bg-no-repeat"
+      bg-center bg-cover bg-no-repeat"
       ></div>
 
       <div className="min-w-fit flex-col justify-start items-center overflow-hidden sm:h-screen sm:w-1/2">

@@ -18,11 +18,11 @@ module.exports = {
         roboto: ["'Roboto', sans-serif"],
         poppins: ["'Poppins', sans-serif"],
       },
-      backgroundImage: {
-        'art-login': "url('./src/images/banner-login.jpg')",
-        'art-cadastro': "url('./src/images/banner-cadastro.gif')",
-        'art-buscar': "url('./src/images/search-banner.jpg')",
-      },
+      // backgroundImage: {
+      //   'art-login': "url('./src/images/banner-login.jpg')",
+      //   'art-cadastro': "url('./src/images/banner-cadastro.gif')",
+      //   'art-buscar': "url('./src/images/search-banner.jpg')",
+      // },
       gradientColorStopPositions: {
         33: '33%',
       }
