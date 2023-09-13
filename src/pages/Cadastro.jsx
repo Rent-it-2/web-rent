@@ -3,6 +3,7 @@ import { IMaskInput } from "react-imask";
 import { styles } from "../styles";
 import api from "../api";
 import { useNavigate } from "react-router-dom";
+import Logo from "../images/logo.svg"
 
 const Cadastro = () => {
   const [user, setUser] = useState({});
@@ -48,7 +49,7 @@ const Cadastro = () => {
       <div className="min-w-fit flex-col justify-start items-center overflow-hidden sm:h-screen sm:w-1/2">
         <header className="w-full flex items-start self-start justify-self-start px-8">
           <a href="/">
-            <img src="../../public/logo.svg" alt="home" className="w-28" />
+            <img src={Logo} alt="home" className="w-28" />
           </a>
         </header>
 

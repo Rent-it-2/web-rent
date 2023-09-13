@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { footerLinksAjuda, footerLinksLcd, footerLinksLct } from '../constants';
-
+import Logo from "../imageslogo.svg"
 
 const Footer = () => {
     return (
@@ -9,7 +9,7 @@ const Footer = () => {
 
             <div className="w-full flex flex-wrap gap-10 bg-white p-8 flex-row sm:gap-0">
                 <div className="sm:w-2/5">
-                    <img src="../../public/logo.svg" alt="home" />
+                    <img src={Logo} alt="home" />
                     <h2 className="text-gray-400 max-w-xs">Sua plataforma número 1 para aluguel de produtos.</h2>
                 </div>
                 <FooterDiv2/>

@@ -3,6 +3,7 @@ import { styles } from "../styles";
 import { AuthContext } from "../contexts/Auth";
 import { Link, useNavigate } from "react-router-dom";
 import { Categorias, InputBuscar, Menu } from "./index";
+import Logo from "../images/logo-vazado-04.png"
 
 const Header = () => {
   const { authenticated } = useContext(AuthContext);
@@ -15,7 +16,7 @@ const Header = () => {
         <i className="mdi mdi-magnify text-white text-[30px] sm:hidden"></i>
 
         <a href="/">
-          <img src="../../public/logo-vazado-04.png" alt="home" className="sm:w-40" />
+          <img src={Logo} alt="home" className="sm:w-40" />
         </a>
 
         <div className="w-3/5 flex flex-col">
