@@ -6,7 +6,7 @@ import { Endereco, Modal } from "../index";
 import { Avatar } from "@mui/material";
 import { AuthContext } from "../../contexts/Auth";
 import { endereco, foto } from "../../constants";
-import MeusDados from "image_MeusDados.svg"
+import MeusDadosImg from "../images/image_MeusDados.svg"
 
 const MeusDados = () => {
   const { user } = useContext(AuthContext);
@@ -57,7 +57,7 @@ const MeusDados = () => {
 
         <div className="w-1/3 hidden items-center sm:flex">
           <p className="text-sm">Essa será a visão dos outros de você!</p>
-          <img src={MeusDados} className="w-2/3" />
+          <img src={MeusDadosImg} className="w-2/3" />
         </div>
       </div>
 

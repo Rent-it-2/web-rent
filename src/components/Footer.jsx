@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { footerLinksAjuda, footerLinksLcd, footerLinksLct } from '../constants';
-import Logo from "../imageslogo.svg"
+import Logo from "../images/logo.svg"
 
 const Footer = () => {
     return (
