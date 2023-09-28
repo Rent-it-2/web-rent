@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { IMaskInput } from "react-imask";
 import { styles } from "../styles";
 import api from "../api";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "../images/logo.svg";
 import Banner from "../images/banner-cadastro.gif";
 
@@ -18,7 +18,6 @@ const Cadastro = () => {
       
 await
  api
-        // .post(`/users`, user, { headers: headers })
         .post(`/usuarios/cadastrar`, user, { headers: headers })
         .then((res) => {
           console.log('res',res.data);
@@ -173,12 +172,7 @@ await
               </button>
               <span className="text-gray-500 text-xs sm:text-sm">
                 Já tem uma conta?{" "}
-                <a
-                  href="/login"
-                  className="font-bold text-xs sm:text-sm text-rentBlue hover:text-secondary"
-                >
-                  Entre
-                </a>{" "}
+                <Link to="/login" className="font-bold text-xs sm:text-sm text-rentBlue hover:text-secondary">Entre</Link>{" "}
                 agora
               </span>
             </div>

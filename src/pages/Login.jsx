@@ -4,12 +4,14 @@ import { styles } from "../styles";
 import { ToastContainer } from "react-toastify";
 import Logo from "../images/logo.svg";
 import Banner from "../images/banner-login.jpg"
+import { Link, useNavigate } from "react-router-dom";
 
 
 const Login = () => {
   const { authenticated, login } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setpassword] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -107,13 +109,14 @@ const Login = () => {
               </button>
 
               <span className="text-gray-500 text-sm">
-                Não tem uma conta?{" "}
-                <a
-                  href="/cadastro"
+                Não tem uma conta?
+                {/* <button
                   className={`font-bold text-sm text-rentBlue cursor-pointer hover:text-secondary`}
+                  onClick={navigate("/cadastro")}
                 >
                   Cadastre-se
-                </a>{" "}
+                </button> */}
+                <Link to="/cadastro" className="font-bold text-xs sm:text-sm text-rentBlue hover:text-secondary">Cadastre-se</Link>{" "}
                 agora
               </span>
             </div>

@@ -22,14 +22,14 @@ const Pagamentos = () => {
   const [openModal, setOpenModal] = useState(false);
 
   const formTemplate = {
-    cartaoId:"",
+    cartaoId: "",
     cpf: "",
     dtFim: "",
     dtInicio: "",
-    enderecoId:"",
-    itemId:"",
-    idUso:"",
-    valorFinal:""
+    enderecoId: "",
+    itemId: "",
+    idUso: "",
+    valorFinal: ""
   };
 
   const [data, setData] = useState(formTemplate);
@@ -64,11 +64,10 @@ const Pagamentos = () => {
 
   const getItem = async () => {
     try {
-      const resposta = 
-await
- getItemById(userId, itemId).then((res) => {
-        setItem(res.data);
-      });
+      const resposta =
+        await getItemById(userId, itemId).then((res) => {
+            setItem(res.data);
+          });
       return resposta;
     } catch (error) {
       console.log(error);
@@ -77,11 +76,11 @@ await
 
   const getUser = async () => {
     try {
-      const resposta = 
-await
- getUserById(userId).then((res) => {
-        setUser(res.data);
-      });
+      const resposta =
+        await
+          getUserById(userId).then((res) => {
+            setUser(res.data);
+          });
       return resposta;
     } catch (error) {
       console.log(error);
@@ -132,7 +131,7 @@ await
                 <button
                   type="submit"
                   className={`w-full ${styles.botaoPadraoPrimary} ${styles.hoverPadraoPrimary}`}
-                  onClick={() => {setOpenModal(true) | concluir()}}
+                  onClick={() => { setOpenModal(true) | concluir() }}
                 >
                   Concluir
                   <i className="mdi mdi-check text-[20px]" />
@@ -162,11 +161,11 @@ export const Form = ({ userId }) => {
 
   const getUser = async () => {
     try {
-      const resposta = 
-await
- getUserById(userId).then((res) => {
-        setUser(res.data);
-      });
+      const resposta =
+        await
+          getUserById(userId).then((res) => {
+            setUser(res.data);
+          });
       return resposta;
     } catch (error) {
       console.log(error);

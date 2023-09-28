@@ -10,12 +10,11 @@ const headers = {
 
 export const api = axios.create({
   // baseURL: "http://localhost:4500",
-  baseURL: "http://3.225.162.35:8080"
+  baseURL: "http://3.225.162.35:8080",
 });
 
 export const createSession = async (email, password) => {
-  return api.post("/usuarios/login", { email, password }
-  );
+  return api.post("/usuarios/login", { email, password });
 };
 
 export const putUsuario = (formValues) => {
@@ -207,11 +206,7 @@ export const getUserItensFavoritos = async () => {
 
 export const getUserLogged = async () => {
   try {
-    const resposta = 
-    // 
-await
-
-     getUserById(UsuarioLogado.userId).then((res) => {
+    const resposta = await getUserById(UsuarioLogado.userId).then((res) => {
       console.log(res.data);
       return res.data;
     });
@@ -224,9 +219,7 @@ await
 
 export const getUserLoggedItems = async (userId) => {
   try {
-    const resposta = 
-await
- getUserItem(userId).then((res) => {
+    const resposta = await getUserItem(userId).then((res) => {
       console.log(res.data);
       return res.data;
     });
@@ -413,7 +406,7 @@ export const postAvaliacao = async (valor) => {
   return api
     .post(`/transacoes/avaliar`, {
       transacao: Transacao.idTransacao,
-      nota: valor
+      nota: valor,
     })
     .then((response) => {
       console.log("sucesso");
@@ -425,6 +418,6 @@ export const postAvaliacao = async (valor) => {
 
 export const getAvaliacao = async (itemId) => {
   return api.get(`/transacoes/get-avaliar?id=${itemId}`);
-}
+};
 
 export default api;
