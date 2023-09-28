@@ -47,16 +47,26 @@ const Menu = () => {
               }}
             >
               {pagina.title != "Sair" && (
-                <a href={`${pagina.link}`}>
+                // <a href={`${pagina.link}`}>
+                //   <i className={`mdi mdi-${pagina.icon} pr-4 text-[20px]`} />
+                //   {pagina.title}
+                // </a>
+
+                <Link key={pagina.link} to={`${pagina.link}`}>
                   <i className={`mdi mdi-${pagina.icon} pr-4 text-[20px]`} />
                   {pagina.title}
-                </a>
+                </Link>
               )}
               {pagina.title === "Sair" && (
                 <a href={`${pagina.link}`} onClick={handleLogout}>
                   <i className={`mdi mdi-${pagina.icon} pr-4 text-[20px]`} />
                   {pagina.title}
                 </a>
+
+                // <Link key={pagina.link} to="pagina.link" onClick={handleLogout}>
+                //   <i className={`mdi mdi-${pagina.icon} pr-4 text-[20px]`} />
+                //   {pagina.title}
+                // </Link>
               )}
             </li>
           ))}
