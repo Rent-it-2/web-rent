@@ -11,26 +11,14 @@ const Categorias = () => {
     navigate("/perfil/itens");
   };
 
-  const navigateFilters = () => {
-    if(currentPage != "/filtros"){
-      navigate("/filtros");
-    }
-  };
-
   return (
     <section className={`hidden w-full pt-1 sm:block`}>
       <div className="w-full flex items-center justify-center">
         <ul className="w-full flex gap-5 items-center justify-between">
           <li>
             {categorias.map((categoria) => (
-              // <button
-              //   className=" text-white text-xs px-5 font-poppins hover:text-secondary"
-              //   onClick={navigate("/filtros")}
-              // >
-              //   {categoria.title}
-              // </button>
-
               <Link
+                key={categoria.id}
                 to="/filtros"
                 className=" text-white text-xs px-5 font-poppins hover:text-secondary"
               >
